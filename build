@@ -69,6 +69,9 @@ function help_menu() {
 
 # Prints a formatted header to let the user know what's being done
 function header() {
+    # Enable at least the header output
+    [[ -z ${VERBOSE} ]] && exec 1>&5 2>&6
+
     [[ "${*}" =~ "--no-first-echo" ]] || echo
     # shellcheck disable=SC2034
     echo "${GRN}====$(for i in $(seq ${#1}); do echo "=\c"; done)===="
@@ -76,6 +79,8 @@ function header() {
     # shellcheck disable=SC2034
     echo "====$(for i in $(seq ${#1}); do echo "=\c"; done)====${RST}"
     [[ "${*}" =~ "--no-second-echo" ]] || echo
+
+    [[ -z ${VERBOSE} ]] && exec 6>&2 5>&1 &>/dev/null
 }
 
 
