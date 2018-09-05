@@ -1,24 +1,20 @@
 # GCC toolchain build script
 
-This is a script to build GCC toolchains targeting arm, arm64, and x86 devices
-(primarily Android devices).
-
+This is a script to build GCC toolchains targeting arm, arm64, and x86 devices.
 
 ## Using the script
 
 To build a toolchain, you will need to the
 following:
 
-+ A Linux distribution (the script has been tested on Ubuntu 17.04 and Arch Linux)
-+ A decent processor and RAM (i5 and 8GB of RAM or more is preferred)
++ A Linux distribution (the script has been tested on Debian Stretch)
 + Core developer packages
-    + For Arch: the base-devel package should be enough
-    + For Ubuntu: ```sudo apt-get install flex bison ncurses-dev texinfo gcc gperf patch libtool automake g++ libncurses5-dev gawk subversion expat libexpat1-dev python-all-dev binutils-dev libgcc1:i386 bc libcloog-isl-dev libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev autopoint gettext txt2man liblzma-dev libssl-dev libz-dev```
+    + For Debian 9: ```sudo apt-get install build-essential make gawk git texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison```
 
 Once you have set up your environment, run the following:
 
 ```bash
-git clone https://github.com/USBhost/build-tools-gcc
+git clone https://github.com/franzflasch/build-tools-gcc
 cd build-tools-gcc
 ./build -h
 ```
@@ -34,8 +30,8 @@ Example commands:
 # Build a Linaro 7.x toolchain for arm64
 ./build -a arm64 -s linaro -v 7
 
-# Build a GNU 5.x toolchain for arm
-./build -a arm -s gnu -v 5
+# Build a GNU 8.x toolchain for arm
+./build -a arm -s gnu -v 8
 ```
 
 ## After compilation
@@ -55,19 +51,6 @@ For gz compression:
 ```bash
 tar -xvzf <toolchain_name>.tar.gz --strip-components=1
 ```
-
-After that, point your cross compiler to the proper file and compile! This is
-an easy shortcut for kernels (when run in the directory you extracted the
-toolchain in):
-
-```bash
-# for arm64
-export CROSS_COMPILE=$(pwd)/bin/aarch64-linux-gnu-
-
-# for arm
-export CROSS_COMPILE=$(pwd)/bin/arm-linux-gnueabi-
-```
-
 
 ## Pull requests/issues
 
