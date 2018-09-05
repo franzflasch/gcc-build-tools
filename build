@@ -31,8 +31,10 @@
 
 set -e
 
-TAR_CONFIG="${BASH_SOURCE%/*}/tar_source_config.sh"
-GIT_CONFIG="${BASH_SOURCE%/*}/git_source_config.sh"
+COMMON_CONFIG="${BASH_SOURCE%/*}/configs/common.sh"
+TAR_CONFIG="${BASH_SOURCE%/*}/configs/tar_source_config.sh"
+GIT_CONFIG="${BASH_SOURCE%/*}/configs/git_source_config.sh"
+source ${COMMON_CONFIG}
 source ${TAR_CONFIG}
 source ${GIT_CONFIG}
 
@@ -69,6 +71,7 @@ function help_menu() {
 
 # Prints a formatted header to let the user know what's being done
 function header() {
+
     # Enable at least the header output
     [[ -z ${VERBOSE} ]] && exec 1>&5 2>&6
 
@@ -81,6 +84,10 @@ function header() {
     [[ "${*}" =~ "--no-second-echo" ]] || echo
 
     [[ -z ${VERBOSE} ]] && exec 6>&2 5>&1 &>/dev/null
+
+    # this is necessary for whatever reason, otherwise it stops if
+    # verbose is set
+    echo ""
 }
 
 

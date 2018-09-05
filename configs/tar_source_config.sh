@@ -1,12 +1,3 @@
-function setup_common_urls_tar() {
-    MPFR_BASE_URL="https://www.mpfr.org/mpfr-current/"
-    GMP_BASE_URL="https://ftp.gnu.org/gnu/gmp/"
-    MPC_BASE_URL="https://ftp.gnu.org/gnu/mpc/"
-    ISL_BASE_URL="http://isl.gforge.inria.fr/"
-    BINUTILS_BASE_URL="https://ftp.gnu.org/gnu/binutils/binutils-"
-    GLIBC_BASE_URL="https://ftp.gnu.org/gnu/glibc/"
-    LINUX_BASE_URL="https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-"
-}
 
 function setup_base_urls_tar_gnu() {
     GCC_BASE_URL="https://mirrors.kernel.org/gnu/gcc/"  
