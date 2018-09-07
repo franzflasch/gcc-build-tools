@@ -1,0 +1,18 @@
+FROM debian:stretch
+
+WORKDIR /home/script_dir
+
+RUN apt-get update -y
+RUN apt-get install -y build-essential make gawk git texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison
+
+ENV PATH="/home/script_dir/build-tools-gcc:${PATH}"
+
+RUN git clone https://github.com/franzflasch/build-tools-gcc.git
+
+WORKDIR /home/work_dir
+
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build -a arm -s gnu -v 8 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build -a arm64 -s gnu -v 8 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build -a i686 -s gnu -v 8 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build -a x86_64 -s gnu -v 8 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build -a cm4 -s gnu -v 8 -t && rm -rf /home/work_dir/*"
