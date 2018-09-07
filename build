@@ -34,9 +34,11 @@ set -e
 COMMON_CONFIG="${BASH_SOURCE%/*}/configs/common.sh"
 TAR_CONFIG="${BASH_SOURCE%/*}/configs/tar_source_config.sh"
 GIT_CONFIG="${BASH_SOURCE%/*}/configs/git_source_config.sh"
+TARGET_CONFIG="${BASH_SOURCE%/*}/configs/target_config.sh"
 source ${COMMON_CONFIG}
 source ${TAR_CONFIG}
 source ${GIT_CONFIG}
+source ${TARGET_CONFIG}
 
 
 # Easy alias for escape codes
@@ -247,39 +249,13 @@ function parse_parameters() {
     esac
 
     if [[ -z ${TARBALLS} ]]; then
-        # Set GCC branch based on version and Linaro or not
-        case "${SOURCE}:${VERSION}" in
-            "gnu:4") die "Will not build, Use Linaro instead" ;;
-            "gnu:5") setup_variables_git_gnu_5 ;;
-            "gnu:6") setup_variables_git_gnu_6 ;;
-            "gnu:7") setup_variables_git_gnu_7 ;;
-            "gnu:8") setup_variables_git_gnu_8 ;;
-            "gnu:9") setup_variables_git_gnu_9 ;;
-            "linaro:4") setup_variables_git_linaro_4 ;;
-            "linaro:5") setup_variables_git_linaro_5 ;;
-            "linaro:6") setup_variables_git_linaro_6 ;;
-            "linaro:7") setup_variables_git_linaro_7 ;;
-            "linaro:8") die "There's no such thing as Linaro 8.x Clannad..." -h ;;
-            "linaro:9") die "There's no such thing as Linaro 9.x Clannad..." -h ;;
-            *) die "Absent or invalid GCC version or source specified!" -h ;;
-        esac
+        # Search for a valid target config
+        type -t config_${TARGET}_${SOURCE}_${VERSION}_git > /dev/null || die "No git config found for ${TARGET}!"
+        config_${TARGET} ${SOURCE} ${VERSION} git
     else
-        # Set GCC branch based on version and Linaro or not
-        case "${SOURCE}:${VERSION}" in
-            "gnu:4") die "Will not build, Use Linaro instead" ;;
-            "gnu:5") setup_variables_tar_gnu_5 ;;
-            "gnu:6") setup_variables_tar_gnu_6 ;;
-            "gnu:7") setup_variables_tar_gnu_7 ;;
-            "gnu:8") setup_variables_tar_gnu_8 ;;
-            "gnu:9") die "GCC 9.0 is currently a WIP so there is no tarball to download! Either use the git repo or choose a new version..." ;;
-            "linaro:4") setup_variables_tar_linaro_4 ;;
-            "linaro:5") setup_variables_tar_linaro_5 ;;
-            "linaro:6") setup_variables_tar_linaro_6 ;;
-            "linaro:7") setup_variables_tar_linaro_7 ;;
-            "linaro:8") die "There's no such thing as Linaro 8.x Clannad..." -h ;;
-            "linaro:9") die "There's no such thing as Linaro 9.x Clannad..." -h ;;
-            *) die "Absent or invalid GCC version or source specified!" -h ;;
-        esac
+        # Search for a valid target config
+        type -t config_${TARGET} > /dev/null || die "No tar config found for ${TARGET}!"
+        config_${TARGET} ${SOURCE} ${VERSION} tar
     fi
 }
 
