@@ -14,7 +14,9 @@ function setup_linux_default_config()
                             "--prefix=${INSTALL}" 
                             "--disable-gdb")
 
-    GCC_CONFIGURATION=("--enable-languages=c"
+    GCC_CONFIGURATION=("--disable-multilib"
+                       "--disable-werror"
+                       "--enable-languages=c"
                        "--target=${TARGET}"
                        "--prefix=${INSTALL}")
 
