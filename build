@@ -196,10 +196,10 @@ function setup_variables() {
 function setup_environment() {
     ROOT="${PWD}"
     PREBUILTS_BIN="${ROOT}/prebuilts/bin"
-    INSTALL="${ROOT}/${TARGET}"
     SOURCES_DIR="${ROOT}/sources"
     BUILD_STATE_DIR="${ROOT}/state"
     BUILD_DIR="${ROOT}/build_dir"
+    INSTALL="${ROOT}/toolchain"
 
     export PATH=${PREBUILTS_BIN}:${PATH}
 
@@ -433,6 +433,11 @@ function build_binutils() {
     cd ${BUILD_DIR}/build-binutils
     ${SOURCES_DIR}/binutils-${BINUTILS}/configure "${BINUTILS_CONFIGURATION[@]}"
     make ${JOBS} || die "Error while building binutils!" -n
+
+    # case $(uname -m) in
+    # 	x86_64) mkdir -v ${INSTALL}/lib && ln -sv lib ${INSTALL}/lib64 ;;
+    # esac
+
     make install ${JOBS} || die "Error while installing binutils!" -n
 
     set_build_state ${FUNCNAME[0]}
@@ -458,7 +463,7 @@ function build_headers() {
 
 
 # Build GCC
-function build_gcc() {
+function build_gcc_stage_1() {
 
     check_build_state ${FUNCNAME[0]} && return
     cd ${ROOT}
@@ -474,10 +479,10 @@ function build_gcc() {
 
     mkdir -p ${BUILD_DIR}/build-gcc
     cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
-    ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_CONFIGURATION[@]}"
-    make all-gcc ${JOBS} || die "Error while building gcc!" -n
-    make install-gcc ${JOBS} || die "Error while installing gcc!" -n
- 
+    ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_STAGE_1_CONFIGURATION[@]}"
+    make ${JOBS} all-gcc || die "Error while building gcc stage1!" -n
+    make ${JOBS} install-gcc || die "Error while installing gcc stage1!" -n
+
     set_build_state ${FUNCNAME[0]}
 }
 
@@ -505,7 +510,7 @@ function build_newlib() {
 
 
 # Build glibc
-function build_glibc() {
+function build_glibc_header() {
 
     check_build_state ${FUNCNAME[0]} && return
     cd ${ROOT}
@@ -515,20 +520,62 @@ function build_glibc() {
     header "MAKING GLIBC"
     mkdir -p ${BUILD_DIR}/build-glibc
     cd ${BUILD_DIR}/build-glibc || die "glibc build folder does not exist!"
-    ${SOURCES_DIR}/glibc-${GLIBC}/configure "${GLIBC_CONFIGURATION[@]}"
-    make install-bootstrap-headers=yes install-headers ${JOBS} || die "Error installing headers for glibc!" -n
-    make csu/subdir_lib ${JOBS} || die "Error while making subdir_lib for glibc!" -n
-    install csu/crt1.o csu/crti.o csu/crtn.o "${INSTALL}/${TARGET}/lib"
-    ${TARGET}-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o "${INSTALL}/${TARGET}/lib/libc.so"
-    touch "${INSTALL}/${TARGET}/include/gnu/stubs.h"
+    ${SOURCES_DIR}/glibc-${GLIBC}/configure "${GLIBC_STAGE_1_CONFIGURATION[@]}"
 
-    cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
-    make all-target-libgcc ${JOBS} || die "Error while building libgcc for target!" -n
-    make install-target-libgcc ${JOBS} || die "Error while installing libgcc for target!" -n
+    make install-headers install-bootstrap-headers=yes || die "Error while building glibc headers!" -n
+    make ${JOBS} csu/subdir_lib || die "Error while building glibc headers 2!" -n
+    install csu/crt1.o csu/crti.o csu/crtn.o ${INSTALL}/${TARGET}/lib || die "Error while installing crt" -n
+    ${INSTALL}/bin/${TARGET}-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o ${INSTALL}/${TARGET}/lib/libc.so || die "Error while building libc" -n
+    touch ${INSTALL}/${TARGET}/include/gnu/stubs.h
 
+    set_build_state ${FUNCNAME[0]}
+}
+
+# Build glibc
+function build_glibc() {
+
+    check_build_state ${FUNCNAME[0]} && return
+    cd ${ROOT}
+    # use clean hashtable
+    hash -r
+
+    header "MAKING GLIBC"
     cd ${BUILD_DIR}/build-glibc || die "glibc build folder does not exist!"
-    make ${JOBS} || die "Error while building glibc for target" -n
-    make install ${JOBS} || die "Error while installing glibc for target" -n
+    make ${JOBS} || die "Error while building glibc"
+    make install || die "Error while installing glibc"
+
+    set_build_state ${FUNCNAME[0]}
+}
+
+
+function build_gcc_stage2() {
+
+    check_build_state ${FUNCNAME[0]} && return
+    cd ${ROOT}
+    # use clean hashtable
+    hash -r
+
+    header "MAKING GCC INITIAL"
+
+    mkdir -p ${BUILD_DIR}/build-gcc
+    cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
+    make ${JOBS} all-target-libgcc || die "Error while building gcc stage2" -n
+    make install-target-libgcc || die "Error while building gcc stage2" -n
+ 
+    set_build_state ${FUNCNAME[0]}
+}
+
+function build_gcc_final() {
+
+    check_build_state ${FUNCNAME[0]} && return
+    cd ${ROOT}
+    # use clean hashtable
+    hash -r
+
+    header "MAKING GCC FINAL"
+    cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
+    make || die "Error while building gcc final" -n
+    make install || die "Error while gcc final install" -n
 
     set_build_state ${FUNCNAME[0]}
 }
@@ -545,23 +592,6 @@ configure_gcc_stage_2() {
     cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
     ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_STAGE_2_CONFIGURATION[@]}"
  
-    set_build_state ${FUNCNAME[0]}
-}
-
-
-# Install GCC
-function install_gcc() {
-
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
-    # use clean hashtable
-    hash -r
-
-    header "INSTALLING GCC"
-    cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
-    make all ${JOBS} || die "Error while compiling final toolchain!" -n
-    make install ${JOBS} || die "Error while installing final toolchain!" -n
-
     set_build_state ${FUNCNAME[0]}
 }
 
@@ -607,14 +637,11 @@ function ending_info() {
 
     END=$(date +%s)
 
-    echo "`pwd`"
-    echo "${TARGET}/bin/${TARGET}-gcc"
-
     [[ -z ${VERBOSE} ]] && exec 1>&5 2>&6
-    if [[ -e ${TARGET}/bin/${TARGET}-gcc ]]; then
+    if [[ -e ${INSTALL}/bin/${TARGET}-gcc ]]; then
         header "BUILD SUCCESSFUL" ${VERBOSE:-"--no-first-echo"}
         echo "${BOLD}Script duration:${RST} $(format_time "${START}" "${END}")"
-        echo "${BOLD}GCC version:${RST} $(${TARGET}/bin/${TARGET}-gcc --version | head -n 1)"
+        echo "${BOLD}GCC version:${RST} $(${INSTALL}/bin/${TARGET}-gcc --version | head -n 1)"
         if [[ -n ${COMPRESSION} ]] && [[ -e ${PACKAGE} ]]; then
             echo "${BOLD}File location:${RST} $(pwd)/${PACKAGE}"
             echo "${BOLD}File size:${RST} $(du -h "${PACKAGE}" | awk '{print $1}')"
@@ -647,9 +674,12 @@ if [[ "${IS_BARE_METAL}" = true ]]; then
 else
     build_binutils
     build_headers
-    build_gcc
+    build_gcc_stage_1
+    build_glibc_header
+
+    build_gcc_stage2
     build_glibc
-    install_gcc
+    build_gcc_final
 fi
 
 package_tc

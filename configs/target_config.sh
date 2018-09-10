@@ -8,26 +8,23 @@ function setup_linux_default_config()
     IS_BARE_METAL=false
 
     # Configuration variables
-    BINUTILS_CONFIGURATION=("--disable-multilib"
-                            "--disable-werror" 
-                            "--target=${TARGET}" 
-                            "--prefix=${INSTALL}" 
-                            "--disable-gdb")
+    BINUTILS_CONFIGURATION=("--disable-nls"
+                            "--disable-werror"
+                            "--target=${TARGET}"
+                            "--prefix=${INSTALL}")
 
-    GCC_CONFIGURATION=("--disable-multilib"
-                       "--disable-werror"
-                       "--enable-languages=c"
-                       "--target=${TARGET}"
-                       "--prefix=${INSTALL}")
+    GCC_STAGE_1_CONFIGURATION=("--disable-libmpx" # Only for intel x86
+                               "--disable-multilib"
+                               "--enable-languages=c"
+                               "--target=${TARGET}"
+                               "--prefix=${INSTALL}")
 
-    GLIBC_CONFIGURATION=("--prefix=${INSTALL}/${TARGET}"
-                         "--build=${MACHTYPE}"
-                         "--host=${TARGET}"
-                         "--target=${TARGET}"
-                         "--with-headers=${INSTALL}/${TARGET}/include"
-                         "--disable-multilib"
-                         "--disable-werror"
-                         "libc_cv_forced_unwind=yes")
+    GLIBC_STAGE_1_CONFIGURATION=("--prefix=${INSTALL}/${TARGET}"
+                                 "--with-headers=${INSTALL}/${TARGET}/include"
+                                 "--host=${TARGET}"
+                                 "--target=${TARGET}"
+                                 "libc_cv_forced_unwind=yes"
+                                 "libc_cv_c_cleanup=yes")
 }
 
 
