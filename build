@@ -574,6 +574,7 @@ function build_gcc_final() {
 
     header "MAKING GCC FINAL"
     cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
+    ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_STAGE_FINAL_CONFIGURATION[@]}"
     make || die "Error while building gcc final" -n
     make install || die "Error while gcc final install" -n
 
