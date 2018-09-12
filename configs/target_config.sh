@@ -27,10 +27,10 @@ function setup_linux_default_config()
                                  "libc_cv_c_cleanup=yes")
 
     GCC_STAGE_FINAL_CONFIGURATION=("--disable-libmpx" # Only for intel x86
-		                           "--disable-multilib"
-		                           "--enable-languages=c,c++"
-		                           "--target=${TARGET}"
-		                           "--prefix=${INSTALL}")
+                                   "--disable-multilib"
+                                   "--enable-languages=c,c++"
+                                   "--target=${TARGET}"
+                                   "--prefix=${INSTALL}")
 }
 
 
