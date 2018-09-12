@@ -420,7 +420,7 @@ function extract_sources() {
 }
 
 
-# Build binutils
+# Step 1. Binutils
 function build_binutils() {
 
     check_build_state ${FUNCNAME[0]} && return
@@ -444,7 +444,7 @@ function build_binutils() {
 }
 
 
-# Make Linux kernel headers
+# Step 2. Linux Kernel Headers
 function build_headers() {
 
     check_build_state ${FUNCNAME[0]} && return
@@ -462,7 +462,7 @@ function build_headers() {
 }
 
 
-# Build GCC
+# Step 3. C/C++ Compilers
 function build_gcc_stage_1() {
 
     check_build_state ${FUNCNAME[0]} && return
@@ -509,7 +509,7 @@ function build_newlib() {
 }
 
 
-# Build glibc
+# Step 4. Standard C Library Headers and Startup Files
 function build_glibc_header() {
 
     check_build_state ${FUNCNAME[0]} && return
@@ -531,23 +531,7 @@ function build_glibc_header() {
     set_build_state ${FUNCNAME[0]}
 }
 
-# Build glibc
-function build_glibc() {
-
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
-    # use clean hashtable
-    hash -r
-
-    header "MAKING GLIBC"
-    cd ${BUILD_DIR}/build-glibc || die "glibc build folder does not exist!"
-    make ${JOBS} || die "Error while building glibc"
-    make install || die "Error while installing glibc"
-
-    set_build_state ${FUNCNAME[0]}
-}
-
-
+# Step 5. Compiler Support Library
 function build_gcc_stage2() {
 
     check_build_state ${FUNCNAME[0]} && return
@@ -565,6 +549,23 @@ function build_gcc_stage2() {
     set_build_state ${FUNCNAME[0]}
 }
 
+# Step 6. Standard C Library & the rest of Glibc
+function build_glibc() {
+
+    check_build_state ${FUNCNAME[0]} && return
+    cd ${ROOT}
+    # use clean hashtable
+    hash -r
+
+    header "MAKING GLIBC"
+    cd ${BUILD_DIR}/build-glibc || die "glibc build folder does not exist!"
+    make ${JOBS} || die "Error while building glibc"
+    make install || die "Error while installing glibc"
+
+    set_build_state ${FUNCNAME[0]}
+}
+
+# Step 7. Standard C++ Library & the rest of GCC
 function build_gcc_final() {
 
     check_build_state ${FUNCNAME[0]} && return
@@ -573,7 +574,9 @@ function build_gcc_final() {
     hash -r
 
     header "MAKING GCC FINAL"
-    cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
+    mkdir -p ${BUILD_DIR}/build-gcc-final
+    cd ${BUILD_DIR}/build-gcc-final || die "GCC build folder does not exist!"
+    ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_STAGE_FINAL_CONFIGURATION[@]}"
     make || die "Error while building gcc final" -n
     make install || die "Error while gcc final install" -n
 

@@ -25,6 +25,12 @@ function setup_linux_default_config()
                                  "--target=${TARGET}"
                                  "libc_cv_forced_unwind=yes"
                                  "libc_cv_c_cleanup=yes")
+
+    GCC_STAGE_FINAL_CONFIGURATION=("--disable-libmpx" # Only for intel x86
+		                           "--disable-multilib"
+		                           "--enable-languages=c,c++"
+		                           "--target=${TARGET}"
+		                           "--prefix=${INSTALL}")
 }
 
 
@@ -85,9 +91,7 @@ function config_arm-none-eabi() {
     IS_BARE_METAL=true
 
     # Configuration variables
-    BINUTILS_CONFIGURATION=("--disable-multilib"
-                            "--disable-werror" 
-                            "--target=${TARGET}" 
+    BINUTILS_CONFIGURATION=("--target=${TARGET}" 
                             "--prefix=${INSTALL}" 
                             "--disable-gdb"
                             "--with-cpu=cortex-m4"
