@@ -158,12 +158,8 @@ function git_fetch() {
 }
 
 function extract() {
-    case "${1}" in
-        *.gz) UNPACK=pigz ;;
-        *.xz) UNPACK=pxz ;;
-    esac
     mkdir -p "${2}"
-    ${UNPACK} -d < "${1}" | tar -xC "${2}" --strip-components=1
+    tar xvf "${1}" -C "${2}" --strip-components=1
 }
 
 function set_build_state() {
@@ -241,8 +237,8 @@ function parse_parameters() {
         "arm") TARGET="arm-linux-gnueabi" ;;
         "arm64") TARGET="aarch64-linux-gnu" ;;
         "x86") TARGET="i686-linux-gnu" ;;
-        "x86_64") TARGET="x86_64-linux-gnu" ;;
-        "cm4") TARGET="arm-none-eabi" ;;
+        "x86-64") TARGET="x86_64-linux-gnu" ;;
+        "cm4f") TARGET="arm-none-eabi" ;;
         *) die "Absent or invalid arch specified!" -h ;;
     esac
 
@@ -250,12 +246,12 @@ function parse_parameters() {
 
     if [[ -z ${TARBALLS} ]]; then
         # Search for a valid target config
-        type -t config_${TARGET} > /dev/null || die "No git config found for ${TARGET}!"
-        config_${TARGET} ${SOURCE} ${VERSION} git
+        type -t config_${TARGET}_${ARCH} > /dev/null || die "No git config found for ${TARGET}!"
+        config_${TARGET}_${ARCH} ${SOURCE} ${VERSION} git
     else
         # Search for a valid target config
-        type -t config_${TARGET} > /dev/null || die "No tar config found for ${TARGET}!"
-        config_${TARGET} ${SOURCE} ${VERSION} tar
+        type -t config_${TARGET}_${ARCH} > /dev/null || die "No tar config found for ${TARGET}!"
+        config_${TARGET}_${ARCH} ${SOURCE} ${VERSION} tar
     fi
 }
 
@@ -278,20 +274,6 @@ function build_binaries() {
         make ${JOBS} || die "Error building axel!"
         make ${JOBS} install || die "Error installing axel!"
     )
-
-    local PIGZ=${ROOT}/sources/pigz
-    [[ ! -d ${PIGZ} ]] && git -C "$(dirname "${PIGZ}")" clone --depth=1 https://github.com/madler/pigz
-    git -C "${PIGZ}" clean -fxdq
-    git -C "${PIGZ}" pull
-    make -C "${PIGZ}" ${JOBS} pigz || die "Error building pigz!"
-    mv "${PIGZ}"/pigz "${PREBUILTS_BIN}"
-
-    local PXZ=${ROOT}/sources/pxz
-    [[ ! -d ${PXZ} ]] && git -C "$(dirname "${PXZ}")" clone --depth=1 https://github.com/jnovy/pxz
-    git -C "${PXZ}" clean -fxdq
-    git -C "${PXZ}" pull
-    make -C "${PXZ}" ${JOBS} pxz || die "Error building pxz!"
-    mv "${PXZ}"/pxz "${PREBUILTS_BIN}"
 
     set_build_state ${FUNCNAME[0]}
 }
@@ -336,7 +318,6 @@ function download_sources() {
     else
         if [[ "${IS_BARE_METAL}" = true ]]; then
             if [[ ! -f ${NEWLIB}.tar.gz ]]; then
-                die "${NEWLIB}.tar.xz"
                 header "DOWNLOADING NEWLIB"
                 axel ${NEWLIB_BASE_URL}${NEWLIB}.tar.gz
             fi
@@ -432,13 +413,8 @@ function build_binutils() {
     mkdir -p ${BUILD_DIR}/build-binutils
     cd ${BUILD_DIR}/build-binutils
     ${SOURCES_DIR}/binutils-${BINUTILS}/configure "${BINUTILS_CONFIGURATION[@]}"
-    make ${JOBS} || die "Error while building binutils!" -n
-
-    # case $(uname -m) in
-    # 	x86_64) mkdir -v ${INSTALL}/lib && ln -sv lib ${INSTALL}/lib64 ;;
-    # esac
-
-    make install ${JOBS} || die "Error while installing binutils!" -n
+    make ${JOBS} all || die "Error while building binutils!" -n
+    make install || die "Error while installing binutils!" -n
 
     set_build_state ${FUNCNAME[0]}
 }
@@ -479,7 +455,7 @@ function build_gcc_stage_1() {
 
     mkdir -p ${BUILD_DIR}/build-gcc
     cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
-    ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_STAGE_1_CONFIGURATION[@]}"
+    ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_CONFIGURATION[@]}"
     make ${JOBS} all-gcc || die "Error while building gcc stage1!" -n
     make ${JOBS} install-gcc || die "Error while installing gcc stage1!" -n
 
@@ -496,8 +472,6 @@ function build_newlib() {
     hash -r
 
     header "MAKING NEWLIB"
-
-    which arm-none-eabi-ranlib
 
     mkdir -p ${BUILD_DIR}/build-newlib
     cd ${BUILD_DIR}/build-newlib || die "newlib build folder does not exist!"
@@ -520,7 +494,7 @@ function build_glibc_header() {
     header "MAKING GLIBC"
     mkdir -p ${BUILD_DIR}/build-glibc
     cd ${BUILD_DIR}/build-glibc || die "glibc build folder does not exist!"
-    ${SOURCES_DIR}/glibc-${GLIBC}/configure "${GLIBC_STAGE_1_CONFIGURATION[@]}"
+    ${SOURCES_DIR}/glibc-${GLIBC}/configure "${GLIBC_CONFIGURATION[@]}"
 
     make install-headers install-bootstrap-headers=yes || die "Error while building glibc headers!" -n
     make ${JOBS} csu/subdir_lib || die "Error while building glibc headers 2!" -n
@@ -575,8 +549,13 @@ function build_gcc_final() {
 
     header "MAKING GCC FINAL"
     cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
-    ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_STAGE_FINAL_CONFIGURATION[@]}"
-    make || die "Error while building gcc final" -n
+
+    # We need to reconfigure if there is a final config available
+    if [[ ! -z "${GCC_FINAL_CONFIGURATION[@]}" ]]; then
+       ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_FINAL_CONFIGURATION[@]}"
+    fi
+
+    make ${JOBS} all || die "Error while building gcc final" -n
     make install || die "Error while gcc final install" -n
 
     set_build_state ${FUNCNAME[0]}
@@ -668,11 +647,9 @@ extract_sources
 
 if [[ "${IS_BARE_METAL}" = true ]]; then
     build_binutils    
-    build_gcc
+    build_gcc_stage_1
     build_newlib
-    # FIXME: check if this is a generic step
-    configure_gcc_stage_2
-    install_gcc
+    build_gcc_final
 else
     build_binutils
     build_headers
