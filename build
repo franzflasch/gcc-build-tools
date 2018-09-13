@@ -219,8 +219,7 @@ function parse_parameters() {
         shift
     done
 
-    # [[ -z ${VERBOSE} ]] && exec 6>&2 5>&1 &>/dev/null
-    # [[ -z ${FULL_SOURCE} ]] && DEPTH_FLAG=true
+    [[ -z ${FULL_SOURCE} ]] && DEPTH_FLAG=true
 
     # Default values
     case "${ARCH}" in
