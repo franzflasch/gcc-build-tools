@@ -14,5 +14,5 @@ WORKDIR /home/work_dir
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build -a arm -s gnu -v 8 -t && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build -a arm64 -s gnu -v 8 -t && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build -a x86 -s gnu -v 8 -t && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build -a x86_64 -s gnu -v 8 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build -a x86-64 -s gnu -v 8 -t && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build -a cm4f -s gnu -v 8 -t && rm -rf /home/work_dir/*"
