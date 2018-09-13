@@ -40,10 +40,15 @@ source ${TAR_CONFIG}
 source ${GIT_CONFIG}
 source ${TARGET_CONFIG}
 
+function call_cmd() {
+    echo "CMD being executed: ${@}"
+    local cmd_to_call="${@}"
 
-# Easy alias for escape codes
-function echo() {
-    command echo -e "${@}"
+    if [[ ! -z "${VERBOSE}" ]]; then
+        $cmd_to_call
+    else
+        $cmd_to_call > /dev/null 2>&1
+    fi
 }
 
 
@@ -73,29 +78,14 @@ function help_menu() {
 
 # Prints a formatted header to let the user know what's being done
 function header() {
-
-    # Enable at least the header output
-    [[ -z ${VERBOSE} ]] && exec 1>&5 2>&6
-
-    [[ "${*}" =~ "--no-first-echo" ]] || echo
-    # shellcheck disable=SC2034
-    echo "${GRN}====$(for i in $(seq ${#1}); do echo "=\c"; done)===="
-    echo "==  ${1}  =="
-    # shellcheck disable=SC2034
-    echo "====$(for i in $(seq ${#1}); do echo "=\c"; done)====${RST}"
-    [[ "${*}" =~ "--no-second-echo" ]] || echo
-
-    [[ -z ${VERBOSE} ]] && exec 6>&2 5>&1 &>/dev/null
-
-    # this is necessary for whatever reason, otherwise it stops if
-    # verbose is set
-    echo ""
+    echo -e "${GRN}====$(for i in $(seq ${#1}); do echo -e "=\c"; done)===="
+    echo -e "==  ${1}  =="
+    echo -e "====$(for i in $(seq ${#1}); do echo -e "=\c"; done)====${RST}"
 }
 
 
 # Prints an error in bold red
 function die() {
-    [[ -z ${VERBOSE} ]] && exec 1>&5 2>&6
     echo ""
     echo "${RED}${1}${RST}"
     [[ "${*}" =~ "-n" ]] && echo
@@ -148,18 +138,18 @@ function format_time() {
 
 # git clone wrapper
 function git_clone() {
-    git clone ${DEPTH_FLAG:+"--depth=1"} "${@}"
+    call_cmd git clone ${DEPTH_FLAG:+"--depth=1"} "${@}"
 }
 
 
 # git fetch wrapper
 function git_fetch() {
-    git fetch ${DEPTH_FLAG:+"--depth=1"} "${@}"
+    call_cmd git fetch ${DEPTH_FLAG:+"--depth=1"} "${@}"
 }
 
 function extract() {
     mkdir -p "${2}"
-    tar xvf "${1}" -C "${2}" --strip-components=1
+    call_cmd tar xvf "${1}" -C "${2}" --strip-components=1
 }
 
 function set_build_state() {
@@ -229,15 +219,15 @@ function parse_parameters() {
         shift
     done
 
-    [[ -z ${VERBOSE} ]] && exec 6>&2 5>&1 &>/dev/null
-    [[ -z ${FULL_SOURCE} ]] && DEPTH_FLAG=true
+    # [[ -z ${VERBOSE} ]] && exec 6>&2 5>&1 &>/dev/null
+    # [[ -z ${FULL_SOURCE} ]] && DEPTH_FLAG=true
 
     # Default values
     case "${ARCH}" in
         "arm") TARGET="arm-linux-gnueabi" ;;
         "arm64") TARGET="aarch64-linux-gnu" ;;
         "x86") TARGET="i686-linux-gnu" ;;
-        "x86-64") TARGET="x86_64-linux-gnu" ;;
+        "x86_64") TARGET="x86_64-linux-gnu" ;;
         "cm4f") TARGET="arm-none-eabi" ;;
         *) die "Absent or invalid arch specified!" -h ;;
     esac
@@ -263,16 +253,18 @@ function build_binaries() {
     # use clean hashtable
     hash -r
 
+    header "BUILDING AXEL DOWNLOAD ACCELERATOR"
+
     local AXEL=${ROOT}/sources/axel
-    [[ ! -d ${AXEL} ]] && git -C "$(dirname "${AXEL}")" clone --depth=1 https://github.com/axel-download-accelerator/axel
-    git -C "${AXEL}" clean -fxdq
-    git -C "${AXEL}" pull
+    [[ ! -d ${AXEL} ]] && call_cmd git -C "$(dirname "${AXEL}")" clone --depth=1 https://github.com/axel-download-accelerator/axel
+    call_cmd git -C "${AXEL}" clean -fxdq
+    call_cmd git -C "${AXEL}" pull
     (
         cd "${AXEL}" || die "Issue with cloning axel source!"
-        ./autogen.sh
-        ./configure --prefix="$(dirname "${PREBUILTS_BIN}")"
-        make ${JOBS} || die "Error building axel!"
-        make ${JOBS} install || die "Error installing axel!"
+        call_cmd ./autogen.sh
+        call_cmd ./configure --prefix="$(dirname "${PREBUILTS_BIN}")"
+        call_cmd make ${JOBS} || die "Error building axel!"
+        call_cmd make ${JOBS} install || die "Error installing axel!"
     )
 
     set_build_state ${FUNCNAME[0]}
@@ -319,49 +311,49 @@ function download_sources() {
         if [[ "${IS_BARE_METAL}" = true ]]; then
             if [[ ! -f ${NEWLIB}.tar.gz ]]; then
                 header "DOWNLOADING NEWLIB"
-                axel ${NEWLIB_BASE_URL}${NEWLIB}.tar.gz
+                call_cmd axel ${NEWLIB_BASE_URL}${NEWLIB}.tar.gz
             fi
         else        
             if [[ ! -f ${GLIBC}.tar.xz ]]; then
                 header "DOWNLOADING GLIBC"
-                axel ${GLIBC_BASE_URL}${GLIBC}.tar.xz
+                call_cmd axel ${GLIBC_BASE_URL}${GLIBC}.tar.xz
             fi
 
             if [[ ! -f linux-${LINUX}.tar.xz ]]; then
                 header "DOWNLOADING LINUX KERNEL"
-                axel ${LINUX_BASE_URL}${LINUX}.tar.xz
+                call_cmd axel ${LINUX_BASE_URL}${LINUX}.tar.xz
             fi
         fi
 
         if [[ ! -f binutils-${BINUTILS}.tar.xz ]]; then
             header "DOWNLOADING BINUTILS"
-            axel ${BINUTILS_BASE_URL}${BINUTILS}.tar.xz
+            call_cmd axel ${BINUTILS_BASE_URL}${BINUTILS}.tar.xz
         fi
 
         if [[ ! -f ${GCC}.tar.gz ]]; then
             header "DOWNLOADING GCC"
-            axel ${GCC_BASE_URL}${GCC}.tar.gz
+            call_cmd axel ${GCC_BASE_URL}${GCC}.tar.gz
         fi
     fi
 
     if [[ ! -f ${MPC}.tar.gz ]]; then
         header "DOWNLOADING MPC"
-        axel ${MPC_BASE_URL}${MPC}.tar.gz
+        call_cmd axel ${MPC_BASE_URL}${MPC}.tar.gz
     fi
 
     if [[ ! -f ${ISL}.tar.xz ]]; then
-        header "DOWNLOADING ISL ${ISL} FOR GCC ${VERSION}"
-        axel ${ISL_BASE_URL}${ISL}.tar.xz
+        header "DOWNLOADING ISL"
+        call_cmd axel ${ISL_BASE_URL}${ISL}.tar.xz
     fi
 
     if [[ ! -f ${MPFR}.tar.xz ]]; then
         header "DOWNLOADING MPFR"
-        axel ${MPFR_BASE_URL}${MPFR}.tar.xz
+        call_cmd axel ${MPFR_BASE_URL}${MPFR}.tar.xz
     fi
 
     if [[ ! -f ${GMP}.tar.xz ]]; then
         header "DOWNLOADING GMP"
-        axel ${GMP_BASE_URL}${GMP}.tar.xz
+        call_cmd axel ${GMP_BASE_URL}${GMP}.tar.xz
     fi
 
     cd ${ROOT}
@@ -412,9 +404,9 @@ function build_binutils() {
     header "BUILDING BINUTILS"
     mkdir -p ${BUILD_DIR}/build-binutils
     cd ${BUILD_DIR}/build-binutils
-    ${SOURCES_DIR}/binutils-${BINUTILS}/configure "${BINUTILS_CONFIGURATION[@]}"
-    make ${JOBS} all || die "Error while building binutils!" -n
-    make install || die "Error while installing binutils!" -n
+    call_cmd ${SOURCES_DIR}/binutils-${BINUTILS}/configure "${BINUTILS_CONFIGURATION[@]}"
+    call_cmd make ${JOBS} all || die "Error while building binutils!" -n
+    call_cmd make install || die "Error while installing binutils!" -n
 
     set_build_state ${FUNCNAME[0]}
 }
@@ -430,7 +422,7 @@ function build_headers() {
 
     header "MAKING LINUX HEADERS"
     cd ${SOURCES_DIR}/linux-${LINUX} || die "Linux kernel folder does not exist!"
-    make ARCH="${ARCH}" \
+    call_cmd make ARCH="${ARCH}" \
         INSTALL_HDR_PATH="${INSTALL}/${TARGET}" \
         headers_install ${JOBS} || die "Error while building/installing Linux headers!" -n
 
@@ -446,7 +438,7 @@ function build_gcc_stage_1() {
     # use clean hashtable
     hash -r
 
-    header "MAKING GCC"
+    header "MAKING GCC STAGE 1"
 
     ln -sfn "${SOURCES_DIR}/mpfr-${MPFR}" ${SOURCES_DIR}/gcc-${GCC}/mpfr
     ln -sfn "${SOURCES_DIR}/gmp-${GMP}" ${SOURCES_DIR}/gcc-${GCC}/gmp
@@ -455,9 +447,9 @@ function build_gcc_stage_1() {
 
     mkdir -p ${BUILD_DIR}/build-gcc
     cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
-    ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_CONFIGURATION[@]}"
-    make ${JOBS} all-gcc || die "Error while building gcc stage1!" -n
-    make ${JOBS} install-gcc || die "Error while installing gcc stage1!" -n
+    call_cmd ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_CONFIGURATION[@]}"
+    call_cmd make ${JOBS} all-gcc || die "Error while building gcc stage1!" -n
+    call_cmd make ${JOBS} install-gcc || die "Error while installing gcc stage1!" -n
 
     set_build_state ${FUNCNAME[0]}
 }
@@ -475,9 +467,9 @@ function build_newlib() {
 
     mkdir -p ${BUILD_DIR}/build-newlib
     cd ${BUILD_DIR}/build-newlib || die "newlib build folder does not exist!"
-    ${SOURCES_DIR}/newlib-${NEWLIB}/configure "${NEWLIB_CONFIGURATION[@]}"
-    make all || die "Error while building newlib!" -n
-    make install || die "Error while installing newlib!" -n
+    call_cmd ${SOURCES_DIR}/newlib-${NEWLIB}/configure "${NEWLIB_CONFIGURATION[@]}"
+    call_cmd make all || die "Error while building newlib!" -n
+    call_cmd make install || die "Error while installing newlib!" -n
  
     set_build_state ${FUNCNAME[0]}
 }
@@ -491,15 +483,15 @@ function build_glibc_header() {
     # use clean hashtable
     hash -r
 
-    header "MAKING GLIBC"
+    header "MAKING GLIBC HEADERS"
     mkdir -p ${BUILD_DIR}/build-glibc
     cd ${BUILD_DIR}/build-glibc || die "glibc build folder does not exist!"
-    ${SOURCES_DIR}/glibc-${GLIBC}/configure "${GLIBC_CONFIGURATION[@]}"
+    call_cmd ${SOURCES_DIR}/glibc-${GLIBC}/configure "${GLIBC_CONFIGURATION[@]}"
 
-    make install-headers install-bootstrap-headers=yes || die "Error while building glibc headers!" -n
-    make ${JOBS} csu/subdir_lib || die "Error while building glibc headers 2!" -n
-    install csu/crt1.o csu/crti.o csu/crtn.o ${INSTALL}/${TARGET}/lib || die "Error while installing crt" -n
-    ${INSTALL}/bin/${TARGET}-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o ${INSTALL}/${TARGET}/lib/libc.so || die "Error while building libc" -n
+    call_cmd make install-headers install-bootstrap-headers=yes || die "Error while building glibc headers!" -n
+    call_cmd make ${JOBS} csu/subdir_lib || die "Error while building glibc headers 2!" -n
+    call_cmd install csu/crt1.o csu/crti.o csu/crtn.o ${INSTALL}/${TARGET}/lib || die "Error while installing crt" -n
+    call_cmd ${INSTALL}/bin/${TARGET}-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o ${INSTALL}/${TARGET}/lib/libc.so || die "Error while building libc" -n
     touch ${INSTALL}/${TARGET}/include/gnu/stubs.h
 
     set_build_state ${FUNCNAME[0]}
@@ -513,12 +505,12 @@ function build_gcc_stage2() {
     # use clean hashtable
     hash -r
 
-    header "MAKING GCC INITIAL"
+    header "MAKING GCC STAGE 2"
 
     mkdir -p ${BUILD_DIR}/build-gcc
     cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
-    make ${JOBS} all-target-libgcc || die "Error while building gcc stage2" -n
-    make install-target-libgcc || die "Error while building gcc stage2" -n
+    call_cmd make ${JOBS} all-target-libgcc || die "Error while building gcc stage2" -n
+    call_cmd make install-target-libgcc || die "Error while building gcc stage2" -n
  
     set_build_state ${FUNCNAME[0]}
 }
@@ -533,8 +525,8 @@ function build_glibc() {
 
     header "MAKING GLIBC"
     cd ${BUILD_DIR}/build-glibc || die "glibc build folder does not exist!"
-    make ${JOBS} || die "Error while building glibc"
-    make install || die "Error while installing glibc"
+    call_cmd make ${JOBS} || die "Error while building glibc"
+    call_cmd make install || die "Error while installing glibc"
 
     set_build_state ${FUNCNAME[0]}
 }
@@ -552,27 +544,12 @@ function build_gcc_final() {
 
     # We need to reconfigure if there is a final config available
     if [[ ! -z "${GCC_FINAL_CONFIGURATION[@]}" ]]; then
-       ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_FINAL_CONFIGURATION[@]}"
+       call_cmd ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_FINAL_CONFIGURATION[@]}"
     fi
 
-    make ${JOBS} all || die "Error while building gcc final" -n
-    make install || die "Error while gcc final install" -n
+    call_cmd make ${JOBS} all || die "Error while building gcc final" -n
+    call_cmd make install || die "Error while gcc final install" -n
 
-    set_build_state ${FUNCNAME[0]}
-}
-
-
-configure_gcc_stage_2() {
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
-    # use clean hashtable
-    hash -r
-
-    header "CONFIGURING GCC STAGE 2"
-
-    cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
-    ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_STAGE_2_CONFIGURATION[@]}"
- 
     set_build_state ${FUNCNAME[0]}
 }
 
@@ -618,23 +595,22 @@ function ending_info() {
 
     END=$(date +%s)
 
-    [[ -z ${VERBOSE} ]] && exec 1>&5 2>&6
     if [[ -e ${INSTALL}/bin/${TARGET}-gcc ]]; then
-        header "BUILD SUCCESSFUL" ${VERBOSE:-"--no-first-echo"}
-        echo "${BOLD}Script duration:${RST} $(format_time "${START}" "${END}")"
-        echo "${BOLD}GCC version:${RST} $(${INSTALL}/bin/${TARGET}-gcc --version | head -n 1)"
+        header "BUILD SUCCESSFUL"
+        echo -e "${BOLD}Script duration:${RST} $(format_time "${START}" "${END}")"
+        echo -e "${BOLD}GCC version:${RST} $(${INSTALL}/bin/${TARGET}-gcc --version | head -n 1)"
         if [[ -n ${COMPRESSION} ]] && [[ -e ${PACKAGE} ]]; then
-            echo "${BOLD}File location:${RST} $(pwd)/${PACKAGE}"
-            echo "${BOLD}File size:${RST} $(du -h "${PACKAGE}" | awk '{print $1}')"
+            echo -e "${BOLD}File location:${RST} $(pwd)/${PACKAGE}"
+            echo -e "${BOLD}File size:${RST} $(du -h "${PACKAGE}" | awk '{print $1}')"
         else
-            echo "${BOLD}Toolchain location:${RST} $(pwd)/${TARGET}"
+            echo -e "${BOLD}Toolchain location:${RST} $(pwd)/${TARGET}"
         fi
     else
         header "BUILD FAILED"
     fi
 
     # Alert to script end
-    echo "\a"
+    echo -e "\a"
 
     set_build_state ${FUNCNAME[0]}
 }
