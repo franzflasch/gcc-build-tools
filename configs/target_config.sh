@@ -109,7 +109,7 @@ function config_i686-linux-gnu_x86() {
 }
 
 
-function config_x86_64-linux-gnu_x86-64() {
+function config_x86_64-linux-gnu_x86_64() {
     local SOURCE="$1"
     local VERSION="$2"
     local TAR_OR_GIT="$3"
