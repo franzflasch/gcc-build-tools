@@ -228,6 +228,7 @@ function parse_parameters() {
         "x86") TARGET="i686-linux-gnu" ;;
         "x86_64") TARGET="x86_64-linux-gnu" ;;
         "cm4f") TARGET="arm-none-eabi" ;;
+        "riscv-baremetal") TARGET="riscv32-none-elf" ;;
         *) die "Absent or invalid arch specified!" -h ;;
     esac
 
