@@ -62,13 +62,12 @@ function help_menu() {
     echo "${BOLD}EXAMPLE:${RST} ${0} -a arm64 -s linaro -v 7"
     echo
     echo "${BOLD}REQUIRED PARAMETERS:${RST}"
-    echo "  -a  | --arch:        Possible values: arm, arm64, i686, or x86_64. This is the toolchain's target architecture."
+    echo "  -a  | --arch:        Possible values: arm, arm64, x86, x86_64, cm4f. This is the toolchain's target architecture."
     echo "  -s  | --source:      Possible values: gnu or linaro. This is the GCC source (GNU official vs. Linaro fork)."
     echo "  -v  | --version:     Possible values: (4, 5, 6, 7, 8*, and 9* [*GNU only]). This is the GCC version to build."
     echo
     echo "${BOLD}OPTIONAL PARAMETERS:${RST}"
     echo "  -f  | --full-src:    Download full git repos instead of shallow clones"
-    echo "  -nu | --no-update:   Do not update the downloaded components before building (useful if you have slow internet)."
     echo "  -p  | --package:     Possible values: gz or xz. Compresses toolchain after build."
     echo "  -t  | --tarballs:    Use tarballs for binutils, ISL, and, GCC"
     echo "  -V  | --verbose:     Make script print all output, not just errors and the ending information"
