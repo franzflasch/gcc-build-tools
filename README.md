@@ -16,7 +16,7 @@ Once you have set up your environment, run the following:
 ```bash
 git clone https://github.com/franzflasch/build-tools-gcc
 cd build-tools-gcc
-./build -h
+./build-gcc -h
 ```
 
 The printout will show you how to run the script.
@@ -25,13 +25,13 @@ Example commands:
 
 ```bash
 # Build a Linaro 7.x toolchain for x86_64
-./build -a x86_64 -s linaro -v 7
+./build-gcc -a x86_64 -s linaro -v 7
 
 # Build a Linaro 7.x toolchain for arm64
-./build -a arm64 -s linaro -v 7
+./build-gcc -a arm64 -s linaro -v 7
 
 # Build a GNU 8.x toolchain for arm
-./build -a arm -s gnu -v 8
+./build-gcc -a arm -s gnu -v 8
 ```
 
 ## After compilation
