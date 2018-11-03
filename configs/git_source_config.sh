@@ -1,22 +1,21 @@
 
-function setup_base_urls_git_gnu() {
+function setup_urls_git() {
 
     setup_common_urls_git
 
-    GCC_GIT_URL="git://gcc.gnu.org/git/gcc.git"
+    # Setup urls
+    BINUTILS_URL="${BINUTILS_GIT_URL}"
+    GCC_URL="${GCC_GIT_URL}"
+    LINUX_URL="${LINUX_GIT_URL}"
+    GLIBC_URL="${GLIBC_GIT_URL}"
+    NEWLIB_URL="${NEWLIB_GIT_URL}"
+    MPC_URL="${MPC_BASE_URL}${MPC}.tar.gz"
+    ISL_URL="${ISL_BASE_URL}${ISL}.tar.xz"
+    MPFR_URL="${MPFR_BASE_URL}${MPFR}.tar.xz"
+    GMP_URL="${GMP_BASE_URL}${GMP}.tar.xz"
 }
 
-function setup_base_urls_git_linaro() {
-
-    setup_common_urls_git
-
-    GCC_GIT_URL="https://git.linaro.org/toolchain/gcc.git"
-}
-
-function setup_variables_git_gnu_9() {
-
-    setup_base_urls_git_gnu
-
+function setup_variables_git_9() {
     MPFR="mpfr-4.0.1"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
@@ -25,12 +24,11 @@ function setup_variables_git_gnu_9() {
     GLIBC="glibc-2.28"
     LINUX="v4.18"
     GCC="master"
+
+    setup_urls_git
 }
 
-function setup_variables_git_gnu_8() {
-
-    setup_base_urls_git_gnu
-
+function setup_variables_git_8() {
     MPFR="mpfr-4.0.1"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
@@ -40,12 +38,11 @@ function setup_variables_git_gnu_8() {
     LINUX="v4.18"
     GCC="gcc-8-branch"
     NEWLIB="newlib-3.0.0"
+
+    setup_urls_git
 }
 
-function setup_variables_git_gnu_7() {
-
-    setup_base_urls_git_gnu
-
+function setup_variables_git_7() {
     MPFR="mpfr-4.0.1"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
@@ -55,34 +52,6 @@ function setup_variables_git_gnu_7() {
     LINUX="v4.18"
     GCC="gcc-7-branch"
     NEWLIB="newlib-2.5.0"
-}
 
-function setup_variables_git_linaro_7() {
-
-    setup_base_urls_git_linaro
-
-    MPFR="mpfr-4.0.1"
-    GMP="gmp-6.1.2"
-    MPC="mpc-1.1.0"
-    ISL="isl-0.18"
-    BINUTILS="binutils-2_31-branch"
-    GLIBC="glibc-2.28"
-    LINUX="v4.18"
-    GCC="linaro-local/gcc-7-integration-branch"
-    NEWLIB="newlib-2_5_0"
-}
-
-function setup_variables_git_linaro_6() {
-
-    setup_base_urls_git_linaro
-
-    MPFR="mpfr-4.0.1"
-    GMP="gmp-6.1.2"
-    MPC="mpc-1.1.0"
-    ISL="isl-0.18"
-    BINUTILS="binutils-2_31-branch"
-    GLIBC="glibc-2.28"
-    LINUX="v4.18"
-    GCC="linaro-local/gcc-6-integration-branch"
-    NEWLIB="newlib-2_4_0"
+    setup_urls_git
 }

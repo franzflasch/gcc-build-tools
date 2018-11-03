@@ -24,14 +24,20 @@ The printout will show you how to run the script.
 Example commands:
 
 ```bash
-# Build a Linaro 7.x toolchain for x86_64
-./build-gcc -a x86_64 -s linaro -v 7
+# Build a toolchain for x86_64
+./build-gcc -a x86_64 -v 7
 
-# Build a Linaro 7.x toolchain for arm64
-./build-gcc -a arm64 -s linaro -v 7
+# Build a toolchain for arm64
+./build-gcc -a arm64 -v 7
 
-# Build a GNU 8.x toolchain for arm
-./build-gcc -a arm -s gnu -v 8
+# Build a toolchain for arm
+./build-gcc -a arm -v 8
+
+# Build a toolchain for avr microcontrollers
+./build-gcc -a avr8 -v 8 -t
+
+# Build a toolchain for arm cortex m3/m4 microcontrollers
+./build-gcc -a cm4f -v 8 -t
 ```
 
 ## After compilation

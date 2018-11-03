@@ -51,7 +51,6 @@ function call_cmd() {
     fi
 }
 
-
 # Help menu function
 function help_menu() {
     echo
@@ -59,11 +58,10 @@ function help_menu() {
     echo
     echo "${BOLD}USAGE:${RST} ${0} <options>"
     echo
-    echo "${BOLD}EXAMPLE:${RST} ${0} -a arm64 -s linaro -v 7"
+    echo "${BOLD}EXAMPLE:${RST} ${0} -a arm64 -v 7"
     echo
     echo "${BOLD}REQUIRED PARAMETERS:${RST}"
     echo "  -a  | --arch:        Possible values: arm, arm64, x86, x86_64, cm4f, riscv-baremetal. This is the toolchain's target architecture."
-    echo "  -s  | --source:      Possible values: gnu or linaro. This is the GCC source (GNU official vs. Linaro fork)."
     echo "  -v  | --version:     Possible values: (4, 5, 6, 7, 8*, and 9* [*GNU only]). This is the GCC version to build."
     echo
     echo "${BOLD}OPTIONAL PARAMETERS:${RST}"
@@ -74,14 +72,12 @@ function help_menu() {
     echo
 }
 
-
 # Prints a formatted header to let the user know what's being done
 function header() {
     echo -e "${GRN}====$(for i in $(seq ${#1}); do echo -e "=\c"; done)===="
     echo -e "==  ${1}  =="
     echo -e "====$(for i in $(seq ${#1}); do echo -e "=\c"; done)====${RST}"
 }
-
 
 # Prints an error in bold red
 function die() {
@@ -92,14 +88,12 @@ function die() {
     exit
 }
 
-
 # Prints a warning in bold yellow
 function warn() {
     echo ""
     echo "${YLW}${1}${RST}"
     [[ "${*}" =~ "-n" ]] && echo
 }
-
 
 # Formats the time for the end
 function format_time() {
@@ -140,7 +134,6 @@ function git_clone() {
     call_cmd git clone ${DEPTH_FLAG:+"--depth=1"} "${@}"
 }
 
-
 # git fetch wrapper
 function git_fetch() {
     call_cmd git fetch ${DEPTH_FLAG:+"--depth=1"} "${@}"
@@ -149,6 +142,26 @@ function git_fetch() {
 function extract() {
     mkdir -p "${2}"
     call_cmd tar xvf "${1}" -C "${2}" --strip-components=1
+}
+
+function fetch_source() {
+    local URL=$1
+    local FOLDER=$2
+    local BRANCH=$3
+
+    # Check if it is a tarball
+    echo "${URL}" | grep -q ".tar." && local EXIT_CODE=$? || local EXIT_CODE=$?
+    if [ ${EXIT_CODE} == 0 ]; then
+        local FILE_NAME=$(basename "${URL}")
+        if [[ ! -f ${FILE_NAME} ]]; then
+            call_cmd axel ${URL}
+            extract ${FILE_NAME} ${FOLDER}
+        fi
+    else
+        if [[ ! -d ${FOLDER} ]]; then
+            git_clone ${URL} ${FOLDER} -b ${BRANCH}
+        fi
+    fi
 }
 
 function set_build_state() {
@@ -201,7 +214,6 @@ function parse_parameters() {
         case "${1}" in
             # REQUIRED FLAGS
             "-a"|"--arch") shift && ARCH=${1} ;;
-            "-s"|"--source") shift && SOURCE=${1} ;;
             "-v"|"--version") shift && VERSION=${1} ;;
 
             # OPTIONAL FLAGS
@@ -227,6 +239,7 @@ function parse_parameters() {
         "x86") TARGET="i686-linux-gnu" ;;
         "x86_64") TARGET="x86_64-linux-gnu" ;;
         "cm4f") TARGET="arm-none-eabi" ;;
+        "avr8") TARGET="avr" ;;
         "riscv-baremetal") TARGET="riscv32-none-elf" ;;
         *) die "Absent or invalid arch specified!" -h ;;
     esac
@@ -236,14 +249,13 @@ function parse_parameters() {
     if [[ -z ${TARBALLS} ]]; then
         # Search for a valid target config
         type -t config_${TARGET}_${ARCH} > /dev/null || die "No git config found for ${TARGET}!"
-        config_${TARGET}_${ARCH} ${SOURCE} ${VERSION} git
+        config_${TARGET}_${ARCH} ${VERSION} git
     else
         # Search for a valid target config
         type -t config_${TARGET}_${ARCH} > /dev/null || die "No tar config found for ${TARGET}!"
-        config_${TARGET}_${ARCH} ${SOURCE} ${VERSION} tar
+        config_${TARGET}_${ARCH} ${VERSION} tar
     fi
 }
-
 
 function build_binaries() {
 
@@ -269,7 +281,6 @@ function build_binaries() {
     set_build_state ${FUNCNAME[0]}
 }
 
-
 function download_sources() {
 
     check_build_state ${FUNCNAME[0]} && return
@@ -279,118 +290,15 @@ function download_sources() {
 
     cd ${SOURCES_DIR} || die "Failed to create sources directory!"
 
-    if [[ -z ${TARBALLS} ]]; then
-        if [[ "${IS_BARE_METAL}" = true ]]; then
-            if [[ ! -d newlib-${NEWLIB} ]]; then
-                header "DOWNLOADING NEWLIB"
-                git_clone ${NEWLIB_GIT_URL} newlib-${NEWLIB} -b ${NEWLIB}
-            fi
-        else
-            if [[ ! -d glibc-${GLIBC} ]]; then
-                header "DOWNLOADING GLIBC"
-                git_clone ${GLIBC_GIT_URL} glibc-${GLIBC} -b ${GLIBC}
-            fi
-
-            if [[ ! -d linux-${LINUX} ]]; then
-                header "DOWNLOADING LINUX KERNEL"
-                git_clone ${LINUX_GIT_URL} linux-${LINUX} -b ${LINUX}
-            fi
-        fi
-
-        if [[ ! -d binutils-${BINUTILS} ]]; then
-            header "DOWNLOADING BINUTILS"
-            git_clone ${BINUTILS_GIT_URL} binutils-${BINUTILS} -b ${BINUTILS}
-        fi
-
-        if [[ ! -d gcc-${GCC} ]]; then
-            header "DOWNLOADING GCC"
-            git_clone ${GCC_GIT_URL} gcc-${GCC} -b ${GCC}
-        fi
-    else
-        if [[ "${IS_BARE_METAL}" = true ]]; then
-            if [[ ! -f ${NEWLIB}.tar.gz ]]; then
-                header "DOWNLOADING NEWLIB"
-                call_cmd axel ${NEWLIB_BASE_URL}${NEWLIB}.tar.gz
-            fi
-        else        
-            if [[ ! -f ${GLIBC}.tar.xz ]]; then
-                header "DOWNLOADING GLIBC"
-                call_cmd axel ${GLIBC_BASE_URL}${GLIBC}.tar.xz
-            fi
-
-            if [[ ! -f linux-${LINUX}.tar.xz ]]; then
-                header "DOWNLOADING LINUX KERNEL"
-                call_cmd axel ${LINUX_BASE_URL}${LINUX}.tar.xz
-            fi
-        fi
-
-        if [[ ! -f binutils-${BINUTILS}.tar.xz ]]; then
-            header "DOWNLOADING BINUTILS"
-            call_cmd axel ${BINUTILS_BASE_URL}${BINUTILS}.tar.xz
-        fi
-
-        if [[ ! -f ${GCC}.tar.gz ]]; then
-            header "DOWNLOADING GCC"
-            call_cmd axel ${GCC_BASE_URL}${GCC}.tar.gz
-        fi
-    fi
-
-    if [[ ! -f ${MPC}.tar.gz ]]; then
-        header "DOWNLOADING MPC"
-        call_cmd axel ${MPC_BASE_URL}${MPC}.tar.gz
-    fi
-
-    if [[ ! -f ${ISL}.tar.xz ]]; then
-        header "DOWNLOADING ISL"
-        call_cmd axel ${ISL_BASE_URL}${ISL}.tar.xz
-    fi
-
-    if [[ ! -f ${MPFR}.tar.xz ]]; then
-        header "DOWNLOADING MPFR"
-        call_cmd axel ${MPFR_BASE_URL}${MPFR}.tar.xz
-    fi
-
-    if [[ ! -f ${GMP}.tar.xz ]]; then
-        header "DOWNLOADING GMP"
-        call_cmd axel ${GMP_BASE_URL}${GMP}.tar.xz
-    fi
+    for download_func in "${DOWNLOAD_FUNCS[@]}"
+    do
+        ${download_func}
+    done
 
     cd ${ROOT}
 
     set_build_state ${FUNCNAME[0]}
 }
-
-# Extract tarballs to their proper locations
-function extract_sources() {
-
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
-    # use clean hashtable
-    hash -r
-
-    header "EXTRACTING DOWNLOADED TARBALLS"
-
-    cd ${SOURCES_DIR}
-
-    extract ${MPFR}.tar.xz ${SOURCES_DIR}/mpfr-${MPFR}
-    extract ${GMP}.tar.xz ${SOURCES_DIR}/gmp-${GMP}
-    extract ${MPC}.tar.gz ${SOURCES_DIR}/mpc-${MPC}
-    extract ${ISL}.tar.xz ${SOURCES_DIR}/isl-${ISL}
-
-    if [[ -n ${TARBALLS} ]]; then
-        if [[ "${IS_BARE_METAL}" = true ]]; then
-            extract ${NEWLIB}.tar.gz ${SOURCES_DIR}/newlib-${NEWLIB}
-        else    
-            extract ${GLIBC}.tar.xz ${SOURCES_DIR}/glibc-${GLIBC}
-            extract linux-${LINUX}.tar.xz ${SOURCES_DIR}/linux-${LINUX}
-        fi
-        extract binutils-${BINUTILS}.tar.xz ${SOURCES_DIR}/binutils-${BINUTILS}
-        extract ${GCC}.tar.gz ${SOURCES_DIR}/gcc-${GCC}
-    fi
-
-    set_build_state ${FUNCNAME[0]}
-}
-
 
 # Step 1. Binutils
 function build_binutils() {
@@ -410,7 +318,6 @@ function build_binutils() {
     set_build_state ${FUNCNAME[0]}
 }
 
-
 # Step 2. Linux Kernel Headers
 function build_headers() {
 
@@ -427,7 +334,6 @@ function build_headers() {
 
     set_build_state ${FUNCNAME[0]}
 }
-
 
 # Step 3. C/C++ Compilers
 function build_gcc_stage_1() {
@@ -453,7 +359,6 @@ function build_gcc_stage_1() {
     set_build_state ${FUNCNAME[0]}
 }
 
-
 # Build newlib
 function build_newlib() {
 
@@ -469,10 +374,28 @@ function build_newlib() {
     call_cmd ${SOURCES_DIR}/newlib-${NEWLIB}/configure "${NEWLIB_CONFIGURATION[@]}"
     call_cmd make all || die "Error while building newlib!" -n
     call_cmd make install || die "Error while installing newlib!" -n
- 
+
     set_build_state ${FUNCNAME[0]}
 }
 
+# Build avr libc
+function build_avrlibc() {
+
+    check_build_state ${FUNCNAME[0]} && return
+    cd ${ROOT}
+    # use clean hashtable
+    hash -r
+
+    header "MAKING AVRLIBC"
+
+    mkdir -p ${BUILD_DIR}/build-avrlibc
+    cd ${BUILD_DIR}/build-avrlibc || die "avrlibc build folder does not exist!"
+    call_cmd ${SOURCES_DIR}/avrlibc-${AVRLIBC}/configure "${AVRLIBC_CONFIGURATION[@]}"
+    call_cmd make || die "Error while building avrlibc!" -n
+    call_cmd make install || die "Error while installing avrlibc!" -n
+
+    set_build_state ${FUNCNAME[0]}
+}
 
 # Step 4. Standard C Library Headers and Startup Files
 function build_glibc_header() {
@@ -510,7 +433,7 @@ function build_gcc_stage2() {
     cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
     call_cmd make ${JOBS} all-target-libgcc || die "Error while building gcc stage2" -n
     call_cmd make install-target-libgcc || die "Error while building gcc stage2" -n
- 
+
     set_build_state ${FUNCNAME[0]}
 }
 
@@ -552,7 +475,6 @@ function build_gcc_final() {
     set_build_state ${FUNCNAME[0]}
 }
 
-
 # Package toolchain
 function package_tc() {
 
@@ -562,7 +484,7 @@ function package_tc() {
     hash -r
 
     if [[ -n ${COMPRESSION} ]]; then
-        PACKAGE=${TARGET}-${VERSION}.x-${SOURCE}-$(TZ=UTC date +%Y%m%d).tar.${COMPRESSION}
+        PACKAGE=${TARGET}-${VERSION}.x-$(TZ=UTC date +%Y%m%d).tar.${COMPRESSION}
 
         header "PACKAGING TOOLCHAIN"
 
@@ -580,9 +502,8 @@ function package_tc() {
         esac
     fi
 
-    set_build_state ${FUNCNAME[0]}    
+    set_build_state ${FUNCNAME[0]}
 }
-
 
 # Ending information
 function ending_info() {
@@ -618,23 +539,12 @@ parse_parameters "${@}"
 setup_variables
 build_binaries
 download_sources
-extract_sources
 
-if [[ "${IS_BARE_METAL}" = true ]]; then
-    build_binutils    
-    build_gcc_stage_1
-    build_newlib
-    build_gcc_final
-else
-    build_binutils
-    build_headers
-    build_gcc_stage_1
-    build_glibc_header
-
-    build_gcc_stage2
-    build_glibc
-    build_gcc_final
-fi
+# Go through all build functions
+for build_func in "${BUILD_FUNCS[@]}"
+do
+    ${build_func}
+done
 
 package_tc
 ending_info

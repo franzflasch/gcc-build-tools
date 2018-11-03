@@ -5,8 +5,6 @@
 
 function setup_default_config()
 {
-    IS_BARE_METAL=false
-
     # Configuration variables
     BINUTILS_BASE_CONFIG=(
         "--target=${TARGET}"
@@ -32,12 +30,52 @@ function setup_default_config()
     )
 }
 
+function setup_baremetal_default_downloadfuncs() {
+    DOWNLOAD_FUNCS=("fetch_source ${NEWLIB_URL} newlib-${NEWLIB} ${NEWLIB}"
+                    "fetch_source ${BINUTILS_URL} binutils-${BINUTILS} ${BINUTILS}"
+                    "fetch_source ${GCC_URL} gcc-${GCC} ${GCC}"
+                    "fetch_source ${MPC_URL} mpc-${MPC}"
+                    "fetch_source ${ISL_URL} isl-${ISL}"
+                    "fetch_source ${MPFR_URL} mpfr-${MPFR}"
+                    "fetch_source ${GMP_URL} gmp-${GMP}"
+    )
+}
+
+function setup_baremetal_default_buildfuncs() {
+    BUILD_FUNCS=("build_binutils"
+                 "build_gcc_stage_1"
+                 "build_newlib"
+                 "build_gcc_final"
+    )
+}
+
+function setup_linux_default_downloadfuncs() {
+    DOWNLOAD_FUNCS=("fetch_source ${GLIBC_URL} glibc-${GLIBC} ${GLIBC}"
+                    "fetch_source ${LINUX_URL} linux-${LINUX} ${LINUX}"
+                    "fetch_source ${BINUTILS_URL} binutils-${BINUTILS} ${BINUTILS}"
+                    "fetch_source ${GCC_URL} gcc-${GCC} ${GCC}"
+                    "fetch_source ${MPC_URL} mpc-${MPC}"
+                    "fetch_source ${ISL_URL} isl-${ISL}"
+                    "fetch_source ${MPFR_URL} mpfr-${MPFR}"
+                    "fetch_source ${GMP_URL} gmp-${GMP}"
+    )
+}
+
+function setup_linux_default_buildfuncs() {
+    BUILD_FUNCS=("build_binutils"
+                 "build_headers"
+                 "build_gcc_stage_1"
+                 "build_glibc_header"
+                 "build_gcc_stage2"
+                 "build_glibc"
+                 "build_gcc_final"
+    )
+}
 
 # default arm-linux-gnueabi
 function config_arm-linux-gnueabi_arm() {
-    local SOURCE="$1"
-    local VERSION="$2"
-    local TAR_OR_GIT="$3"
+    local VERSION="$1"
+    local TAR_OR_GIT="$2"
 
     setup_default_config
 
@@ -54,15 +92,17 @@ function config_arm-linux-gnueabi_arm() {
         "${GLIBC_BASE_CONFIG[@]}"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION}
+    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    setup_variables_${TAR_OR_GIT}_${VERSION}
+
+    setup_linux_default_downloadfuncs
+    setup_linux_default_buildfuncs
 }
 
 
 function config_aarch64-linux-gnu_arm64() {
-    local SOURCE="$1"
-    local VERSION="$2"
-    local TAR_OR_GIT="$3"
+    local VERSION="$1"
+    local TAR_OR_GIT="$2"
 
     setup_default_config
 
@@ -77,15 +117,17 @@ function config_aarch64-linux-gnu_arm64() {
         "${GLIBC_BASE_CONFIG[@]}"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION}
+    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    setup_variables_${TAR_OR_GIT}_${VERSION}
+
+    setup_linux_default_downloadfuncs
+    setup_linux_default_buildfuncs
 }
 
 
 function config_i686-linux-gnu_x86() {
-    local SOURCE="$1"
-    local VERSION="$2"
-    local TAR_OR_GIT="$3"
+    local VERSION="$1"
+    local TAR_OR_GIT="$2"
 
     setup_default_config
 
@@ -104,15 +146,17 @@ function config_i686-linux-gnu_x86() {
         "${GLIBC_BASE_CONFIG[@]}"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION}
+    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    setup_variables_${TAR_OR_GIT}_${VERSION}
+
+    setup_linux_default_downloadfuncs
+    setup_linux_default_buildfuncs
 }
 
 
 function config_x86_64-linux-gnu_x86_64() {
-    local SOURCE="$1"
-    local VERSION="$2"
-    local TAR_OR_GIT="$3"
+    local VERSION="$1"
+    local TAR_OR_GIT="$2"
 
     setup_default_config
 
@@ -130,22 +174,22 @@ function config_x86_64-linux-gnu_x86_64() {
         "${GLIBC_BASE_CONFIG[@]}"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION}
+    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    setup_variables_${TAR_OR_GIT}_${VERSION}
+
+    setup_linux_default_downloadfuncs
+    setup_linux_default_buildfuncs
 }
 
 
 function config_arm-none-eabi_cm4f() {
-    local SOURCE="$1"
-    local VERSION="$2"
-    local TAR_OR_GIT="$3"
+    local VERSION="$1"
+    local TAR_OR_GIT="$2"
 
     setup_default_config
 
-    IS_BARE_METAL=true
-
     BINUTILS_CONFIGURATION=(
-        "${BINUTILS_BASE_CONFIG[@]}" 
+        "${BINUTILS_BASE_CONFIG[@]}"
         "--with-cpu=cortex-m3"
         "--with-mode=thumb"
         "--enable-interwork"
@@ -196,21 +240,21 @@ function config_arm-none-eabi_cm4f() {
         "--enable-languages=c,c++"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION}
+    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    setup_variables_${TAR_OR_GIT}_${VERSION}
+
+    setup_baremetal_default_downloadfuncs
+    setup_baremetal_default_buildfuncs
 }
 
 function config_riscv32-none-elf_riscv-baremetal() {
-    local SOURCE="$1"
-    local VERSION="$2"
-    local TAR_OR_GIT="$3"
+    local VERSION="$1"
+    local TAR_OR_GIT="$2"
 
     setup_default_config
 
-    IS_BARE_METAL=true
-
     BINUTILS_CONFIGURATION=(
-        "${BINUTILS_BASE_CONFIG[@]}" 
+        "${BINUTILS_BASE_CONFIG[@]}"
         "--with-arch=rv32ima"
         "--with-abi=ilp32"
         "--disable-gdb"
@@ -249,6 +293,53 @@ function config_riscv32-none-elf_riscv-baremetal() {
         "--enable-languages=c,c++"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${SOURCE}_${VERSION}
+    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    setup_variables_${TAR_OR_GIT}_${VERSION}
+
+    setup_baremetal_default_downloadfuncs
+    setup_baremetal_default_buildfuncs
+}
+
+function config_avr_avr8() {
+    local VERSION="$1"
+    local TAR_OR_GIT="$2"
+
+    setup_default_config
+
+    BINUTILS_CONFIGURATION=(
+        "${BINUTILS_BASE_CONFIG[@]}"
+        "--disable-gdb"
+    )
+
+    GCC_CONFIGURATION=(
+        "${GCC_BASE_CONFIG[@]}"
+        "--disable-libssp"
+        "--disable-libada"
+        "--with-dwarf2"
+        "--disable-shared"
+        "--enable-static"
+    )
+
+    AVRLIBC_CONFIGURATION=(
+        "--host=${TARGET}"
+        "--prefix=${INSTALL}"
+    )
+
+    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    setup_variables_${TAR_OR_GIT}_${VERSION}
+
+    DOWNLOAD_FUNCS=("fetch_source ${AVRLIBC_URL} avrlibc-${AVRLIBC} ${AVRLIBC}"
+                    "fetch_source ${BINUTILS_URL} binutils-${BINUTILS} ${BINUTILS}"
+                    "fetch_source ${GCC_URL} gcc-${GCC} ${GCC}"
+                    "fetch_source ${MPC_URL} mpc-${MPC}"
+                    "fetch_source ${ISL_URL} isl-${ISL}"
+                    "fetch_source ${MPFR_URL} mpfr-${MPFR}"
+                    "fetch_source ${GMP_URL} gmp-${GMP}"
+    )
+
+    BUILD_FUNCS=("build_binutils"
+                 "build_gcc_stage_1"
+                 "build_avrlibc"
+                 "build_gcc_final"
+    )
 }
