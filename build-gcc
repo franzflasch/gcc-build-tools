@@ -149,6 +149,8 @@ function fetch_source() {
     local FOLDER=$2
     local BRANCH=$3
 
+    header "FETCHING ${URL}"
+
     # Check if it is a tarball
     echo "${URL}" | grep -q ".tar." && local EXIT_CODE=$? || local EXIT_CODE=$?
     if [ ${EXIT_CODE} == 0 ]; then
