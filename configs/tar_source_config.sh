@@ -4,16 +4,16 @@ function setup_urls_tar() {
     setup_common_urls_tar
 
     # Setup urls
-    BINUTILS_URL="${BINUTILS_BASE_URL}${BINUTILS}.tar.xz"
-    GCC_URL="${GCC_BASE_URL}${GCC}/${GCC}.tar.gz"
-    LINUX_URL="${LINUX_BASE_URL}${LINUX}.tar.xz"
-    GLIBC_URL="${GLIBC_BASE_URL}${GLIBC}.tar.xz"
-    NEWLIB_URL="${NEWLIB_BASE_URL}${NEWLIB}.tar.gz"
-    AVRLIBC_URL="${AVRLIBC_BASE_URL}${AVRLIBC}.tar.bz2"
-    MPC_URL="${MPC_BASE_URL}${MPC}.tar.gz"
-    ISL_URL="${ISL_BASE_URL}${ISL}.tar.xz"
-    MPFR_URL="${MPFR_BASE_URL}${MPFR}.tar.xz"
-    GMP_URL="${GMP_BASE_URL}${GMP}.tar.xz"
+    BINUTILS_URL="${BINUTILS_BASE_URL}${BINUTILS}.tar.xz;type=tar"
+    GCC_URL="${GCC_BASE_URL}${GCC}/${GCC}.tar.gz;type=tar"
+    LINUX_URL="${LINUX_BASE_URL}${LINUX}.tar.xz;type=tar"
+    GLIBC_URL="${GLIBC_BASE_URL}${GLIBC}.tar.xz;type=tar"
+    NEWLIB_URL="${NEWLIB_BASE_URL}${NEWLIB}.tar.gz;type=tar"
+    AVRLIBC_URL="${AVRLIBC_BASE_URL}${AVRLIBC}.tar.bz2;type=tar"
+    MPC_URL="${MPC_BASE_URL}${MPC}.tar.gz;type=tar"
+    ISL_URL="${ISL_BASE_URL}${ISL}.tar.xz;type=tar"
+    MPFR_URL="${MPFR_BASE_URL}${MPFR}.tar.xz;type=tar"
+    GMP_URL="${GMP_BASE_URL}${GMP}.tar.xz;type=tar"
 }
 
 function setup_variables_tar_8() {

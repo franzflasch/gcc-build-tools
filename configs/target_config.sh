@@ -31,9 +31,9 @@ function setup_default_config()
 }
 
 function setup_baremetal_default_downloadfuncs() {
-    DOWNLOAD_FUNCS=("fetch_source ${NEWLIB_URL} newlib-${NEWLIB} ${NEWLIB}"
-                    "fetch_source ${BINUTILS_URL} binutils-${BINUTILS} ${BINUTILS}"
-                    "fetch_source ${GCC_URL} gcc-${GCC} ${GCC}"
+    DOWNLOAD_FUNCS=("fetch_source ${NEWLIB_URL} newlib-${NEWLIB}"
+                    "fetch_source ${BINUTILS_URL} binutils-${BINUTILS}"
+                    "fetch_source ${GCC_URL} gcc-${GCC}"
                     "fetch_source ${MPC_URL} mpc-${MPC}"
                     "fetch_source ${ISL_URL} isl-${ISL}"
                     "fetch_source ${MPFR_URL} mpfr-${MPFR}"
@@ -50,10 +50,10 @@ function setup_baremetal_default_buildfuncs() {
 }
 
 function setup_linux_default_downloadfuncs() {
-    DOWNLOAD_FUNCS=("fetch_source ${GLIBC_URL} glibc-${GLIBC} ${GLIBC}"
-                    "fetch_source ${LINUX_URL} linux-${LINUX} ${LINUX}"
-                    "fetch_source ${BINUTILS_URL} binutils-${BINUTILS} ${BINUTILS}"
-                    "fetch_source ${GCC_URL} gcc-${GCC} ${GCC}"
+    DOWNLOAD_FUNCS=("fetch_source ${GLIBC_URL} glibc-${GLIBC}"
+                    "fetch_source ${LINUX_URL} linux-${LINUX}"
+                    "fetch_source ${BINUTILS_URL} binutils-${BINUTILS}"
+                    "fetch_source ${GCC_URL} gcc-${GCC}"
                     "fetch_source ${MPC_URL} mpc-${MPC}"
                     "fetch_source ${ISL_URL} isl-${ISL}"
                     "fetch_source ${MPFR_URL} mpfr-${MPFR}"
@@ -328,8 +328,8 @@ function config_avr_avr8() {
     type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
     setup_variables_${TAR_OR_GIT}_${VERSION}
 
-    DOWNLOAD_FUNCS=("fetch_source ${AVRLIBC_URL} avrlibc-${AVRLIBC} ${AVRLIBC}"
-                    "fetch_source ${BINUTILS_URL} binutils-${BINUTILS} ${BINUTILS}"
+    DOWNLOAD_FUNCS=("fetch_source ${AVRLIBC_URL} avrlibc-${AVRLIBC}"
+                    "fetch_source ${BINUTILS_URL} binutils-${BINUTILS}"
                     "fetch_source ${GCC_URL} gcc-${GCC} ${GCC}"
                     "fetch_source ${MPC_URL} mpc-${MPC}"
                     "fetch_source ${ISL_URL} isl-${ISL}"

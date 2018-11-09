@@ -62,7 +62,7 @@ function help_menu() {
     echo
     echo "${BOLD}REQUIRED PARAMETERS:${RST}"
     echo "  -a  | --arch:        Possible values: arm, arm64, x86, x86_64, cm4f, riscv-baremetal. This is the toolchain's target architecture."
-    echo "  -v  | --version:     Possible values: (4, 5, 6, 7, 8*, and 9* [*GNU only]). This is the GCC version to build."
+    echo "  -v  | --version:     Possible values: (4, 5, 6, 7, 8, and master. This is the GCC version to build."
     echo
     echo "${BOLD}OPTIONAL PARAMETERS:${RST}"
     echo "  -f  | --full-src:    Download full git repos instead of shallow clones"
@@ -82,7 +82,7 @@ function header() {
 # Prints an error in bold red
 function die() {
     echo ""
-    echo "${RED}${1}${RST}"
+    echo -e "${RED}${1}${RST}"
     [[ "${*}" =~ "-n" ]] && echo
     [[ "${*}" =~ "-h" ]] && help_menu
     exit
@@ -145,24 +145,78 @@ function extract() {
 }
 
 function fetch_source() {
-    local URL=$1
-    local FOLDER=$2
-    local BRANCH=$3
+    local full_url=$1
+    local folder=$2
 
-    header "FETCHING ${URL}"
+    local url_array=($(echo $full_url | tr ";" "\n"))
+    local url=${url_array[0]}
+    local url_type=""
+    local found=false
+    local branch=""
+
+    header "FETCHING ${full_url}"
+
+    # find type:
+    for type in "${url_array[@]}"; do
+      echo "${type}" | grep -q "type=" && local exit_code=$? || local exit_code=$?
+      if [ ${exit_code} == 0 ]; then
+        url_type=${type#*type=}
+        found=true
+        break
+      fi
+    done
+    ${found} || die "No valid type found in url ${full_url}!"
+    found=false
+    echo "urltype ${url_type}"
 
     # Check if it is a tarball
-    echo "${URL}" | grep -q ".tar." && local EXIT_CODE=$? || local EXIT_CODE=$?
-    if [ ${EXIT_CODE} == 0 ]; then
-        local FILE_NAME=$(basename "${URL}")
+    if [ "${url_type}" == "tar" ]; then
+        local FILE_NAME=$(basename "${url}")
         if [[ ! -f ${FILE_NAME} ]]; then
-            call_cmd axel ${URL}
-            extract ${FILE_NAME} ${FOLDER}
+            call_cmd axel ${url}
+            extract ${FILE_NAME} ${folder}
         fi
-    else
-        if [[ ! -d ${FOLDER} ]]; then
-            git_clone ${URL} ${FOLDER} -b ${BRANCH}
+        return
+    fi
+
+    # find branch:
+    for branch in "${url_array[@]}"; do
+      echo "${branch}" | grep -q "branch=" && local exit_code=$? || local exit_code=$?
+      if [ ${exit_code} == 0 ]; then
+        branch=${branch#*branch=}
+        found=true
+        break
+      fi
+    done
+    ${found} || die "No valid branch found in url ${full_url}!"
+    found=false
+    echo "BRANCH: ${branch}"
+
+    # Check if it is a git repo
+    if [ "${url_type}" == "git" ]; then
+        if [[ ! -d ${folder} ]]; then
+            git_clone ${url} ${folder} -b ${branch}
         fi
+        return
+    fi
+
+    # Check if it is a svn repo
+    if [ "${url_type}" == "svn" ]; then
+        local module=""
+        # find svn module:
+        for module in "${url_array[@]}"; do
+          echo "${module}" | grep -q "module=" && local exit_code=$? || local exit_code=$?
+          if [ ${exit_code} == 0 ]; then
+            module=${module#*module=}
+            break
+          fi
+        done
+        echo "MODULE: ${module}"
+
+        if [[ ! -d ${folder} ]]; then
+            svn co ${url}${branch}${module} ${folder}
+        fi
+        return
     fi
 }
 
@@ -389,6 +443,13 @@ function build_avrlibc() {
     hash -r
 
     header "MAKING AVRLIBC"
+
+    # bootstrap fixup
+    if [[ ! -f ${SOURCES_DIR}/avrlibc-${AVRLIBC}/configure ]]; then
+        cd ${SOURCES_DIR}/avrlibc-${AVRLIBC}/
+        call_cmd ./bootstrap
+        cd ${ROOT}
+    fi
 
     mkdir -p ${BUILD_DIR}/build-avrlibc
     cd ${BUILD_DIR}/build-avrlibc || die "avrlibc build folder does not exist!"
