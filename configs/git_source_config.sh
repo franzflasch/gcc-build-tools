@@ -37,7 +37,7 @@ function setup_variables_git_8() {
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
     ISL="isl-0.18"
-    BINUTILS="binutils-2_31-branch"
+    BINUTILS="binutils-2_31_1-branch"
     GLIBC="glibc-2.28"
     LINUX="v4.18"
     GCC="gcc-8-branch"
