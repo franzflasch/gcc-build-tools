@@ -7,10 +7,10 @@ This is a script to build GCC toolchains targeting the following architectures
     x86  
     x86_64  
     
-- baremetal 
-    arm 
-    avr 
-    risc-v 
+- baremetal  
+    arm  
+    avr  
+    risc-v  
 
 ## Using the script
 
