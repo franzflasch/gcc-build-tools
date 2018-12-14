@@ -80,10 +80,3 @@ Pull requests are more than welcome as well. However, there is a particular codi
 + Double brackets and single equal sign for string comparisons in if blocks: ```if [[ ${VARIABLE} = "yes" ]]; then```
 
 Additionally, please be sure to run your change through shellcheck.net (either copy and paste the script there or download the binary and run `shellcheck build`).
-
-
-## Credits/thanks
-
-+ [nathanchance](https://github.com/nathanchance): For great modifications!
-+ [frap129](https://github.com/frap129): For some modifications to update the script/components
-+ [MSF-Jarvis](https://github.com/MSF-Jarvis): For testing the arm option
