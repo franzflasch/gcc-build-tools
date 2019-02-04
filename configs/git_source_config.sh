@@ -17,7 +17,7 @@ function setup_urls_git() {
 }
 
 function setup_variables_git_master() {
-    MPFR="mpfr-4.0.1"
+    MPFR="mpfr-4.0.2"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
     ISL="isl-0.20"
@@ -33,7 +33,7 @@ function setup_variables_git_master() {
 }
 
 function setup_variables_git_8() {
-    MPFR="mpfr-4.0.1"
+    MPFR="mpfr-4.0.2"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
     ISL="isl-0.18"
@@ -49,7 +49,7 @@ function setup_variables_git_8() {
 }
 
 function setup_variables_git_7() {
-    MPFR="mpfr-4.0.1"
+    MPFR="mpfr-4.0.2"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
     ISL="isl-0.18"

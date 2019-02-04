@@ -23,7 +23,7 @@ function setup_variables_tar_8() {
     # GCC and Binutils
     GCC="gcc-8.2.0"
 
-    MPFR="mpfr-4.0.1"
+    MPFR="mpfr-4.0.2"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
     ISL="isl-0.18"
@@ -38,7 +38,7 @@ function setup_variables_tar_8() {
 }
 
 function setup_variables_tar_7() {
-    MPFR="mpfr-4.0.1"
+    MPFR="mpfr-4.0.2"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
     ISL="isl-0.18"
