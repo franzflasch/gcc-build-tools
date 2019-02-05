@@ -18,7 +18,7 @@ function setup_urls_tar() {
 
 function setup_variables_tar_8() {
     # Linux
-    LINUX="4.18"
+    LINUX="4.20"
 
     # GCC and Binutils
     GCC="gcc-8.2.0"
@@ -27,10 +27,10 @@ function setup_variables_tar_8() {
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
     ISL="isl-0.18"
-    BINUTILS="2.31.1"
+    BINUTILS="2.32"
 
     # LIBC sources
-    GLIBC="glibc-2.28"
+    GLIBC="glibc-2.29"
     NEWLIB="newlib-3.0.0.20180831"
     AVRLIBC="avr-libc-2.0.0"
 
