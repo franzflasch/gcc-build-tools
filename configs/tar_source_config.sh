@@ -31,7 +31,7 @@ function setup_variables_tar_8() {
 
     # LIBC sources
     GLIBC="glibc-2.29"
-    NEWLIB="newlib-3.0.0.20180831"
+    NEWLIB="newlib-3.1.0.20181231"
     AVRLIBC="avr-libc-2.0.0"
 
     setup_urls_tar
