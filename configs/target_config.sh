@@ -22,11 +22,8 @@ function setup_default_config()
 
     GLIBC_BASE_CONFIG=(
         "--host=${TARGET}"
-        "--target=${TARGET}"
         "--prefix=${INSTALL}/${TARGET}"
         "--with-headers=${INSTALL}/${TARGET}/include"
-        "libc_cv_forced_unwind=yes"
-        "libc_cv_c_cleanup=yes"
     )
 }
 
