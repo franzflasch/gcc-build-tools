@@ -17,7 +17,7 @@ function setup_default_config()
         "--target=${TARGET}"
         "--prefix=${INSTALL}"
         "--disable-nls"
-        "--enable-languages=c"
+        "--enable-languages=c,c++"
     )
 
     GLIBC_BASE_CONFIG=(
@@ -58,6 +58,7 @@ function setup_linux_default_downloadfuncs() {
                     "fetch_source ${ISL_URL} isl-${ISL}"
                     "fetch_source ${MPFR_URL} mpfr-${MPFR}"
                     "fetch_source ${GMP_URL} gmp-${GMP}"
+                    "fetch_source ${CLOOG_URL} cloog-${CLOOG}"
     )
 }
 

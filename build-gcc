@@ -405,6 +405,7 @@ function build_gcc_stage_1() {
     ln -sfn "${SOURCES_DIR}/gmp-${GMP}" ${SOURCES_DIR}/gcc-${GCC}/gmp
     ln -sfn "${SOURCES_DIR}/mpc-${MPC}" ${SOURCES_DIR}/gcc-${GCC}/mpc
     ln -sfn "${SOURCES_DIR}/isl-${ISL}" ${SOURCES_DIR}/gcc-${GCC}/isl
+    ln -sfn "${SOURCES_DIR}/cloog-${CLOOG}" ${SOURCES_DIR}/gcc-${GCC}/cloog
 
     mkdir -p ${BUILD_DIR}/build-gcc
     cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
@@ -473,7 +474,7 @@ function build_glibc_header() {
     cd ${BUILD_DIR}/build-glibc || die "glibc build folder does not exist!"
     call_cmd ${SOURCES_DIR}/glibc-${GLIBC}/configure "${GLIBC_CONFIGURATION[@]}"
 
-    call_cmd make install-headers install-bootstrap-headers=yes || die "Error while building glibc headers!" -n
+    call_cmd make install-bootstrap-headers=yes install-headers || die "Error while building glibc headers!" -n
     call_cmd make ${JOBS} csu/subdir_lib || die "Error while building glibc headers 2!" -n
     call_cmd install csu/crt1.o csu/crti.o csu/crtn.o ${INSTALL}/${TARGET}/lib || die "Error while installing crt" -n
     call_cmd ${INSTALL}/bin/${TARGET}-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o ${INSTALL}/${TARGET}/lib/libc.so || die "Error while building libc" -n

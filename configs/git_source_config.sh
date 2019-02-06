@@ -14,6 +14,7 @@ function setup_urls_git() {
     ISL_URL="${ISL_BASE_URL}${ISL}.tar.xz;type=tar"
     MPFR_URL="${MPFR_BASE_URL}${MPFR}.tar.xz;type=tar"
     GMP_URL="${GMP_BASE_URL}${GMP}.tar.xz;type=tar"
+    CLOOG_URL="${CLOOG_BASE_URL}${CLOOG}.tar.gz;type=tar"
 }
 
 function setup_variables_git_master() {
@@ -21,6 +22,7 @@ function setup_variables_git_master() {
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
     ISL="isl-0.20"
+    CLOOG="cloog-0.18.4"
     BINUTILS="master"
     GLIBC="master" # May produces a compilation error, should work with glibc-2.28
     LINUX="master"
@@ -37,6 +39,7 @@ function setup_variables_git_8() {
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
     ISL="isl-0.18"
+    CLOOG="cloog-0.18.4"
     BINUTILS="binutils-2_32-branch"
     GLIBC="glibc-2.29"
     LINUX="v4.20"
@@ -52,10 +55,11 @@ function setup_variables_git_7() {
     MPFR="mpfr-4.0.2"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
-    ISL="isl-0.18"
-    BINUTILS="binutils-2_31-branch"
-    GLIBC="glibc-2.28"
-    LINUX="v4.18"
+    ISL="isl-0.20"
+    CLOOG="cloog-0.18.4"
+    BINUTILS="binutils-2_32-branch"
+    GLIBC="glibc-2.29"
+    LINUX="v4.20"
     GCC="gcc-7-branch"
     NEWLIB="newlib-2.5.0"
     AVRLIBC="tags"
