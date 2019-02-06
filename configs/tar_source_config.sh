@@ -25,7 +25,7 @@ function setup_variables_tar_8() {
     MPFR="mpfr-4.0.2"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
-    ISL="isl-0.18" # GCC 8 only builds with isl-0.20 so far
+    ISL="isl-0.18" # GCC 8 only builds with isl-0.18 so far
     CLOOG="cloog-0.18.4"
     NEWLIB="newlib-3.1.0.20181231"
     AVRLIBC="avr-libc-2.0.0"
