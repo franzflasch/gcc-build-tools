@@ -17,10 +17,12 @@ function setup_default_config()
         "--target=${TARGET}"
         "--prefix=${INSTALL}"
         "--disable-nls"
-        "--enable-languages=c,c++"
+        "--enable-languages=c"
     )
 
     GLIBC_BASE_CONFIG=(
+        "CC=${TARGET}-gcc"
+        "CXX=${TARGET}-g++"
         "--host=${TARGET}"
         "--prefix=${INSTALL}/${TARGET}"
         "--with-headers=${INSTALL}/${TARGET}/include"
