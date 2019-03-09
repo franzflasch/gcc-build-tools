@@ -73,7 +73,7 @@ function setup_linux_default_buildfuncs() {
 }
 
 # default arm-linux-gnueabi
-function config_arm-linux-gnueabi_arm() {
+function config_arm-linux-gnueabi() {
     local VERSION="$1"
     local TAR_OR_GIT="$2"
 
@@ -100,7 +100,7 @@ function config_arm-linux-gnueabi_arm() {
 }
 
 
-function config_aarch64-linux-gnu_arm64() {
+function config_aarch64-linux-gnu() {
     local VERSION="$1"
     local TAR_OR_GIT="$2"
 
@@ -125,7 +125,7 @@ function config_aarch64-linux-gnu_arm64() {
 }
 
 
-function config_i686-linux-gnu_x86() {
+function config_i686-linux-gnu() {
     local VERSION="$1"
     local TAR_OR_GIT="$2"
 
@@ -154,7 +154,7 @@ function config_i686-linux-gnu_x86() {
 }
 
 
-function config_x86_64-linux-gnu_x86_64() {
+function config_x86_64-linux-gnu() {
     local VERSION="$1"
     local TAR_OR_GIT="$2"
 
@@ -182,7 +182,7 @@ function config_x86_64-linux-gnu_x86_64() {
 }
 
 
-function config_arm-none-eabi_cm4f() {
+function config_arm-none-eabi() {
     local VERSION="$1"
     local TAR_OR_GIT="$2"
 
@@ -247,7 +247,44 @@ function config_arm-none-eabi_cm4f() {
     setup_baremetal_default_buildfuncs
 }
 
-function config_riscv32-none-elf_riscv-baremetal() {
+function config_riscv64-linux-gnu() {
+    local VERSION="$1"
+    local TAR_OR_GIT="$2"
+
+    setup_default_config
+
+    # Append additional confis here
+    BINUTILS_CONFIGURATION=(
+        "${BINUTILS_BASE_CONFIG[@]}"
+        "--with-arch=rv64imafdc"
+        "--with-abi=lp64d"
+        "--with-tune=rocket"
+        "--disable-multilib"
+    )
+    GCC_CONFIGURATION=(
+        "${GCC_BASE_CONFIG[@]}"
+        "--with-arch=rv64imafdc"
+        "--with-abi=lp64d"
+        "--with-tune=rocket"
+        "--disable-multilib"
+        "--enable-languages=c,c++"
+    )
+    GLIBC_CONFIGURATION=(
+        "${GLIBC_BASE_CONFIG[@]}"
+        "--with-arch=rv64imafdc"
+        "--with-abi=lp64d"
+        "--with-tune=rocket"
+        "--disable-multilib"
+    )
+
+    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    setup_variables_${TAR_OR_GIT}_${VERSION}
+
+    setup_linux_default_downloadfuncs
+    setup_linux_default_buildfuncs
+}
+
+function config_riscv32-none-elf() {
     local VERSION="$1"
     local TAR_OR_GIT="$2"
 
@@ -300,7 +337,7 @@ function config_riscv32-none-elf_riscv-baremetal() {
     setup_baremetal_default_buildfuncs
 }
 
-function config_avr_avr8() {
+function config_avr() {
     local VERSION="$1"
     local TAR_OR_GIT="$2"
 

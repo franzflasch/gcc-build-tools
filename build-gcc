@@ -249,13 +249,10 @@ function setup_variables() {
 
 function setup_environment() {
     ROOT="${PWD}"
-    PREBUILTS_BIN="${ROOT}/prebuilts/bin"
     SOURCES_DIR="${ROOT}/sources"
     BUILD_STATE_DIR="${ROOT}/state"
     BUILD_DIR="${ROOT}/build_dir"
     INSTALL="${ROOT}/toolchain"
-
-    export PATH=${PREBUILTS_BIN}:${PATH}
 
     # Maybe not needed!?
     export PATH=${INSTALL}/bin:${PATH}
@@ -294,6 +291,7 @@ function parse_parameters() {
         "arm64") TARGET="aarch64-linux-gnu" ;;
         "x86") TARGET="i686-linux-gnu" ;;
         "x86_64") TARGET="x86_64-linux-gnu" ;;
+        "riscv") TARGET="riscv64-linux-gnu" ;;
         "cm4f") TARGET="arm-none-eabi" ;;
         "avr8") TARGET="avr" ;;
         "riscv-baremetal") TARGET="riscv32-none-elf" ;;
@@ -304,37 +302,13 @@ function parse_parameters() {
 
     if [[ -z ${TARBALLS} ]]; then
         # Search for a valid target config
-        type -t config_${TARGET}_${ARCH} > /dev/null || die "No git config found for ${TARGET}!"
-        config_${TARGET}_${ARCH} ${VERSION} git
+        type -t config_${TARGET} > /dev/null || die "No git config found for ${TARGET}!"
+        config_${TARGET} ${VERSION} git
     else
         # Search for a valid target config
-        type -t config_${TARGET}_${ARCH} > /dev/null || die "No tar config found for ${TARGET}!"
-        config_${TARGET}_${ARCH} ${VERSION} tar
+        type -t config_${TARGET} > /dev/null || die "No tar config found for ${TARGET}!"
+        config_${TARGET} ${VERSION} tar
     fi
-}
-
-function build_binaries() {
-
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
-    # use clean hashtable
-    hash -r
-
-    header "BUILDING AXEL DOWNLOAD ACCELERATOR"
-
-    local AXEL=${ROOT}/sources/axel
-    [[ ! -d ${AXEL} ]] && call_cmd git -C "$(dirname "${AXEL}")" clone --depth=1 https://github.com/axel-download-accelerator/axel
-    call_cmd git -C "${AXEL}" clean -fxdq
-    call_cmd git -C "${AXEL}" pull
-    (
-        cd "${AXEL}" || die "Issue with cloning axel source!"
-        call_cmd ./autogen.sh
-        call_cmd ./configure --prefix="$(dirname "${PREBUILTS_BIN}")"
-        call_cmd make ${JOBS} || die "Error building axel!"
-        call_cmd make ${JOBS} install || die "Error installing axel!"
-    )
-
-    set_build_state ${FUNCNAME[0]}
 }
 
 function download_sources() {
@@ -601,7 +575,6 @@ function ending_info() {
 
 parse_parameters "${@}"
 setup_variables
-build_binaries
 download_sources
 
 # Go through all build functions
