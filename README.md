@@ -20,7 +20,7 @@ following:
 + A Linux distribution (the script has been tested on Debian Stretch)
 + Core developer packages
     + For Debian 9:  
-    ```sudo apt install -y build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison```
+    ```sudo apt install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison```
 
 Once you have set up your environment, run the following:
 
