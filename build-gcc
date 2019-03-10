@@ -173,7 +173,7 @@ function fetch_source() {
     if [ "${url_type}" == "tar" ]; then
         local FILE_NAME=$(basename "${url}")
         if [[ ! -f ${FILE_NAME} ]]; then
-            call_cmd axel ${url}
+            call_cmd wget ${url}
             extract ${FILE_NAME} ${folder}
         fi
         return
