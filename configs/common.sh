@@ -6,7 +6,7 @@ function setup_common_urls_tar() {
     ISL_BASE_URL="http://isl.gforge.inria.fr/"
     CLOOG_BASE_URL="https://www.bastoul.net/cloog/pages/download/"
     BINUTILS_BASE_URL="https://ftp.gnu.org/gnu/binutils/binutils-"
-    GCC_BASE_URL="https://mirrors.kernel.org/gnu/gcc/"
+    GCC_BASE_URL="ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/"
     GLIBC_BASE_URL="https://ftp.gnu.org/gnu/glibc/"
     LINUX_BASE_URL="https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-"
     NEWLIB_BASE_URL="ftp://sourceware.org/pub/newlib/"

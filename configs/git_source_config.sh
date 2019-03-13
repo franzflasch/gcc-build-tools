@@ -31,7 +31,7 @@ function setup_variables_git_master() {
     ISL="isl-0.20"
     CLOOG="cloog-0.18.4"
     BINUTILS="master"
-    GLIBC="master" # May produces a compilation error, should work with glibc-2.28
+    GLIBC="master"
     LINUX="master"
     GCC="master"
     NEWLIB="master"
@@ -46,7 +46,7 @@ function setup_variables_git_8() {
     MPFR="mpfr-4.0.2"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
-    ISL="isl-0.18"
+    ISL="isl-0.20"
     CLOOG="cloog-0.18.4"
     BINUTILS="binutils-2_32-branch"
     GLIBC="glibc-2.29"

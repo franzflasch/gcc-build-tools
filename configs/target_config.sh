@@ -421,11 +421,13 @@ function config_avr() {
                     "fetch_source ${ISL_URL} isl-${ISL}"
                     "fetch_source ${MPFR_URL} mpfr-${MPFR}"
                     "fetch_source ${GMP_URL} gmp-${GMP}"
+                    "fetch_source ${GDB_URL} gdb-${GDB}"
     )
 
     BUILD_FUNCS=("build_binutils"
                  "build_gcc_stage_1"
                  "build_avrlibc"
                  "build_gcc_final"
+                 "build_gdb"
     )
 }
