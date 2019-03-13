@@ -4,6 +4,12 @@ function setup_urls_git() {
     setup_common_urls_git
 
     # Setup urls
+    # Supported parameters:
+    # type= - tar, git, svn
+    # branch=
+    # subfolder= (only for git) - will make a symlink to a subfolder in the git repo (simulated subfolder checkout)
+    # module= (only for svn) - will checkout a subfolder within the svn repo
+
     BINUTILS_URL="${BINUTILS_GIT_URL};type=git;branch=${BINUTILS}"
     GCC_URL="${GCC_GIT_URL};type=git;branch=${GCC}"
     LINUX_URL="${LINUX_GIT_URL};type=git;branch=${LINUX}"
@@ -15,6 +21,7 @@ function setup_urls_git() {
     MPFR_URL="${MPFR_BASE_URL}${MPFR}.tar.xz;type=tar"
     GMP_URL="${GMP_BASE_URL}${GMP}.tar.xz;type=tar"
     CLOOG_URL="${CLOOG_BASE_URL}${CLOOG}.tar.gz;type=tar"
+    GDB_URL="${GDB_GIT_URL};type=git;branch=${GDB}"
 }
 
 function setup_variables_git_master() {
@@ -30,6 +37,7 @@ function setup_variables_git_master() {
     NEWLIB="master"
     AVRLIBC="trunk"
     AVRLIBC_MODULE="/avr-libc"
+    GDB="master"
 
     setup_urls_git
 }
@@ -47,6 +55,7 @@ function setup_variables_git_8() {
     NEWLIB="newlib-3.1.0"
     AVRLIBC="tags"
     AVRLIBC_MODULE="/avr-libc-2_0_0-release"
+    GDB="gdb-8.2-branch"
 
     setup_urls_git
 }
@@ -64,6 +73,7 @@ function setup_variables_git_7() {
     NEWLIB="newlib-2.5.0"
     AVRLIBC="tags"
     AVRLIBC_MODULE="/avr-libc-2_0_0-release"
+    GDB="gdb-7.12-branch"
 
     setup_urls_git
 }

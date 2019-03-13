@@ -15,6 +15,7 @@ function setup_urls_tar() {
     MPFR_URL="${MPFR_BASE_URL}${MPFR}.tar.xz;type=tar"
     GMP_URL="${GMP_BASE_URL}${GMP}.tar.xz;type=tar"
     CLOOG_URL="${CLOOG_BASE_URL}${CLOOG}.tar.gz;type=tar"
+    GDB_URL="${GDB_BASE_URL}${GDB}.tar.xz;type=tar"
 }
 
 function setup_variables_tar_8() {
@@ -29,6 +30,7 @@ function setup_variables_tar_8() {
     CLOOG="cloog-0.18.4"
     NEWLIB="newlib-3.1.0.20181231"
     AVRLIBC="avr-libc-2.0.0"
+    GDB="gdb-8.2.1"
 
     setup_urls_tar
 }
@@ -45,6 +47,7 @@ function setup_variables_tar_7() {
     CLOOG="cloog-0.18.4"
     NEWLIB="newlib-2.5.0.20171222"
     AVRLIBC="avr-libc-2.0.0"
+    GDB="gdb-7.12.1"
 
     setup_urls_tar
 }

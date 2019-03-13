@@ -11,6 +11,7 @@ function setup_common_urls_tar() {
     LINUX_BASE_URL="https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-"
     NEWLIB_BASE_URL="ftp://sourceware.org/pub/newlib/"
     AVRLIBC_BASE_URL="http://download.savannah.gnu.org/releases/avr-libc/"
+    GDB_BASE_URL="http://ftp.gnu.org/gnu/gdb/"
 }
 
 function setup_common_urls_git() {
@@ -25,4 +26,5 @@ function setup_common_urls_git() {
     LINUX_GIT_URL="git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
     NEWLIB_GIT_URL="git://sourceware.org/git/newlib-cygwin.git"
     AVRLIBC_SVN_URL="svn://svn.savannah.nongnu.org/avr-libc/"
+    GDB_GIT_URL="git://sourceware.org/git/binutils-gdb.git"
 }

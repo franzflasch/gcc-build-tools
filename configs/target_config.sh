@@ -6,11 +6,19 @@
 function setup_default_config()
 {
     # Configuration variables
+
+    # binutils and gdb share the same git repo, which is fine,
+    # however, when downloading the binutils release it comes without
+    # gdb and vice versa. And when cloning the via git the gdb is included
+    # and will also be built even if we do not want it. 
+    # Which is kinda crap. So we explicitely add --disable-gdb and 
+    # for gdb down below we add --disable-binutils
     BINUTILS_BASE_CONFIG=(
         "--target=${TARGET}"
         "--prefix=${INSTALL}"
         "--disable-nls"
         "--disable-werror"
+        "--disable-gdb"
     )
 
     GCC_BASE_CONFIG=(
@@ -27,6 +35,14 @@ function setup_default_config()
         "--prefix=${INSTALL}/${TARGET}"
         "--with-headers=${INSTALL}/${TARGET}/include"
     )
+
+    GDB_BASE_CONFIG=(
+        "--target=${TARGET}"
+        "--prefix=${INSTALL}"
+        "--disable-binutils"
+        "--disable-ld"
+        "--disable-gas"
+    )
 }
 
 function setup_baremetal_default_downloadfuncs() {
@@ -37,6 +53,7 @@ function setup_baremetal_default_downloadfuncs() {
                     "fetch_source ${ISL_URL} isl-${ISL}"
                     "fetch_source ${MPFR_URL} mpfr-${MPFR}"
                     "fetch_source ${GMP_URL} gmp-${GMP}"
+                    "fetch_source ${GDB_URL} gdb-${GDB}"
     )
 }
 
@@ -45,6 +62,7 @@ function setup_baremetal_default_buildfuncs() {
                  "build_gcc_stage_1"
                  "build_newlib"
                  "build_gcc_final"
+                 "build_gdb"
     )
 }
 
@@ -58,6 +76,7 @@ function setup_linux_default_downloadfuncs() {
                     "fetch_source ${MPFR_URL} mpfr-${MPFR}"
                     "fetch_source ${GMP_URL} gmp-${GMP}"
                     "fetch_source ${CLOOG_URL} cloog-${CLOOG}"
+                    "fetch_source ${GDB_URL} gdb-${GDB}"
     )
 }
 
@@ -69,6 +88,7 @@ function setup_linux_default_buildfuncs() {
                  "build_gcc_stage2"
                  "build_glibc"
                  "build_gcc_final"
+                 "build_gdb"
     )
 }
 
@@ -90,6 +110,10 @@ function config_arm-linux-gnueabi() {
 
     GLIBC_CONFIGURATION=(
         "${GLIBC_BASE_CONFIG[@]}"
+    )
+
+    GDB_CONFIGURATION=(
+        "${GDB_BASE_CONFIG[@]}"
     )
 
     type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
@@ -115,6 +139,10 @@ function config_aarch64-linux-gnu() {
     )
     GLIBC_CONFIGURATION=(
         "${GLIBC_BASE_CONFIG[@]}"
+    )
+
+    GDB_CONFIGURATION=(
+        "${GDB_BASE_CONFIG[@]}"
     )
 
     type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
@@ -146,6 +174,10 @@ function config_i686-linux-gnu() {
         "${GLIBC_BASE_CONFIG[@]}"
     )
 
+    GDB_CONFIGURATION=(
+        "${GDB_BASE_CONFIG[@]}"
+    )
+
     type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
     setup_variables_${TAR_OR_GIT}_${VERSION}
 
@@ -174,6 +206,10 @@ function config_x86_64-linux-gnu() {
         "${GLIBC_BASE_CONFIG[@]}"
     )
 
+    GDB_CONFIGURATION=(
+        "${GDB_BASE_CONFIG[@]}"
+    )
+
     type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
     setup_variables_${TAR_OR_GIT}_${VERSION}
 
@@ -193,7 +229,6 @@ function config_arm-none-eabi() {
         "--with-cpu=cortex-m3"
         "--with-mode=thumb"
         "--enable-interwork"
-        "--disable-gdb"
         "--with-fpu=fpv4-sp-d16"
         "--with-float=hard"
         "--enable-multilib"
@@ -238,6 +273,10 @@ function config_arm-none-eabi() {
         "--with-float=hard"
         "--enable-multilib"
         "--enable-languages=c,c++"
+    )
+
+    GDB_CONFIGURATION=(
+        "${GDB_BASE_CONFIG[@]}"
     )
 
     type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
@@ -277,6 +316,10 @@ function config_riscv64-linux-gnu() {
         "--disable-multilib"
     )
 
+    GDB_CONFIGURATION=(
+        "${GDB_BASE_CONFIG[@]}"
+    )
+
     type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
     setup_variables_${TAR_OR_GIT}_${VERSION}
 
@@ -294,7 +337,6 @@ function config_riscv32-none-elf() {
         "${BINUTILS_BASE_CONFIG[@]}"
         "--with-arch=rv32ima"
         "--with-abi=ilp32"
-        "--disable-gdb"
         "--enable-multilib"
     )
 
@@ -330,6 +372,10 @@ function config_riscv32-none-elf() {
         "--enable-languages=c,c++"
     )
 
+    GDB_CONFIGURATION=(
+        "${GDB_BASE_CONFIG[@]}"
+    )
+
     type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
     setup_variables_${TAR_OR_GIT}_${VERSION}
 
@@ -345,7 +391,6 @@ function config_avr() {
 
     BINUTILS_CONFIGURATION=(
         "${BINUTILS_BASE_CONFIG[@]}"
-        "--disable-gdb"
     )
 
     GCC_CONFIGURATION=(
@@ -360,6 +405,10 @@ function config_avr() {
     AVRLIBC_CONFIGURATION=(
         "--host=${TARGET}"
         "--prefix=${INSTALL}"
+    )
+
+    GDB_CONFIGURATION=(
+        "${GDB_BASE_CONFIG[@]}"
     )
 
     type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"

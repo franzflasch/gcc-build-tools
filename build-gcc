@@ -61,7 +61,7 @@ function help_menu() {
     echo "${BOLD}EXAMPLE:${RST} ${0} -a arm64 -v 7"
     echo
     echo "${BOLD}REQUIRED PARAMETERS:${RST}"
-    echo "  -a  | --arch:        Possible values: arm, arm64, x86, x86_64, cm4f, riscv-baremetal. This is the toolchain's target architecture."
+    echo "  -a  | --arch:        Possible values: arm, arm64, x86, x86_64, riscv, cm4f, riscv-baremetal, avr8. This is the toolchain's target architecture."
     echo "  -v  | --version:     Possible values: (4, 5, 6, 7, 8, and master. This is the GCC version to build."
     echo
     echo "${BOLD}OPTIONAL PARAMETERS:${RST}"
@@ -131,7 +131,10 @@ function format_time() {
 
 # git clone wrapper
 function git_clone() {
-    call_cmd git clone ${DEPTH_FLAG:+"--depth=1"} "${@}"
+    local url=$1
+    local folder=$2
+    local branch=$3
+    call_cmd git clone ${DEPTH_FLAG:+"--depth=1"} ${url} ${folder} -b ${branch}
 }
 
 # git fetch wrapper
@@ -192,10 +195,25 @@ function fetch_source() {
     found=false
     echo "BRANCH: ${branch}"
 
+    # check if we should symlink to a subfolder:
+    for subfolder in "${url_array[@]}"; do
+      echo "${subfolder}" | grep -q "subfolder=" && local exit_code=$? || local exit_code=$?
+      if [ ${exit_code} == 0 ]; then
+        subfolder=${subfolder#*subfolder=}
+        found=true
+        break
+      fi
+    done
+    ${found} || subfolder=""
+    found=false
+    echo "SUBFOLDER: ${subfolder}"
+
     # Check if it is a git repo
     if [ "${url_type}" == "git" ]; then
-        if [[ ! -d ${folder} ]]; then
-            git_clone ${url} ${folder} -b ${branch}
+        if [[ ! -d git_${folder} ]]; then
+            git_clone ${url} git_${folder} ${branch}
+            # Now make a symlink
+            ln -sfn ${SOURCES_DIR}/git_${folder}/${subfolder} ${SOURCES_DIR}/${folder}
         fi
         return
     fi
@@ -509,6 +527,25 @@ function build_gcc_final() {
 
     call_cmd make ${JOBS} all || die "Error while building gcc final" -n
     call_cmd make install || die "Error while gcc final install" -n
+
+    set_build_state ${FUNCNAME[0]}
+}
+
+# Step 8. Build GDB
+function build_gdb() {
+
+    check_build_state ${FUNCNAME[0]} && return
+    cd ${ROOT}
+    # use clean hashtable
+    hash -r
+
+    header "MAKING GDB"
+
+    mkdir -p ${BUILD_DIR}/build-gdb
+    cd ${BUILD_DIR}/build-gdb || die "gdb build folder does not exist!"
+    call_cmd ${SOURCES_DIR}/gdb-${GDB}/configure "${GDB_CONFIGURATION[@]}"
+    call_cmd make || die "Error while building gdb!" -n
+    call_cmd make install || die "Error while installing gdb!" -n
 
     set_build_state ${FUNCNAME[0]}
 }
