@@ -31,18 +31,18 @@
 
 set -e
 
-COMMON_CONFIG="${BASH_SOURCE%/*}/configs/common.sh"
-TAR_CONFIG="${BASH_SOURCE%/*}/configs/tar_source_config.sh"
-GIT_CONFIG="${BASH_SOURCE%/*}/configs/git_source_config.sh"
-TARGET_CONFIG="${BASH_SOURCE%/*}/configs/target_config.sh"
-source ${COMMON_CONFIG}
-source ${TAR_CONFIG}
-source ${GIT_CONFIG}
-source ${TARGET_CONFIG}
+# shellcheck disable=SC1090
+source "${BASH_SOURCE%/*}/configs/common.sh"
+# shellcheck disable=SC1090
+source "${BASH_SOURCE%/*}/configs/tar_source_config.sh"
+# shellcheck disable=SC1090
+source "${BASH_SOURCE%/*}/configs/git_source_config.sh"
+# shellcheck disable=SC1090
+source "${BASH_SOURCE%/*}/configs/target_config.sh"
 
 function call_cmd() {
-    echo "CMD being executed: ${@}"
-    local cmd_to_call="${@}"
+    echo "CMD being executed: ${*}"
+    local cmd_to_call="${*}"
 
     if [[ ! -z "${VERBOSE}" ]]; then
         $cmd_to_call
@@ -74,8 +74,10 @@ function help_menu() {
 
 # Prints a formatted header to let the user know what's being done
 function header() {
+    # shellcheck disable=SC2034
     echo -e "${GRN}====$(for i in $(seq ${#1}); do echo -e "=\c"; done)===="
     echo -e "==  ${1}  =="
+    # shellcheck disable=SC2034
     echo -e "====$(for i in $(seq ${#1}); do echo -e "=\c"; done)====${RST}"
 }
 
@@ -134,7 +136,7 @@ function git_clone() {
     local url=$1
     local folder=$2
     local branch=$3
-    call_cmd git clone ${DEPTH_FLAG:+"--depth=1"} ${url} ${folder} -b ${branch}
+    call_cmd git clone ${DEPTH_FLAG:+"--depth=1"} "${url}" "${folder}" -b "${branch}"
 }
 
 # git fetch wrapper
@@ -151,7 +153,7 @@ function fetch_source() {
     local full_url=$1
     local folder=$2
 
-    local url_array=($(echo $full_url | tr ";" "\n"))
+    local url_array=($(echo "${full_url}" | tr ";" "\n"))
     local url=${url_array[0]}
     local url_type=""
     local found=false
@@ -161,8 +163,9 @@ function fetch_source() {
 
     # find type:
     for type in "${url_array[@]}"; do
+      # shellcheck disable=SC2015
       echo "${type}" | grep -q "type=" && local exit_code=$? || local exit_code=$?
-      if [ ${exit_code} == 0 ]; then
+      if [ ${exit_code} = 0 ]; then
         url_type=${type#*type=}
         found=true
         break
@@ -173,19 +176,21 @@ function fetch_source() {
     echo "urltype ${url_type}"
 
     # Check if it is a tarball
-    if [ "${url_type}" == "tar" ]; then
-        local FILE_NAME=$(basename "${url}")
-        if [[ ! -f ${FILE_NAME} ]]; then
-            call_cmd wget ${url}
-            extract ${FILE_NAME} ${folder}
+    if [ "${url_type}" = "tar" ]; then
+        local file_name=""
+        file_name=$(basename "${url}")
+        if [[ ! -f ${file_name} ]]; then
+            call_cmd wget "${url}"
+            extract "${file_name}" "${folder}"
         fi
         return
     fi
 
     # find branch:
     for branch in "${url_array[@]}"; do
+      # shellcheck disable=SC2015
       echo "${branch}" | grep -q "branch=" && local exit_code=$? || local exit_code=$?
-      if [ ${exit_code} == 0 ]; then
+      if [ ${exit_code} = 0 ]; then
         branch=${branch#*branch=}
         found=true
         break
@@ -197,8 +202,9 @@ function fetch_source() {
 
     # check if we should symlink to a subfolder:
     for subfolder in "${url_array[@]}"; do
+      # shellcheck disable=SC2015
       echo "${subfolder}" | grep -q "subfolder=" && local exit_code=$? || local exit_code=$?
-      if [ ${exit_code} == 0 ]; then
+      if [ ${exit_code} = 0 ]; then
         subfolder=${subfolder#*subfolder=}
         found=true
         break
@@ -209,22 +215,23 @@ function fetch_source() {
     echo "SUBFOLDER: ${subfolder}"
 
     # Check if it is a git repo
-    if [ "${url_type}" == "git" ]; then
+    if [ "${url_type}" = "git" ]; then
         if [[ ! -d git_${folder} ]]; then
-            git_clone ${url} git_${folder} ${branch}
+            git_clone "${url}" "git_${folder}" "${branch}"
             # Now make a symlink
-            ln -sfn ${SOURCES_DIR}/git_${folder}/${subfolder} ${SOURCES_DIR}/${folder}
+            ln -sfn "${SOURCES_DIR}/git_${folder}/${subfolder}" "${SOURCES_DIR}/${folder}"
         fi
         return
     fi
 
     # Check if it is a svn repo
-    if [ "${url_type}" == "svn" ]; then
+    if [ "${url_type}" = "svn" ]; then
         local module=""
         # find svn module:
         for module in "${url_array[@]}"; do
+          # shellcheck disable=SC2015
           echo "${module}" | grep -q "module=" && local exit_code=$? || local exit_code=$?
-          if [ ${exit_code} == 0 ]; then
+          if [ ${exit_code} = 0 ]; then
             module=${module#*module=}
             break
           fi
@@ -232,18 +239,18 @@ function fetch_source() {
         echo "MODULE: ${module}"
 
         if [[ ! -d ${folder} ]]; then
-            svn co ${url}${branch}${module} ${folder}
+            svn co "${url}${branch}${module}" "${folder}"
         fi
         return
     fi
 }
 
 function set_build_state() {
-    touch ${BUILD_STATE_DIR}/${1}
+    touch "${BUILD_STATE_DIR}/${1}"
 }
 
 function check_build_state() {
-    if [ -e ${BUILD_STATE_DIR}/${1} ];then
+    if [ -e "${BUILD_STATE_DIR}/${1}" ];then
         return 0
     else
         return 1
@@ -275,8 +282,8 @@ function setup_environment() {
     # Maybe not needed!?
     export PATH=${INSTALL}/bin:${PATH}
 
-    mkdir -p ${SOURCES_DIR}
-    mkdir -p ${BUILD_STATE_DIR}
+    mkdir -p "${SOURCES_DIR}"
+    mkdir -p "${BUILD_STATE_DIR}"
 }
 
 # Parse parameters
@@ -289,7 +296,6 @@ function parse_parameters() {
 
             # OPTIONAL FLAGS
             "-f"|"--full-src") FULL_SOURCE=true ;;
-            "-nu"|"--no-update") NO_UPDATE=true ;;
             "-p"|"--package") shift && COMPRESSION=${1} ;;
             "-t"|"--tarballs") TARBALLS=true ;;
             "-V"|"--verbose") VERBOSE=true ;;
@@ -321,117 +327,117 @@ function parse_parameters() {
     if [[ -z ${TARBALLS} ]]; then
         # Search for a valid target config
         type -t config_${TARGET} > /dev/null || die "No git config found for ${TARGET}!"
-        config_${TARGET} ${VERSION} git
+        "config_${TARGET}" "${VERSION}" git
     else
         # Search for a valid target config
         type -t config_${TARGET} > /dev/null || die "No tar config found for ${TARGET}!"
-        config_${TARGET} ${VERSION} tar
+        "config_${TARGET}" "${VERSION}" tar
     fi
 }
 
 function download_sources() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
-    cd ${SOURCES_DIR} || die "Failed to create sources directory!"
+    cd "${SOURCES_DIR}" || die "Failed to create sources directory!"
 
     for download_func in "${DOWNLOAD_FUNCS[@]}"
     do
         ${download_func}
     done
 
-    cd ${ROOT}
+    cd "${ROOT}"
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 # Step 1. Binutils
 function build_binutils() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
     header "BUILDING BINUTILS"
-    mkdir -p ${BUILD_DIR}/build-binutils
-    cd ${BUILD_DIR}/build-binutils
-    call_cmd ${SOURCES_DIR}/binutils-${BINUTILS}/configure "${BINUTILS_CONFIGURATION[@]}"
+    mkdir -p "${BUILD_DIR}/build-binutils"
+    cd "${BUILD_DIR}/build-binutils"
+    call_cmd "${SOURCES_DIR}/binutils-${BINUTILS}/configure" "${BINUTILS_CONFIGURATION[@]}"
     call_cmd make ${JOBS} all || die "Error while building binutils!" -n
     call_cmd make install || die "Error while installing binutils!" -n
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 # Step 2. Linux Kernel Headers
 function build_headers() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
     header "MAKING LINUX HEADERS"
-    cd ${SOURCES_DIR}/linux-${LINUX} || die "Linux kernel folder does not exist!"
+    cd "${SOURCES_DIR}/linux-${LINUX}" || die "Linux kernel folder does not exist!"
     call_cmd make ARCH="${ARCH}" \
         INSTALL_HDR_PATH="${INSTALL}/${TARGET}" \
         headers_install ${JOBS} || die "Error while building/installing Linux headers!" -n
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 # Step 3. C/C++ Compilers
 function build_gcc_stage_1() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
     header "MAKING GCC STAGE 1"
 
-    ln -sfn "${SOURCES_DIR}/mpfr-${MPFR}" ${SOURCES_DIR}/gcc-${GCC}/mpfr
-    ln -sfn "${SOURCES_DIR}/gmp-${GMP}" ${SOURCES_DIR}/gcc-${GCC}/gmp
-    ln -sfn "${SOURCES_DIR}/mpc-${MPC}" ${SOURCES_DIR}/gcc-${GCC}/mpc
-    ln -sfn "${SOURCES_DIR}/isl-${ISL}" ${SOURCES_DIR}/gcc-${GCC}/isl
-    ln -sfn "${SOURCES_DIR}/cloog-${CLOOG}" ${SOURCES_DIR}/gcc-${GCC}/cloog
+    ln -sfn "${SOURCES_DIR}/mpfr-${MPFR}" "${SOURCES_DIR}/gcc-${GCC}/mpfr"
+    ln -sfn "${SOURCES_DIR}/gmp-${GMP}" "${SOURCES_DIR}/gcc-${GCC}/gmp"
+    ln -sfn "${SOURCES_DIR}/mpc-${MPC}" "${SOURCES_DIR}/gcc-${GCC}/mpc"
+    ln -sfn "${SOURCES_DIR}/isl-${ISL}" "${SOURCES_DIR}/gcc-${GCC}/isl"
+    ln -sfn "${SOURCES_DIR}/cloog-${CLOOG}" "${SOURCES_DIR}/gcc-${GCC}/cloog"
 
-    mkdir -p ${BUILD_DIR}/build-gcc
-    cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
-    call_cmd ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_CONFIGURATION[@]}"
+    mkdir -p "${BUILD_DIR}/build-gcc"
+    cd "${BUILD_DIR}/build-gcc" || die "GCC build folder does not exist!"
+    call_cmd "${SOURCES_DIR}/gcc-${GCC}/configure" "${GCC_CONFIGURATION[@]}"
     call_cmd make ${JOBS} all-gcc || die "Error while building gcc stage1!" -n
     call_cmd make ${JOBS} install-gcc || die "Error while installing gcc stage1!" -n
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 # Build newlib
 function build_newlib() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
     header "MAKING NEWLIB"
 
-    mkdir -p ${BUILD_DIR}/build-newlib
-    cd ${BUILD_DIR}/build-newlib || die "newlib build folder does not exist!"
-    call_cmd ${SOURCES_DIR}/newlib-${NEWLIB}/configure "${NEWLIB_CONFIGURATION[@]}"
+    mkdir -p "${BUILD_DIR}/build-newlib"
+    cd "${BUILD_DIR}/build-newlib" || die "newlib build folder does not exist!"
+    call_cmd "${SOURCES_DIR}/newlib-${NEWLIB}/configure" "${NEWLIB_CONFIGURATION[@]}"
     call_cmd make all || die "Error while building newlib!" -n
     call_cmd make install || die "Error while installing newlib!" -n
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 # Build avr libc
 function build_avrlibc() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
@@ -439,122 +445,122 @@ function build_avrlibc() {
 
     # bootstrap fixup
     if [[ ! -f ${SOURCES_DIR}/avrlibc-${AVRLIBC}/configure ]]; then
-        cd ${SOURCES_DIR}/avrlibc-${AVRLIBC}/
+        cd "${SOURCES_DIR}/avrlibc-${AVRLIBC}/"
         call_cmd ./bootstrap
-        cd ${ROOT}
+        cd "${ROOT}"
     fi
 
-    mkdir -p ${BUILD_DIR}/build-avrlibc
-    cd ${BUILD_DIR}/build-avrlibc || die "avrlibc build folder does not exist!"
-    call_cmd ${SOURCES_DIR}/avrlibc-${AVRLIBC}/configure "${AVRLIBC_CONFIGURATION[@]}"
+    mkdir -p "${BUILD_DIR}/build-avrlibc"
+    cd "${BUILD_DIR}/build-avrlibc" || die "avrlibc build folder does not exist!"
+    call_cmd "${SOURCES_DIR}/avrlibc-${AVRLIBC}/configure" "${AVRLIBC_CONFIGURATION[@]}"
     call_cmd make || die "Error while building avrlibc!" -n
     call_cmd make install || die "Error while installing avrlibc!" -n
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 # Step 4. Standard C Library Headers and Startup Files
 function build_glibc_header() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
     header "MAKING GLIBC HEADERS"
-    mkdir -p ${BUILD_DIR}/build-glibc
-    cd ${BUILD_DIR}/build-glibc || die "glibc build folder does not exist!"
-    call_cmd ${SOURCES_DIR}/glibc-${GLIBC}/configure "${GLIBC_CONFIGURATION[@]}"
+    mkdir -p "${BUILD_DIR}/build-glibc"
+    cd "${BUILD_DIR}/build-glibc" || die "glibc build folder does not exist!"
+    call_cmd "${SOURCES_DIR}/glibc-${GLIBC}/configure" "${GLIBC_CONFIGURATION[@]}"
 
     call_cmd make install-bootstrap-headers=yes install-headers || die "Error while building glibc headers!" -n
     call_cmd make ${JOBS} csu/subdir_lib || die "Error while building glibc headers 2!" -n
-    call_cmd install csu/crt1.o csu/crti.o csu/crtn.o ${INSTALL}/${TARGET}/lib || die "Error while installing crt" -n
-    call_cmd ${INSTALL}/bin/${TARGET}-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o ${INSTALL}/${TARGET}/lib/libc.so || die "Error while building libc" -n
-    touch ${INSTALL}/${TARGET}/include/gnu/stubs.h
+    call_cmd install csu/crt1.o csu/crti.o csu/crtn.o "${INSTALL}/${TARGET}/lib" || die "Error while installing crt" -n
+    call_cmd "${INSTALL}/bin/${TARGET}-gcc" -nostdlib -nostartfiles -shared -x c /dev/null -o "${INSTALL}/${TARGET}/lib/libc.so" || die "Error while building libc" -n
+    touch "${INSTALL}/${TARGET}/include/gnu/stubs.h"
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 # Step 5. Compiler Support Library
 function build_gcc_stage2() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
     header "MAKING GCC STAGE 2"
 
-    mkdir -p ${BUILD_DIR}/build-gcc
-    cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
+    mkdir -p "${BUILD_DIR}/build-gcc"
+    cd "${BUILD_DIR}/build-gcc" || die "GCC build folder does not exist!"
     call_cmd make ${JOBS} all-target-libgcc || die "Error while building gcc stage2" -n
     call_cmd make install-target-libgcc || die "Error while building gcc stage2" -n
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 # Step 6. Standard C Library & the rest of Glibc
 function build_glibc() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
     header "MAKING GLIBC"
-    cd ${BUILD_DIR}/build-glibc || die "glibc build folder does not exist!"
+    cd "${BUILD_DIR}/build-glibc" || die "glibc build folder does not exist!"
     call_cmd make ${JOBS} || die "Error while building glibc"
     call_cmd make install || die "Error while installing glibc"
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 # Step 7. Standard C++ Library & the rest of GCC
 function build_gcc_final() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
     header "MAKING GCC FINAL"
-    cd ${BUILD_DIR}/build-gcc || die "GCC build folder does not exist!"
+    cd "${BUILD_DIR}/build-gcc" || die "GCC build folder does not exist!"
 
     # We need to reconfigure if there is a final config available
     if [[ ! -z "${GCC_FINAL_CONFIGURATION[@]}" ]]; then
-       call_cmd ${SOURCES_DIR}/gcc-${GCC}/configure "${GCC_FINAL_CONFIGURATION[@]}"
+       call_cmd "${SOURCES_DIR}/gcc-${GCC}/configure" "${GCC_FINAL_CONFIGURATION[@]}"
     fi
 
     call_cmd make ${JOBS} all || die "Error while building gcc final" -n
     call_cmd make install || die "Error while gcc final install" -n
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 # Step 8. Build GDB
 function build_gdb() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
     header "MAKING GDB"
 
-    mkdir -p ${BUILD_DIR}/build-gdb
-    cd ${BUILD_DIR}/build-gdb || die "gdb build folder does not exist!"
-    call_cmd ${SOURCES_DIR}/gdb-${GDB}/configure "${GDB_CONFIGURATION[@]}"
+    mkdir -p "${BUILD_DIR}/build-gdb"
+    cd "${BUILD_DIR}/build-gdb" || die "gdb build folder does not exist!"
+    call_cmd "${SOURCES_DIR}/gdb-${GDB}/configure" "${GDB_CONFIGURATION[@]}"
     call_cmd make || die "Error while building gdb!" -n
     call_cmd make install || die "Error while installing gdb!" -n
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 # Package toolchain
 function package_tc() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
@@ -577,14 +583,14 @@ function package_tc() {
         esac
     fi
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 # Ending information
 function ending_info() {
 
-    check_build_state ${FUNCNAME[0]} && return
-    cd ${ROOT}
+    check_build_state "${FUNCNAME[0]}" && return
+    cd "${ROOT}"
     # use clean hashtable
     hash -r
 
@@ -593,6 +599,7 @@ function ending_info() {
     if [[ -e ${INSTALL}/bin/${TARGET}-gcc ]]; then
         header "BUILD SUCCESSFUL"
         echo -e "${BOLD}Script duration:${RST} $(format_time "${START}" "${END}")"
+        # shellcheck disable=SC2086
         echo -e "${BOLD}GCC version:${RST} $(${INSTALL}/bin/${TARGET}-gcc --version | head -n 1)"
         if [[ -n ${COMPRESSION} ]] && [[ -e ${PACKAGE} ]]; then
             echo -e "${BOLD}File location:${RST} $(pwd)/${PACKAGE}"
@@ -607,7 +614,7 @@ function ending_info() {
     # Alert to script end
     echo -e "\a"
 
-    set_build_state ${FUNCNAME[0]}
+    set_build_state "${FUNCNAME[0]}"
 }
 
 parse_parameters "${@}"

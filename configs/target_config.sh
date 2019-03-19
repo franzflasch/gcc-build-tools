@@ -116,8 +116,8 @@ function config_arm-linux-gnueabi() {
         "${GDB_BASE_CONFIG[@]}"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${VERSION}
+    type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    "setup_variables_${TAR_OR_GIT}_${VERSION}"
 
     setup_linux_default_downloadfuncs
     setup_linux_default_buildfuncs
@@ -145,8 +145,8 @@ function config_aarch64-linux-gnu() {
         "${GDB_BASE_CONFIG[@]}"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${VERSION}
+    type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    "setup_variables_${TAR_OR_GIT}_${VERSION}"
 
     setup_linux_default_downloadfuncs
     setup_linux_default_buildfuncs
@@ -178,8 +178,8 @@ function config_i686-linux-gnu() {
         "${GDB_BASE_CONFIG[@]}"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${VERSION}
+    type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    "setup_variables_${TAR_OR_GIT}_${VERSION}"
 
     setup_linux_default_downloadfuncs
     setup_linux_default_buildfuncs
@@ -210,8 +210,8 @@ function config_x86_64-linux-gnu() {
         "${GDB_BASE_CONFIG[@]}"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${VERSION}
+    type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    "setup_variables_${TAR_OR_GIT}_${VERSION}"
 
     setup_linux_default_downloadfuncs
     setup_linux_default_buildfuncs
@@ -279,8 +279,8 @@ function config_arm-none-eabi() {
         "${GDB_BASE_CONFIG[@]}"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${VERSION}
+    type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    "setup_variables_${TAR_OR_GIT}_${VERSION}"
 
     setup_baremetal_default_downloadfuncs
     setup_baremetal_default_buildfuncs
@@ -320,8 +320,8 @@ function config_riscv64-linux-gnu() {
         "${GDB_BASE_CONFIG[@]}"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${VERSION}
+    type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    "setup_variables_${TAR_OR_GIT}_${VERSION}"
 
     setup_linux_default_downloadfuncs
     setup_linux_default_buildfuncs
@@ -376,8 +376,8 @@ function config_riscv32-none-elf() {
         "${GDB_BASE_CONFIG[@]}"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${VERSION}
+    type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    "setup_variables_${TAR_OR_GIT}_${VERSION}"
 
     setup_baremetal_default_downloadfuncs
     setup_baremetal_default_buildfuncs
@@ -411,8 +411,8 @@ function config_avr() {
         "${GDB_BASE_CONFIG[@]}"
     )
 
-    type -t setup_variables_${TAR_OR_GIT}_${VERSION} > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
-    setup_variables_${TAR_OR_GIT}_${VERSION}
+    type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
+    "setup_variables_${TAR_OR_GIT}_${VERSION}"
 
     DOWNLOAD_FUNCS=("fetch_source ${AVRLIBC_URL} avrlibc-${AVRLIBC}"
                     "fetch_source ${BINUTILS_URL} binutils-${BINUTILS}"
