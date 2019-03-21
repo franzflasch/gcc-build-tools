@@ -6,6 +6,7 @@ This is a script to build GCC toolchains targeting the following architectures
     arm64  
     x86  
     x86_64  
+    risc-v
     
 - baremetal  
     arm  
@@ -44,11 +45,17 @@ Example commands:
 # Build a toolchain for arm
 ./build-gcc -a arm -v 8
 
+# Build a toolchain for riscv linux
+./build-gcc -a riscv -v 8
+
 # Build a toolchain for avr microcontrollers
 ./build-gcc -a avr8 -v 8 -t
 
 # Build a toolchain for arm cortex m3/m4 microcontrollers
 ./build-gcc -a cm4f -v 8 -t
+
+# Build a toolchain for riscv baremetal (sifive hifive1)
+./build-gcc -a riscv-baremetal -v 8
 ```
 
 ## After compilation
