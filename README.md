@@ -1,4 +1,4 @@
-# GCC toolchain build script
+# GCC crosstoolchain build script
 
 This is a script to build GCC toolchains targeting the following architectures
 - linux:  
