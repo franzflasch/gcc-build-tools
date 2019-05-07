@@ -19,14 +19,14 @@ function setup_urls_tar() {
 }
 
 function setup_variables_tar_8() {
-    LINUX="4.20"
+    LINUX="5.1"
     GCC="gcc-8.3.0"
     BINUTILS="2.32"
     GLIBC="glibc-2.29"
     MPFR="mpfr-4.0.2"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
-    ISL="isl-0.20"
+    ISL="isl-0.21"
     CLOOG="cloog-0.18.4"
     NEWLIB="newlib-3.1.0.20181231"
     AVRLIBC="avr-libc-2.0.0"
