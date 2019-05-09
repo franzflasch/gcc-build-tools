@@ -226,20 +226,8 @@ function fetch_source() {
 
     # Check if it is a svn repo
     if [ "${url_type}" = "svn" ]; then
-        local module=""
-        # find svn module:
-        for module in "${url_array[@]}"; do
-          # shellcheck disable=SC2015
-          echo "${module}" | grep -q "module=" && local exit_code=$? || local exit_code=$?
-          if [ ${exit_code} = 0 ]; then
-            module=${module#*module=}
-            break
-          fi
-        done
-        echo "MODULE: ${module}"
-
         if [[ ! -d ${folder} ]]; then
-            svn co "${url}${branch}${module}" "${folder}"
+            svn co "${url}${branch}" "${folder}"
         fi
         return
     fi

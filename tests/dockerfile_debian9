@@ -11,11 +11,11 @@ ADD . /home/script_dir/build-tools-gcc
 
 WORKDIR /home/work_dir
 
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a arm -v 8 -t && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a arm64 -v 8 -t && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86 -v 8 -t && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86_64 -v 8 -t && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a riscv -v 8 -t && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a cm4f -v 8 -t && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a riscv-baremetal -v 8 -t && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a avr8 -v 8 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a arm -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a arm64 -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86 -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86_64 -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a riscv -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a cm4f -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a riscv-baremetal -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a avr8 -v 9 -t && rm -rf /home/work_dir/*"
