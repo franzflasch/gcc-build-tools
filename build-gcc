@@ -265,7 +265,8 @@ function setup_environment() {
     SOURCES_DIR="${ROOT}/sources"
     BUILD_STATE_DIR="${ROOT}/state"
     BUILD_DIR="${ROOT}/build_dir"
-    INSTALL="${ROOT}/toolchain"
+    INSTALL_DIR_NAME="toolchain"
+    INSTALL="${ROOT}/${INSTALL_DIR_NAME}"
 
     # Maybe not needed!?
     export PATH=${INSTALL}/bin:${PATH}
@@ -562,10 +563,10 @@ function package_tc() {
         case "${COMPRESSION}" in
             "gz")
                 echo "Packaging with GZIP..."
-                GZ_OPT=-9 tar -c --use-compress-program=pigz -f "${PACKAGE}" ${TARGET} ;;
+                tar c ${INSTALL_DIR_NAME} -C ${ROOT} | gzip  > ${PACKAGE} ;;
             "xz")
                 echo "Packaging with XZ..."
-                XZ_OPT=-9 tar -c --use-compress-program=pxz -f "${PACKAGE}" ${TARGET} ;;
+                tar c ${INSTALL_DIR_NAME} -C ${ROOT} | xz  > ${PACKAGE} ;;
             *)
                 die "Invalid compression specified... skipping" ;;
         esac

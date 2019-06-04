@@ -229,9 +229,8 @@ function config_arm-none-eabi() {
         "--with-cpu=cortex-m3"
         "--with-mode=thumb"
         "--enable-interwork"
-        "--with-fpu=fpv4-sp-d16"
-        "--with-float=hard"
-        "--enable-multilib"
+        "--with-float=soft"
+        "--disable-multilib"
     )
 
     GCC_CONFIGURATION=(
@@ -243,9 +242,8 @@ function config_arm-none-eabi() {
         "--with-newlib"
         "--disable-shared"
         "--without-headers"
-        "--with-fpu=fpv4-sp-d16"
-        "--with-float=hard"
-        "--enable-multilib"
+        "--with-float=soft"
+        "--disable-multilib"
     )
 
     NEWLIB_CONFIGURATION=(
@@ -254,11 +252,19 @@ function config_arm-none-eabi() {
         "--with-cpu=cortex-m3"
         "--with-mode=thumb"
         "--enable-interwork"
-        "--disable-nls"
+        "--with-float=soft"
+        "--disable-multilib"
         "--disable-newlib-supplied-syscalls"
-        "--with-fpu=fpv4-sp-d16"
-        "--with-float=hard"
-        "--enable-multilib"
+        "--enable-newlib-reent-small"
+        "--disable-newlib-fvwrite-in-streamio"
+        "--disable-newlib-fseek-optimization"
+        "--disable-newlib-wide-orient"
+        "--enable-newlib-nano-malloc"
+        "--disable-newlib-unbuf-stream-opt"
+        "--enable-lite-exit"
+        "--enable-newlib-global-atexit"
+        "--enable-newlib-nano-formatted-io"
+        "--disable-nls"
     )
 
     GCC_FINAL_CONFIGURATION=(
@@ -269,9 +275,8 @@ function config_arm-none-eabi() {
         "--with-system-zlib"
         "--with-newlib"
         "--disable-shared"
-        "--with-fpu=fpv4-sp-d16"
-        "--with-float=hard"
-        "--enable-multilib"
+        "--with-float=soft"
+        "--disable-multilib"
         "--enable-languages=c,c++"
     )
 

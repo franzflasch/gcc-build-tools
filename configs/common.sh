@@ -1,6 +1,6 @@
 
 function setup_common_urls_tar() {
-    MPFR_BASE_URL="https://www.mpfr.org/mpfr-current/"
+    MPFR_BASE_URL="https://ftp.gnu.org/gnu/mpfr/"
     GMP_BASE_URL="https://ftp.gnu.org/gnu/gmp/"
     MPC_BASE_URL="https://ftp.gnu.org/gnu/mpc/"
     ISL_BASE_URL="http://isl.gforge.inria.fr/"
@@ -15,7 +15,7 @@ function setup_common_urls_tar() {
 }
 
 function setup_common_urls_git() {
-    MPFR_BASE_URL="https://www.mpfr.org/mpfr-current/"
+    MPFR_BASE_URL="https://ftp.gnu.org/gnu/mpfr/"
     GMP_BASE_URL="https://ftp.gnu.org/gnu/gmp/"
     MPC_BASE_URL="https://ftp.gnu.org/gnu/mpc/"
     ISL_BASE_URL="http://isl.gforge.inria.fr/"
