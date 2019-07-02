@@ -62,7 +62,7 @@ function help_menu() {
     echo
     echo "${BOLD}REQUIRED PARAMETERS:${RST}"
     echo "  -a  | --arch:        Possible values: arm, arm64, x86, x86_64, riscv, cm4f, riscv-baremetal, avr8. This is the toolchain's target architecture."
-    echo "  -v  | --version:     Possible values: (4, 5, 6, 7, 8, and master. This is the GCC version to build."
+    echo "  -v  | --version:     Possible values: (7, 8, 9 and master. This is the GCC version to build."
     echo
     echo "${BOLD}OPTIONAL PARAMETERS:${RST}"
     echo "  -f  | --full-src:    Download full git repos instead of shallow clones"
