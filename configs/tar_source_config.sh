@@ -20,9 +20,9 @@ function setup_urls_tar() {
 
 function setup_variables_tar_9() {
     LINUX="5.1"
-    GCC="gcc-9.1.0"
+    GCC="gcc-9.2.0"
     BINUTILS="2.32"
-    GLIBC="glibc-2.29"
+    GLIBC="glibc-2.30"
     MPFR="mpfr-4.0.2"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
@@ -30,7 +30,7 @@ function setup_variables_tar_9() {
     CLOOG="cloog-0.18.4"
     NEWLIB="newlib-3.1.0.20181231"
     AVRLIBC="avr-libc-2.0.0"
-    GDB="gdb-8.2.1"
+    GDB="gdb-8.3"
 
     setup_urls_tar
 }

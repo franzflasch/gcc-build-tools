@@ -48,12 +48,12 @@ function setup_variables_git_9() {
     ISL="isl-0.21"
     CLOOG="cloog-0.18.4"
     BINUTILS="binutils-2_32-branch"
-    GLIBC="glibc-2.29"
+    GLIBC="glibc-2.30"
     LINUX="v5.1"
     GCC="gcc-9-branch"
     NEWLIB="newlib-3.1.0"
     AVRLIBC="tags/avr-libc-2_0_0-release"
-    GDB="gdb-8.2-branch"
+    GDB="gdb-8.3-branch"
 
     setup_urls_git
 }
