@@ -22,6 +22,7 @@ function setup_urls_git() {
     GMP_URL="${GMP_BASE_URL}${GMP}.tar.xz;type=tar"
     CLOOG_URL="${CLOOG_BASE_URL}${CLOOG}.tar.gz;type=tar"
     GDB_URL="${GDB_GIT_URL};type=git;branch=${GDB}"
+    PICOLIBC_URL="${PICOLIBC_GIT_URL};type=git;branch=${PICOLIBC}"
 }
 
 function setup_variables_git_master() {
@@ -37,6 +38,7 @@ function setup_variables_git_master() {
     NEWLIB="master"
     AVRLIBC="trunk/avr-libc"
     GDB="master"
+    PICOLIBC="master"
 
     setup_urls_git
 }
@@ -54,6 +56,7 @@ function setup_variables_git_9() {
     NEWLIB="newlib-3.1.0"
     AVRLIBC="tags/avr-libc-2_0_0-release"
     GDB="gdb-8.3-branch"
+    PICOLIBC="master"
 
     setup_urls_git
 }
@@ -71,6 +74,7 @@ function setup_variables_git_8() {
     NEWLIB="newlib-3.1.0"
     AVRLIBC="tags/avr-libc-2_0_0-release"
     GDB="gdb-8.2-branch"
+    PICOLIBC="master"
 
     setup_urls_git
 }
@@ -88,6 +92,7 @@ function setup_variables_git_7() {
     NEWLIB="newlib-2.5.0"
     AVRLIBC="tags/avr-libc-2_0_0-release"
     GDB="gdb-7.12-branch"
+    PICOLIBC="master"
 
     setup_urls_git
 }

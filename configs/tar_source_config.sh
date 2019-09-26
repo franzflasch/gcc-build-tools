@@ -16,6 +16,7 @@ function setup_urls_tar() {
     GMP_URL="${GMP_BASE_URL}${GMP}.tar.xz;type=tar"
     CLOOG_URL="${CLOOG_BASE_URL}${CLOOG}.tar.gz;type=tar"
     GDB_URL="${GDB_BASE_URL}${GDB}.tar.xz;type=tar"
+    PICOLIBC_URL="${PICOLIBC_BASE_URL}${PICOLIBC}.tar.gz;type=tar"
 }
 
 function setup_variables_tar_9() {
@@ -31,6 +32,7 @@ function setup_variables_tar_9() {
     NEWLIB="newlib-3.1.0.20181231"
     AVRLIBC="avr-libc-2.0.0"
     GDB="gdb-8.3"
+    PICOLIBC="1.0-1"
 
     setup_urls_tar
 }
@@ -48,6 +50,7 @@ function setup_variables_tar_8() {
     NEWLIB="newlib-3.1.0.20181231"
     AVRLIBC="avr-libc-2.0.0"
     GDB="gdb-8.2.1"
+    PICOLIBC="1.0-1"
 
     setup_urls_tar
 }
@@ -65,6 +68,7 @@ function setup_variables_tar_7() {
     NEWLIB="newlib-2.5.0.20171222"
     AVRLIBC="avr-libc-2.0.0"
     GDB="gdb-7.12.1"
+    PICOLIBC="1.0-1"
 
     setup_urls_tar
 }

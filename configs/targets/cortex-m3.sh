@@ -64,9 +64,25 @@ function config_cortex-m3() {
         "${GDB_BASE_CONFIG[@]}"
     )
 
+    PICOLIBC_INSTALL_DIR=${INSTALL}/${TARGET}/lib/
+    PICOLIBC_CONFIGURATION=(
+        "--prefix=${PICOLIBC_INSTALL_DIR}"
+        "-Dthread-local-storage=false"
+    )
+
     type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
     "setup_variables_${TAR_OR_GIT}_${VERSION}"
 
     setup_baremetal_default_downloadfuncs
     setup_baremetal_default_buildfuncs
+
+    DOWNLOAD_FUNCS=(
+        "${DOWNLOAD_FUNCS[@]}"
+        "fetch_source ${PICOLIBC_URL} picolibc-${PICOLIBC}"
+    )
+
+    BUILD_FUNCS=(
+        "${BUILD_FUNCS[@]}"
+        "build_picolibc"
+    )
 }

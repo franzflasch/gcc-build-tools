@@ -12,6 +12,7 @@ function setup_common_urls_tar() {
     NEWLIB_BASE_URL="ftp://sourceware.org/pub/newlib/"
     AVRLIBC_BASE_URL="http://download.savannah.gnu.org/releases/avr-libc/"
     GDB_BASE_URL="http://ftp.gnu.org/gnu/gdb/"
+    PICOLIBC_BASE_URL="https://github.com/keith-packard/picolibc/archive/"
 }
 
 function setup_common_urls_git() {
@@ -27,4 +28,5 @@ function setup_common_urls_git() {
     NEWLIB_GIT_URL="git://sourceware.org/git/newlib-cygwin.git"
     AVRLIBC_SVN_URL="svn://svn.savannah.nongnu.org/avr-libc/"
     GDB_GIT_URL="git://sourceware.org/git/binutils-gdb.git"
+    PICOLIBC_GIT_URL="https://github.com/keith-packard/picolibc.git"
 }
