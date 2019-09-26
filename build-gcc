@@ -53,6 +53,9 @@ function call_cmd() {
 
 # Help menu function
 function help_menu() {
+
+    local supported_archs=$(ls ${BASH_SOURCE%/*}/configs/targets/* | xargs -n 1 basename | cut -d. -f1 | sed ':a;N;$!ba;s/\n/, /g')
+
     echo
     echo "${BOLD}OVERVIEW:${RST} Build a gcc toolchain"
     echo
@@ -61,7 +64,14 @@ function help_menu() {
     echo "${BOLD}EXAMPLE:${RST} ${0} -a arm64 -v 7"
     echo
     echo "${BOLD}REQUIRED PARAMETERS:${RST}"
-    echo "  -a  | --arch:        Possible values: arm, arm64, x86, x86_64, riscv, cm4f, riscv-baremetal, avr8. This is the toolchain's target architecture."
+    echo "  -a  | --arch:        This is the toolchain's target architecture."
+    echo "                       Supported:"
+    for i in $(echo ${supported_archs} | sed "s/,/ /g")
+    do
+        # call your procedure/other scripts here below
+        echo "                         - $i"
+    done
+    echo
     echo "  -v  | --version:     Possible values: (7, 8, 9 and master. This is the GCC version to build."
     echo
     echo "${BOLD}OPTIONAL PARAMETERS:${RST}"
@@ -304,10 +314,10 @@ function parse_parameters() {
         "arm64") TARGET="aarch64-linux-gnu" ;;
         "x86") TARGET="i686-linux-gnu" ;;
         "x86_64") TARGET="x86_64-linux-gnu" ;;
-        "riscv") TARGET="riscv64-linux-gnu" ;;
-        "cm4f") TARGET="arm-none-eabi" ;;
+        "riscv64") TARGET="riscv64-linux-gnu" ;;
+        "cortex-m3") TARGET="arm-none-eabi" ;;
         "avr8") TARGET="avr" ;;
-        "riscv-baremetal") TARGET="riscv32-none-elf" ;;
+        "riscv32-baremetal") TARGET="riscv32-none-elf" ;;
         *) die "Absent or invalid arch specified!" -h ;;
     esac
 
@@ -315,12 +325,12 @@ function parse_parameters() {
 
     if [[ -z ${TARBALLS} ]]; then
         # Search for a valid target config
-        type -t config_${TARGET} > /dev/null || die "No git config found for ${TARGET}!"
-        "config_${TARGET}" "${VERSION}" git
+        type -t config_${ARCH} > /dev/null || die "No git config found for ${ARCH}!"
+        "config_${ARCH}" "${VERSION}" git
     else
         # Search for a valid target config
-        type -t config_${TARGET} > /dev/null || die "No tar config found for ${TARGET}!"
-        "config_${TARGET}" "${VERSION}" tar
+        type -t config_${ARCH} > /dev/null || die "No tar config found for ${ARCH}!"
+        "config_${ARCH}" "${VERSION}" tar
     fi
 }
 
