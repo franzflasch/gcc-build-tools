@@ -336,7 +336,8 @@ function parse_parameters() {
             TARGET="riscv64-linux-gnu" 
             LINUX_ARCH="riscv"
             ;;
-        "cortex-m3") 
+        "cortex-m0" | \
+        "cortex-m3" ) 
             TARGET="arm-none-eabi" 
             PICOLIBC_ARCH="arm"
             ;;
