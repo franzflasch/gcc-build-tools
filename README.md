@@ -1,6 +1,6 @@
 # GCC crosstoolchain build script
 
-This is a script to build GCC toolchains targeting the following architectures
+This is a script to build GCC toolchains targeting the following architectures  
     - arm64 (linux)  
     - arm   (linux)  
     - avr8  (baremetal)  
