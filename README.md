@@ -1,17 +1,16 @@
 # GCC crosstoolchain build script
 
 This is a script to build GCC toolchains targeting the following architectures
-- linux:  
-    arm  
-    arm64  
-    x86  
-    x86_64  
-    risc-v
-    
-- baremetal  
-    arm  
-    avr  
-    risc-v  
+    - arm64 (linux)
+    - arm   (linux)
+    - avr8  (baremetal)
+    - cortex-m0 (baremetal)
+    - cortex-m3 (baremetal)
+    - riscv32-baremetal (baremetal)
+    - riscv64 (linux)
+    - x86_64 (linux)
+    - x86 (linux)
+
 
 ## Using the script
 
@@ -20,7 +19,7 @@ following:
 
 + A Linux distribution (the script has been tested on Debian Stretch)
 + Core developer packages
-    + For Debian 9:  
+    + For Debian 9 or 10:  
     ```sudo apt install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison```
 
 Once you have set up your environment, run the following:
@@ -46,16 +45,16 @@ Example commands:
 ./build-gcc -a arm -v 8
 
 # Build a toolchain for riscv linux
-./build-gcc -a riscv -v 8
+./build-gcc -a riscv64 -v 8
 
 # Build a toolchain for avr microcontrollers
 ./build-gcc -a avr8 -v 8 -t
 
 # Build a toolchain for arm cortex m3/m4 microcontrollers
-./build-gcc -a cm4f -v 8 -t
+./build-gcc -a cortex-m3 -v 8 -t
 
 # Build a toolchain for riscv baremetal (sifive hifive1)
-./build-gcc -a riscv-baremetal -v 8
+./build-gcc -a riscv32-baremetal -v 8
 ```
 
 ## After compilation
