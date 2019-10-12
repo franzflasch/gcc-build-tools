@@ -41,8 +41,9 @@ source "${BASH_SOURCE%/*}/configs/git_source_config.sh"
 source "${BASH_SOURCE%/*}/configs/target_config.sh"
 
 # Source all build functions
-for source_file in ${BASH_SOURCE%/*}/scripts/*.sh; do
-   source $source_file
+for source_file in "${BASH_SOURCE%/*}"/scripts/*.sh; do
+    # shellcheck disable=SC1090
+    source "$source_file"
 done
 
 
@@ -60,7 +61,8 @@ function call_cmd() {
 # Help menu function
 function help_menu() {
 
-    local supported_archs=$(ls ${BASH_SOURCE%/*}/configs/targets/* | xargs -n 1 basename | cut -d. -f1 | sed ':a;N;$!ba;s/\n/, /g')
+    local supported_archs
+    supported_archs=$(find "${BASH_SOURCE%/*}"/configs/targets/ -name '*.sh' -maxdepth 1 -exec basename {} \; | cut -d. -f1 | sed ':a;N;$!ba;s/\n/, /g')
 
     echo
     echo "${BOLD}OVERVIEW:${RST} Build a gcc toolchain"
@@ -72,10 +74,10 @@ function help_menu() {
     echo "${BOLD}REQUIRED PARAMETERS:${RST}"
     echo "  -a  | --arch:        This is the toolchain's target architecture."
     echo "                       Supported:"
-    for i in $(echo ${supported_archs} | sed "s/,/ /g")
+    for i in ${supported_archs}
     do
         # call your procedure/other scripts here below
-        echo "                         - $i"
+        echo "                         - ${i//,/ }"
     done
     echo
     echo "  -v  | --version:     Possible values: (7, 8, 9 and master. This is the GCC version to build."
@@ -169,7 +171,9 @@ function fetch_source() {
     local full_url=$1
     local folder=$2
 
-    local url_array=($(echo "${full_url}" | tr ";" "\n"))
+    local url_array=""
+    mapfile -t url_array < <(echo "${full_url}" | tr ";" "\n")
+
     local url=${url_array[0]}
     local url_type=""
     local found=false
@@ -270,6 +274,7 @@ function setup_variables() {
     YLW="\033[01;33m"
     GRN="\033[1;32m"
 
+    # shellcheck disable=SC2034
     JOBS="-j$(($(nproc --all) + 1))"
 
     # Start of script
@@ -280,6 +285,7 @@ function setup_environment() {
     ROOT="${PWD}"
     SOURCES_DIR="${ROOT}/sources"
     BUILD_STATE_DIR="${ROOT}/state"
+    # shellcheck disable=SC2034
     BUILD_DIR="${ROOT}/build_dir"
     INSTALL_DIR_NAME="toolchain"
     INSTALL="${ROOT}/${INSTALL_DIR_NAME}"
@@ -318,27 +324,33 @@ function parse_parameters() {
     case "${ARCH}" in
         "arm") 
             TARGET="arm-linux-gnueabi"
+            # shellcheck disable=SC2034
             LINUX_ARCH="arm"
             ;;
         "arm64") 
             TARGET="aarch64-linux-gnu" 
+            # shellcheck disable=SC2034
             LINUX_ARCH="arm64"
             ;;
         "x86") 
             TARGET="i686-linux-gnu" 
+            # shellcheck disable=SC2034
             LINUX_ARCH="x86"
             ;;
         "x86_64") 
             TARGET="x86_64-linux-gnu" 
+            # shellcheck disable=SC2034
             LINUX_ARCH="x86_64"
             ;;
         "riscv64") 
             TARGET="riscv64-linux-gnu" 
+            # shellcheck disable=SC2034
             LINUX_ARCH="riscv"
             ;;
         "cortex-m0" | \
         "cortex-m3" ) 
             TARGET="arm-none-eabi" 
+            # shellcheck disable=SC2034
             PICOLIBC_ARCH="arm"
             ;;
         "avr8") 
@@ -354,11 +366,11 @@ function parse_parameters() {
 
     if [[ -z ${TARBALLS} ]]; then
         # Search for a valid target config
-        type -t config_${ARCH} > /dev/null || die "No git config found for ${ARCH}!"
+        type -t "config_${ARCH}" > /dev/null || die "No git config found for ${ARCH}!"
         "config_${ARCH}" "${VERSION}" git
     else
         # Search for a valid target config
-        type -t config_${ARCH} > /dev/null || die "No tar config found for ${ARCH}!"
+        type -t "config_${ARCH}" > /dev/null || die "No tar config found for ${ARCH}!"
         "config_${ARCH}" "${VERSION}" tar
     fi
 }
@@ -400,10 +412,10 @@ function package_tc() {
         case "${COMPRESSION}" in
             "gz")
                 echo "Packaging with GZIP..."
-                tar c ${INSTALL_DIR_NAME} -C ${ROOT} | gzip  > ${PACKAGE} ;;
+                tar c ${INSTALL_DIR_NAME} -C "${ROOT}" | gzip  > "${PACKAGE}" ;;
             "xz")
                 echo "Packaging with XZ..."
-                tar c ${INSTALL_DIR_NAME} -C ${ROOT} | xz  > ${PACKAGE} ;;
+                tar c ${INSTALL_DIR_NAME} -C "${ROOT}" | xz  > "${PACKAGE}" ;;
             *)
                 die "Invalid compression specified... skipping" ;;
         esac

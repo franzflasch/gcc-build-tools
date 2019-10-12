@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2034
 
 function setup_common_urls_tar() {
     MPFR_BASE_URL="https://ftp.gnu.org/gnu/mpfr/"

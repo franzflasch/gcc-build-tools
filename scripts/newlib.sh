@@ -1,7 +1,10 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2034
+
 function build_newlib() {
 
     check_build_state "${FUNCNAME[0]}" && return
-    cd "${ROOT}"
+    cd "${ROOT}" || die "ERROR: cd to ${ROOT}"
     # use clean hashtable
     hash -r
 

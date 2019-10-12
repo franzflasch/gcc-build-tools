@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2034
+
 # These function here are more or less copy pasted for each architecture,
 # which is usually a bad programming habit, however, it makes sense
 # have a config function for each architecture, as it is possible
@@ -93,6 +96,7 @@ function setup_linux_default_buildfuncs() {
 }
 
 # Source all target configs
-for source_file in ${BASH_SOURCE%/*}/targets/*.sh; do
-   source $source_file
+for source_file in "${BASH_SOURCE%/*}"/targets/*.sh; do
+    # shellcheck disable=SC1090
+    source "$source_file"
 done

@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2034
+
 function config_arm64() {
     local VERSION="$1"
     local TAR_OR_GIT="$2"

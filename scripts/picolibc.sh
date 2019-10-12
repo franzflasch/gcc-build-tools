@@ -1,7 +1,10 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2034
+
 function build_picolibc() {
 
     check_build_state "${FUNCNAME[0]}" && return
-    cd "${ROOT}"
+    cd "${ROOT}" || die "ERROR: cd to ${ROOT}"
     # use clean hashtable
     hash -r
 
@@ -14,8 +17,8 @@ function build_picolibc() {
     call_cmd ninja install || die "Error while installing picolibc!" -n
 
     # Install specs file
-    sed -e "s|${PICOLIBC_INSTALL_DIR}||g" -i ${BUILD_DIR}/build-picolibc/picolibc.specs
-    cp ${BUILD_DIR}/build-picolibc/picolibc.specs ${PICOLIBC_INSTALL_DIR}
+    sed -e "s|${PICOLIBC_INSTALL_DIR}||g" -i "${BUILD_DIR}"/build-picolibc/picolibc.specs
+    cp "${BUILD_DIR}"/build-picolibc/picolibc.specs "${PICOLIBC_INSTALL_DIR}"
 
     set_build_state "${FUNCNAME[0]}"
 }

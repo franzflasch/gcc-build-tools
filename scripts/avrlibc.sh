@@ -1,7 +1,10 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2034
+
 function build_avrlibc() {
 
     check_build_state "${FUNCNAME[0]}" && return
-    cd "${ROOT}"
+    cd "${ROOT}" || die "ERROR: cd to ${ROOT}"
     # use clean hashtable
     hash -r
 
@@ -9,9 +12,9 @@ function build_avrlibc() {
 
     # bootstrap fixup
     if [[ ! -f ${SOURCES_DIR}/avrlibc-${AVRLIBC}/configure ]]; then
-        cd "${SOURCES_DIR}/avrlibc-${AVRLIBC}/"
+        cd "${SOURCES_DIR}/avrlibc-${AVRLIBC}/" || die "ERROR: cd to ${SOURCES_DIR}/avrlibc-${AVRLIBC}/"
         call_cmd ./bootstrap
-        cd "${ROOT}"
+        cd "${ROOT}" || die "ERROR: cd to ${ROOT}"
     fi
 
     mkdir -p "${BUILD_DIR}/build-avrlibc"
