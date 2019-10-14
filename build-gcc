@@ -350,8 +350,6 @@ function parse_parameters() {
         "cortex-m0" | \
         "cortex-m3" ) 
             TARGET="arm-none-eabi" 
-            # shellcheck disable=SC2034
-            PICOLIBC_ARCH="arm"
             ;;
         "avr8") 
             TARGET="avr" 
