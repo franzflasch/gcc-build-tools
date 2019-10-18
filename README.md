@@ -17,10 +17,18 @@ This is a script to build GCC toolchains targeting the following architectures
 To build a toolchain, you will need to the
 following:
 
-+ A Linux distribution (the script has been tested on Debian Stretch)
-+ Core developer packages
-    + For Debian 9 or 10:  
-    ```sudo apt install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison```
+A Linux distribution (the script has been tested on Debian Stretch)
+Core developer packages
++ For Debian 9 or 10:  
+```bash
+sudo apt install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison libexpat1-dev
+```
+
+For picolibc
+```bash
+sudo apt install -y python3-pip
+sudo pip3 install meson ninja
+```
 
 Once you have set up your environment, run the following:
 

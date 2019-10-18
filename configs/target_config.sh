@@ -45,6 +45,7 @@ function setup_default_config()
         "--disable-binutils"
         "--disable-ld"
         "--disable-gas"
+        "--with-expat"
     )
 }
 
