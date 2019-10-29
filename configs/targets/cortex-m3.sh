@@ -2,6 +2,8 @@
 # shellcheck disable=SC2034
 
 function config_cortex-m3() {
+    TARGET="arm-none-eabi" 
+
     local VERSION="$1"
     local TAR_OR_GIT="$2"
 

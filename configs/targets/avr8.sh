@@ -2,6 +2,8 @@
 # shellcheck disable=SC2034
 
 function config_avr8() {
+    TARGET="avr" 
+
     local VERSION="$1"
     local TAR_OR_GIT="$2"
 

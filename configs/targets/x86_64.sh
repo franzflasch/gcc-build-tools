@@ -2,6 +2,10 @@
 # shellcheck disable=SC2034
 
 function config_x86_64() {
+    TARGET="x86_64-linux-gnu" 
+    # shellcheck disable=SC2034
+    LINUX_ARCH="x86_64"
+
     local VERSION="$1"
     local TAR_OR_GIT="$2"
 

@@ -320,46 +320,6 @@ function parse_parameters() {
 
     [[ -z ${FULL_SOURCE} ]] && DEPTH_FLAG=true
 
-    # Default values
-    case "${ARCH}" in
-        "arm") 
-            TARGET="arm-linux-gnueabi"
-            # shellcheck disable=SC2034
-            LINUX_ARCH="arm"
-            ;;
-        "arm64") 
-            TARGET="aarch64-linux-gnu" 
-            # shellcheck disable=SC2034
-            LINUX_ARCH="arm64"
-            ;;
-        "x86") 
-            TARGET="i686-linux-gnu" 
-            # shellcheck disable=SC2034
-            LINUX_ARCH="x86"
-            ;;
-        "x86_64") 
-            TARGET="x86_64-linux-gnu" 
-            # shellcheck disable=SC2034
-            LINUX_ARCH="x86_64"
-            ;;
-        "riscv64") 
-            TARGET="riscv64-linux-gnu" 
-            # shellcheck disable=SC2034
-            LINUX_ARCH="riscv"
-            ;;
-        "cortex-m0" | \
-        "cortex-m3" ) 
-            TARGET="arm-none-eabi" 
-            ;;
-        "avr8") 
-            TARGET="avr" 
-            ;;
-        "riscv32-baremetal") 
-            TARGET="riscv32-none-elf" 
-            ;;
-        *) die "Absent or invalid arch specified!" -h ;;
-    esac
-
     setup_environment
 
     if [[ -z ${TARBALLS} ]]; then

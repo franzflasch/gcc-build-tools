@@ -2,6 +2,10 @@
 # shellcheck disable=SC2034
 
 function config_arm() {
+    TARGET="arm-linux-gnueabi"
+    # shellcheck disable=SC2034
+    LINUX_ARCH="arm"
+
     local VERSION="$1"
     local TAR_OR_GIT="$2"
 
