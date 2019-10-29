@@ -62,7 +62,7 @@ function call_cmd() {
 function help_menu() {
 
     local supported_archs
-    supported_archs=$(find "${BASH_SOURCE%/*}"/configs/targets/ -name '*.sh' -maxdepth 1 -exec basename {} \; | cut -d. -f1 | sed ':a;N;$!ba;s/\n/, /g')
+    supported_archs=$(find "${BASH_SOURCE%/*}"/configs/targets/ -maxdepth 1 -name '*.sh' -exec basename {} \; | cut -d. -f1 | sed ':a;N;$!ba;s/\n/, /g')
 
     echo
     echo "${BOLD}OVERVIEW:${RST} Build a gcc toolchain"
