@@ -199,10 +199,8 @@ function fetch_source() {
     if [ "${url_type}" = "tar" ]; then
         local file_name=""
         file_name=$(basename "${url}")
-        if [[ ! -f ${file_name} ]]; then
-            call_cmd wget "${url}"
-            extract "${file_name}" "${folder}"
-        fi
+        call_cmd wget -c "${url}"
+        extract "${file_name}" "${folder}"
         return
     fi
 
@@ -335,7 +333,6 @@ function parse_parameters() {
 
 function download_sources() {
 
-    check_build_state "${FUNCNAME[0]}" && return
     cd "${ROOT}"
     # use clean hashtable
     hash -r
@@ -344,12 +341,14 @@ function download_sources() {
 
     for download_func in "${DOWNLOAD_FUNCS[@]}"
     do
+        local package
+        package=$(echo "${download_func}" | awk '{print $NF}')
+        check_build_state "download_${package}" && continue
         ${download_func}
+        set_build_state "download_${package}"
     done
 
     cd "${ROOT}"
-
-    set_build_state "${FUNCNAME[0]}"
 }
 
 # Package toolchain
