@@ -3,7 +3,8 @@ FROM debian:buster
 WORKDIR /home/script_dir
 
 RUN apt-get update -y
-RUN apt-get install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison python3
+RUN apt-get install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison python3 python3-pip
+RUN pip3 install meson ninja
 
 ENV PATH="/home/script_dir/build-tools-gcc:${PATH}"
 
@@ -11,11 +12,13 @@ ADD . /home/script_dir/build-tools-gcc
 
 WORKDIR /home/work_dir
 
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a arm64 -v 9 -t && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a arm -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a arm64 -v 9 -t && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a avr8 -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a cortex-m0 -v 9 -t && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a cortex-m3 -v 9 -t && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a riscv32-baremetal -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a riscv64-baremetal -v 9 -t && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a riscv64 -v 9 -t && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86_64 -v 9 -t && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86 -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86_64 -v 9 -t && rm -rf /home/work_dir/*"

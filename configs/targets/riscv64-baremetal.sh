@@ -63,14 +63,4 @@ function config_riscv64-baremetal() {
 
     setup_baremetal_default_downloadfuncs
     setup_baremetal_default_buildfuncs
-
-    DOWNLOAD_FUNCS=(
-        "${DOWNLOAD_FUNCS[@]}"
-        "fetch_source ${PICOLIBC_URL} picolibc-${PICOLIBC}"
-    )
-
-    BUILD_FUNCS=(
-        "${BUILD_FUNCS[@]}"
-        "build_picolibc"
-    )
 }
