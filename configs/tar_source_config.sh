@@ -29,7 +29,7 @@ function setup_variables_tar_9() {
     MPFR="mpfr-4.0.2"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
-    ISL="isl-0.21"
+    ISL="isl-0.22"
     CLOOG="cloog-0.18.4"
     NEWLIB="newlib-3.1.0"
     AVRLIBC="avr-libc-2.0.0"

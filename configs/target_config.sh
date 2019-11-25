@@ -24,16 +24,31 @@ function setup_default_config()
         "--disable-gdb"
     )
 
+    local enable_languages="c"
+    local fake_cpp=""
+
+    if [[ ${enable_languages} = "c" ]]; then
+        fake_cpp="fake"
+    fi
+
+    # According to the gcc docs bootstrap is only enabled for native builds by default.
+    # For cross compile builds it is disabled by default.
+    # We explicitely add --disable-bootstrap here to have the same build-behavior for all
+    # targets and because of a new issue with isl-0.22:
+    # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=92484
     GCC_BASE_CONFIG=(
         "--target=${TARGET}"
         "--prefix=${INSTALL}"
         "--disable-nls"
-        "--enable-languages=c"
+        "--disable-bootstrap"
+        "--enable-languages=${enable_languages}"
     )
 
+    # Add CC and a fake CXX to circumvent an issue in glibc in case of a c only build:
+    # https://sourceware.org/bugzilla/show_bug.cgi?id=24183
     GLIBC_BASE_CONFIG=(
         "CC=${TARGET}-gcc"
-        "CXX=${TARGET}-g++"
+        "CXX=${TARGET}${fake_cpp}-g++"
         "--host=${TARGET}"
         "--prefix=${INSTALL}/${TARGET}"
         "--with-headers=${INSTALL}/${TARGET}/include"
