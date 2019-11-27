@@ -1,15 +1,17 @@
 # GCC crosstoolchain build script
 
 This is a script to build GCC toolchains targeting the following architectures  
-    - arm64 (linux)  
-    - arm   (linux)  
-    - avr8  (baremetal)  
-    - cortex-m0 (baremetal)  
-    - cortex-m3 (baremetal)  
-    - riscv32-baremetal (baremetal)  
-    - riscv64 (linux)  
-    - x86_64 (linux)  
-    - x86 (linux)  
+    - arm 
+    - arm64 
+    - avr8 
+    - cortex-m0 
+    - cortex-m3 
+    - riscv32-baremetal 
+    - riscv64 
+    - x86 
+    - x86_64 
+    - riscv64-baremetal 
+    - x86_64_mingw
 
 
 ## Using the script

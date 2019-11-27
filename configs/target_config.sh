@@ -62,6 +62,23 @@ function setup_default_config()
         "--disable-gas"
         "--with-expat"
     )
+
+    MINGW_HEADER_BASE_CONFIG=(
+        "--prefix=${INSTALL}/${TARGET}"
+        "--host=${TARGET}"
+    )
+
+    MINGW_CRT_BASE_CONFIG=(
+        "--prefix=${INSTALL}/${TARGET}"
+        "--with-sysroot=${INSTALL}/${TARGET}"
+        "--host=${TARGET}"
+    )
+
+    MINGW_WINPTHREADS_BASE_CONFIG=(
+        "--prefix=${INSTALL}/${TARGET}"
+        "--host=${TARGET}"
+        "--disable-multilib"
+    )
 }
 
 function setup_baremetal_default_downloadfuncs() {
@@ -108,6 +125,28 @@ function setup_linux_default_buildfuncs() {
                  "build_glibc"
                  "build_gcc_final"
                  "build_gdb"
+    )
+}
+
+function setup_mingw_default_downloadfuncs() {
+    DOWNLOAD_FUNCS=("fetch_source ${BINUTILS_URL} binutils-${BINUTILS}"
+                    "fetch_source ${GCC_URL} gcc-${GCC}"
+                    "fetch_source ${MINGW_URL} mingw-${MINGW}"
+                    "fetch_source ${MPC_URL} mpc-${MPC}"
+                    "fetch_source ${ISL_URL} isl-${ISL}"
+                    "fetch_source ${MPFR_URL} mpfr-${MPFR}"
+                    "fetch_source ${GMP_URL} gmp-${GMP}"
+                    "fetch_source ${CLOOG_URL} cloog-${CLOOG}"
+    )
+}
+
+function setup_mingw_default_buildfuncs() {
+    BUILD_FUNCS=("build_binutils"
+                 "build_mingw_header"
+                 "build_gcc_stage_1"
+                 "build_mingw_crt"
+                 "build_gcc_final"
+                 "build_mingw_winpthreads"
     )
 }
 

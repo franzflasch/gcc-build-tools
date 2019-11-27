@@ -23,6 +23,8 @@
 # https://www.gnu.org/software/libc/
 # https://www.kernel.org/
 # https://git.linaro.org/toolchain/gcc.git # linaro and gnu
+# https://github.com/cbeck88/mingw-w64-gcc-linux/blob/master/build.sh
+# https://www.reactos.org/wiki/Building_MINGW-w64
 
 
 #############

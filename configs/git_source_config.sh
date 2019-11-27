@@ -25,6 +25,7 @@ function setup_urls_git() {
     CLOOG_URL="${CLOOG_BASE_URL}${CLOOG}.tar.gz;type=tar"
     GDB_URL="${GDB_GIT_URL};type=git;branch=${GDB}"
     PICOLIBC_URL="${PICOLIBC_GIT_URL};type=git;branch=${PICOLIBC}"
+    MINGW_URL="${MINGW_GIT_URL};type=git;branch=${MINGW}"
 }
 
 function setup_variables_git_master() {
@@ -49,9 +50,9 @@ function setup_variables_git_9() {
     MPFR="mpfr-4.0.2"
     GMP="gmp-6.1.2"
     MPC="mpc-1.1.0"
-    ISL="isl-0.21"
+    ISL="isl-0.22"
     CLOOG="cloog-0.18.4"
-    BINUTILS="binutils-2_32-branch"
+    BINUTILS="binutils-2_33-branch"
     GLIBC="glibc-2.30"
     LINUX="v5.1"
     GCC="gcc-9-branch"
@@ -59,6 +60,7 @@ function setup_variables_git_9() {
     AVRLIBC="tags/avr-libc-2_0_0-release"
     GDB="gdb-8.3-branch"
     PICOLIBC="master"
+    MINGW="v7.x"
 
     setup_urls_git
 }

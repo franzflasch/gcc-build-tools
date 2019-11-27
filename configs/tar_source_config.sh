@@ -19,6 +19,7 @@ function setup_urls_tar() {
     CLOOG_URL="${CLOOG_BASE_URL}${CLOOG}.tar.gz;type=tar"
     GDB_URL="${GDB_BASE_URL}${GDB}.tar.xz;type=tar"
     PICOLIBC_URL="${PICOLIBC_BASE_URL}${PICOLIBC}.tar.gz;type=tar"
+    MINGW_URL="${MINGW_BASE_URL}${MINGW}.tar.gz;type=tar"
 }
 
 function setup_variables_tar_9() {
@@ -35,6 +36,7 @@ function setup_variables_tar_9() {
     AVRLIBC="avr-libc-2.0.0"
     GDB="gdb-8.3.1"
     PICOLIBC="1.1-1"
+    MINGW="v7.0.0"
 
     setup_urls_tar
 }
