@@ -22,3 +22,5 @@ RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a riscv64-baremeta
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a riscv64 -v 9 -t && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86 -v 9 -t && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86_64 -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86_mingw -v 9 -t && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86_64_mingw -v 9 -t && rm -rf /home/work_dir/*"
