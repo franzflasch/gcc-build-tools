@@ -38,6 +38,7 @@ function config_x86_64_mingw() {
         "--disable-win32-registry"
         "--disable-sjlj-exceptions"
         "--disable-libstdcxx-verbose"
+        "--enable-threads=posix"
     )
 
     type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"

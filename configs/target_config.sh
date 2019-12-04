@@ -24,6 +24,8 @@ function setup_default_config()
         "--disable-gdb"
     )
 
+    # If you want to enable c++ please specify:
+    #local enable_languages="c,c++"
     local enable_languages="c"
     local fake_cpp=""
 
@@ -145,8 +147,8 @@ function setup_mingw_default_buildfuncs() {
                  "build_mingw_header"
                  "build_gcc_stage_1"
                  "build_mingw_crt"
-                 "build_gcc_final"
                  "build_mingw_winpthreads"
+                 "build_gcc_final"
     )
 }
 
