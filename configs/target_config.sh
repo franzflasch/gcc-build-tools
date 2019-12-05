@@ -139,6 +139,7 @@ function setup_mingw_default_downloadfuncs() {
                     "fetch_source ${MPFR_URL} mpfr-${MPFR}"
                     "fetch_source ${GMP_URL} gmp-${GMP}"
                     "fetch_source ${CLOOG_URL} cloog-${CLOOG}"
+                    "fetch_source ${GDB_URL} gdb-${GDB}"
     )
 }
 
@@ -149,6 +150,7 @@ function setup_mingw_default_buildfuncs() {
                  "build_mingw_crt"
                  "build_mingw_winpthreads"
                  "build_gcc_final"
+                 "build_gdb"
     )
 }
 
