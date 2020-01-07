@@ -32,10 +32,10 @@ function setup_variables_tar_9() {
     MPC="mpc-1.1.0"
     ISL="isl-0.22"
     CLOOG="cloog-0.18.4"
-    NEWLIB="newlib-3.1.0"
+    NEWLIB="newlib-3.2.0"
     AVRLIBC="avr-libc-2.0.0"
     GDB="gdb-8.3.1"
-    PICOLIBC="1.1-1"
+    PICOLIBC="1.3-1"
     MINGW="v7.0.0"
 
     setup_urls_tar
