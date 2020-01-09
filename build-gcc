@@ -25,6 +25,8 @@
 # https://git.linaro.org/toolchain/gcc.git # linaro and gnu
 # https://github.com/cbeck88/mingw-w64-gcc-linux/blob/master/build.sh
 # https://www.reactos.org/wiki/Building_MINGW-w64
+# http://cazencott.info/index.php/post/2016/03/14/Local-user-installation-of-gcc
+# https://wiki.dlang.org/GDC/Cross_Compiler/Existing_Sysroot
 
 
 #############

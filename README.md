@@ -95,6 +95,25 @@ For gz compression:
 tar -xvzf <toolchain_name>.tar.gz --strip-components=1
 ```
 
+## Notes on using the toolchain
+
+Building a fully static linked executable:
+```bash
+<target-triple>-gcc -o hello -static hello.c
+```
+
+With OpenMP:
+```bash
+<target-triple>-gcc -o omp_helloc -static -fopenmp omp_hello.c
+```
+
+For shared libraries ensure that you are building using the internal toolchain libs instead of ones already installed on the host linux -  
+here for x86_64 openmp example:
+```bash
+x86_64-linux-gnu-gcc -o omp_helloc -Wl,--rpath=toolchain/lib64 -Wl,--rpath=toolchain/x86_64-linux-gnu/lib/ -Wl,--dynamic-linker=toolchain/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2 -fopenmp omp_hello.c
+```
+For crosscompile targets it is probably necessary to install those libs into the target rootfs.
+
 ## Pull requests/issues
 
 If you have any issues with this script, feel free to open an issue!
