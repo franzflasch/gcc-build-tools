@@ -107,8 +107,7 @@ With OpenMP:
 <target-triple>-gcc -o omp_helloc -static -fopenmp omp_hello.c
 ```
 
-For shared libraries ensure that you are building using the internal toolchain libs instead of ones already installed on the host linux -  
-here for x86_64 openmp example:
+For shared libraries ensure that you are building using the internal toolchain libs instead of ones already installed on the host linux - here for x86_64 openmp example:
 ```bash
 x86_64-linux-gnu-gcc -o omp_helloc -Wl,--rpath=toolchain/lib64 -Wl,--rpath=toolchain/x86_64-linux-gnu/lib/ -Wl,--dynamic-linker=toolchain/x86_64-linux-gnu/lib/ld-linux-x86-64.so.2 -fopenmp omp_hello.c
 ```
