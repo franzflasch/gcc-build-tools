@@ -27,6 +27,7 @@
 # https://www.reactos.org/wiki/Building_MINGW-w64
 # http://cazencott.info/index.php/post/2016/03/14/Local-user-installation-of-gcc
 # https://wiki.dlang.org/GDC/Cross_Compiler/Existing_Sysroot
+# https://www.goliath32.com/blog/2016-12-05.html
 
 
 #############
