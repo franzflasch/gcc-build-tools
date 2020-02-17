@@ -162,11 +162,6 @@ function git_clone() {
     call_cmd git clone ${DEPTH_FLAG:+"--depth=1"} "${url}" "${folder}" -b "${branch}"
 }
 
-# git fetch wrapper
-function git_fetch() {
-    call_cmd git fetch ${DEPTH_FLAG:+"--depth=1"} "${@}"
-}
-
 function extract() {
     mkdir -p "${2}"
     call_cmd tar xvf "${1}" -C "${2}" --strip-components=1

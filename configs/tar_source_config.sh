@@ -34,7 +34,7 @@ function setup_variables_tar_9() {
     CLOOG="cloog-0.18.4"
     NEWLIB="newlib-3.3.0"
     AVRLIBC="avr-libc-2.0.0"
-    GDB="gdb-8.3.1"
+    GDB="gdb-9.1"
     PICOLIBC="1.3-1"
     MINGW="v7.0.0"
 
