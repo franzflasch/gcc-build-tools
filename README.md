@@ -6,7 +6,7 @@ The main goals were to keep things as simple as possible, it should always be ea
 It has a lot more features than its original. I removed superflous features and added a lot of new ones instead.
 The buildscript is able to build toolchains or crosstoolchains for Linux hosts targetting Linux, Windows (mingw) and also baremetal targets.
 
-Specifically these architectures are currently supported:
+Specifically these target architectures are currently supported:
 
     - arm  
     - arm64  
