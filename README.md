@@ -24,10 +24,9 @@ Specifically these target architectures are currently supported:
 
 ## Using the script
 
-To build a toolchain, you will need to the
-following:
+To build a toolchain, you will need to do the following:
 
-A Linux distribution (the script has been tested on Debian Stretch)
+A Linux distribution (the script has been tested on Debian Stretch/Buster)
 Core developer packages
 + For Debian 9 or 10:  
 ```bash
