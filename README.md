@@ -1,12 +1,10 @@
 # GCC crosstoolchain build script
 
 This script was originally a fork of https://github.com/USBhost/build-tools-gcc but it actually has not much left in common
-with its origin. I wanted to create my own toolchain build script as I am not happy with the existing ones. Either they are too complicated
-to make changes on my own or they are simply not implemeted properly.
-The main goals were to keep things as simple as possible, it should always be easy to know what the buildsystem actually does and it should
-be possible to do changes on my own.
+with its origin. I wanted to create my own toolchain build script as I am not happy with the existing ones. Either they are too complicated to make changes on my own or they are simply not implemeted properly.  
+The main goals were to keep things as simple as possible, it should always be easy to know what the buildsystem actually does and it should be possible to do changes on my own.  
 It has a lot more features than its original. I removed superflous features and added a lot of new ones instead.
-The buildscript is able to build toolchains or crosstoolchains for Linux OS, Windows (mingw) and also baremetal targets.
+The buildscript is able to build toolchains or crosstoolchains for Linux hosts targetting Linux, Windows (mingw) and also baremetal targets.
 
 Specifically these architectures are currently supported:
 
