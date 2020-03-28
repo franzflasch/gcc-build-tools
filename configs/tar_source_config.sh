@@ -24,18 +24,18 @@ function setup_urls_tar() {
 
 function setup_variables_tar_9() {
     LINUX="5.1"
-    GCC="gcc-9.2.0"
+    GCC="gcc-9.3.0"
     BINUTILS="2.34"
     GLIBC="glibc-2.31"
     MPFR="mpfr-4.0.2"
     GMP="gmp-6.2.0"
     MPC="mpc-1.1.0"
-    ISL="isl-0.22"
+    ISL="isl-0.22.1"
     CLOOG="cloog-0.18.4"
     NEWLIB="newlib-3.3.0"
     AVRLIBC="avr-libc-2.0.0"
     GDB="gdb-9.1"
-    PICOLIBC="1.3-1"
+    PICOLIBC="1.4.1"
     MINGW="v7.0.0"
 
     setup_urls_tar
