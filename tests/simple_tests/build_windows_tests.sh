@@ -9,7 +9,7 @@ if [ $# -eq 0 ]; then
 fi
 
 c_comp=${1}-gcc
-cpp_comp=${1}-g++
+#cpp_comp=${1}-g++
 
 mkdir -p build_out
 ${c_comp} -mwindows hello_windows.c -o build_out/hello_windows_c.executable
