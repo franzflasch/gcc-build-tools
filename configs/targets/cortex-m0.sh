@@ -32,8 +32,7 @@ function config_cortex-m0() {
     )
 
     NEWLIB_CONFIGURATION=(
-        "--target=${TARGET}"
-        "--prefix=${INSTALL}"
+	"${NEWLIB_BASE_CONFIGURATION[@]}"
         "--with-cpu=cortex-m0"
         "--with-mode=thumb"
         "--enable-interwork"

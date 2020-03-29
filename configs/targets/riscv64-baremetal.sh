@@ -28,8 +28,7 @@ function config_riscv64-baremetal() {
     )
 
     NEWLIB_CONFIGURATION=(
-        "--target=${TARGET}"
-        "--prefix=${INSTALL}"
+	"${NEWLIB_BASE_CONFIGURATION[@]}"
         "--with-arch=rv64ima"
         "--with-abi=lp64"
         "--disable-nls"

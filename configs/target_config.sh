@@ -56,6 +56,17 @@ function setup_default_config()
         "--with-headers=${INSTALL}/${TARGET}/include"
     )
 
+    NEWLIB_BASE_CONFIGURATION=(
+        "--target=${TARGET}"
+        "--prefix=${INSTALL}"
+    )
+
+    NEWLIB_NANO_INSTALL_DIR="${INSTALL}/${TARGET}/newlib-nano"
+    NEWLIB_NANO_BASE_CONFIGURATION=(
+        "--target=${TARGET}"
+        "--prefix=${NEWLIB_NANO_INSTALL_DIR}"
+    )
+
     GDB_BASE_CONFIG=(
         "--target=${TARGET}"
         "--prefix=${INSTALL}"
