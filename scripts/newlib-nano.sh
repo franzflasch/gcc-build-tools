@@ -21,12 +21,12 @@ function build_newlib_nano() {
     rm -rf -- *_nano.a
     rm -rf -- *_nano.o
 
-    for i in "${NEWLIB_NANO_INSTALL_DIR}"/arm-none-eabi/lib/*.a; do
-	ln -s ../newlib-nano/arm-none-eabi/lib/"$(basename "$i")" "$(basename "$i" .a)"_nano.a
+    for i in "${NEWLIB_NANO_INSTALL_DIR}"/${TARGET}/lib/*.a; do
+	ln -s ../newlib-nano/${TARGET}/lib/"$(basename "$i")" "$(basename "$i" .a)"_nano.a
     done
 
-    for i in "${NEWLIB_NANO_INSTALL_DIR}"/arm-none-eabi/lib/*.o; do
-        ln -s ../newlib-nano/arm-none-eabi/lib/"$(basename "$i")" "$(basename "$i" .o)"_nano.o
+    for i in "${NEWLIB_NANO_INSTALL_DIR}"/${TARGET}/lib/*.o; do
+        ln -s ../newlib-nano/${TARGET}/lib/"$(basename "$i")" "$(basename "$i" .o)"_nano.o
     done
 
     # Now prepare the nano specs file
@@ -35,7 +35,7 @@ function build_newlib_nano() {
 
     # Not sure if that is actually needed but the linaro buildscript does this also
     mkdir -p "${INSTALL}/${TARGET}/include/newlib-nano/"
-    cp -f "${NEWLIB_NANO_INSTALL_DIR}/arm-none-eabi/include/newlib.h" "${INSTALL}/${TARGET}/include/newlib-nano/newlib.h"
+    cp -f "${NEWLIB_NANO_INSTALL_DIR}/${TARGET}/include/newlib.h" "${INSTALL}/${TARGET}/include/newlib-nano/newlib.h"
 
     set_build_state "${FUNCNAME[0]}"
 }

@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034
 
 function config_cortex-m4() {
-    TARGET="arm-none-eabi" 
+    TARGET="arm-none-eabi"
 
     local VERSION="$1"
     local TAR_OR_GIT="$2"
@@ -32,18 +32,18 @@ function config_cortex-m4() {
     )
 
     NEWLIB_CONFIGURATION=(
-	"${NEWLIB_BASE_CONFIGURATION[@]}"
+    "${NEWLIB_BASE_CONFIGURATION[@]}"
         "--with-cpu=cortex-m4"
         "--with-mode=thumb"
         "--enable-interwork"
         "--with-float=hard"
         "--disable-multilib"
-	"--enable-newlib-io-long-long"
-	"--enable-newlib-io-c99-formats"
-	"--enable-newlib-register-fini"
-	"--enable-newlib-retargetable-locking"
+        "--enable-newlib-io-long-long"
+        "--enable-newlib-io-c99-formats"
+        "--enable-newlib-register-fini"
+        "--enable-newlib-retargetable-locking"
         "--disable-newlib-supplied-syscalls"
-	"--disable-nls"
+        "--disable-nls"
     )
 
     NEWLIB_NANO_CONFIGURATION=(
@@ -54,17 +54,17 @@ function config_cortex-m4() {
         "--with-float=hard"
         "--disable-multilib"
         "--disable-newlib-supplied-syscalls"
-	"--enable-newlib-reent-small"
-	"--enable-newlib-retargetable-locking"
-	"--disable-newlib-fvwrite-in-streamio"
-	"--disable-newlib-fseek-optimization"
-	"--disable-newlib-wide-orient"
-	"--enable-newlib-nano-malloc"
-	"--disable-newlib-unbuf-stream-opt"
-	"--enable-lite-exit"
-	"--enable-newlib-global-atexit"
-	"--enable-newlib-nano-formatted-io"
-	"--disable-nls"
+        "--enable-newlib-reent-small"
+        "--enable-newlib-retargetable-locking"
+        "--disable-newlib-fvwrite-in-streamio"
+        "--disable-newlib-fseek-optimization"
+        "--disable-newlib-wide-orient"
+        "--enable-newlib-nano-malloc"
+        "--disable-newlib-unbuf-stream-opt"
+        "--enable-lite-exit"
+        "--enable-newlib-global-atexit"
+        "--enable-newlib-nano-formatted-io"
+        "--disable-nls"
     )
 
     GCC_FINAL_CONFIGURATION=(
@@ -88,7 +88,7 @@ function config_cortex-m4() {
     PICOLIBC_CONFIGURATION=(
         "--prefix=${PICOLIBC_INSTALL_DIR}"
         "-Dthread-local-storage=false"
-	"-Dhw-fp=true"
+        "-Dhw-fp=true"
     )
 
     type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
@@ -104,7 +104,7 @@ function config_cortex-m4() {
 
     BUILD_FUNCS=(
         "${BUILD_FUNCS[@]}"
-	"build_newlib_nano"
+        "build_newlib_nano"
         "build_picolibc"
     )
 }

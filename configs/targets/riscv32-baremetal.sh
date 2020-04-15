@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034
 
 function config_riscv32-baremetal() {
-    TARGET="riscv32-none-elf" 
+    TARGET="riscv32-none-elf"
 
     local VERSION="$1"
     local TAR_OR_GIT="$2"
@@ -13,7 +13,7 @@ function config_riscv32-baremetal() {
         "${BINUTILS_BASE_CONFIG[@]}"
         "--with-arch=rv32ima"
         "--with-abi=ilp32"
-        "--enable-multilib"
+        "--disable-multilib"
     )
 
     GCC_CONFIGURATION=(
@@ -24,16 +24,35 @@ function config_riscv32-baremetal() {
         "--with-newlib"
         "--disable-shared"
         "--without-headers"
-        "--enable-multilib"
+        "--disable-multilib"
     )
 
     NEWLIB_CONFIGURATION=(
-	"${NEWLIB_BASE_CONFIGURATION[@]}"
+    "${NEWLIB_BASE_CONFIGURATION[@]}"
         "--with-arch=rv32ima"
         "--with-abi=ilp32"
         "--disable-nls"
         "--disable-newlib-supplied-syscalls"
-        "--enable-multilib"
+        "--disable-multilib"
+    )
+
+    NEWLIB_NANO_CONFIGURATION=(
+        "${NEWLIB_NANO_BASE_CONFIGURATION[@]}"
+        "--with-arch=rv32ima"
+        "--with-abi=ilp32"
+        "--disable-nls"
+        "--disable-newlib-supplied-syscalls"
+        "--disable-multilib"
+        "--enable-newlib-reent-small"
+        "--enable-newlib-retargetable-locking"
+        "--disable-newlib-fvwrite-in-streamio"
+        "--disable-newlib-fseek-optimization"
+        "--disable-newlib-wide-orient"
+        "--enable-newlib-nano-malloc"
+        "--disable-newlib-unbuf-stream-opt"
+        "--enable-lite-exit"
+        "--enable-newlib-global-atexit"
+        "--enable-newlib-nano-formatted-io"
     )
 
     GCC_FINAL_CONFIGURATION=(
@@ -43,7 +62,7 @@ function config_riscv32-baremetal() {
         "--with-system-zlib"
         "--with-newlib"
         "--disable-shared"
-        "--enable-multilib"
+        "--disable-multilib"
         "--enable-languages=c,c++"
     )
 
@@ -70,6 +89,7 @@ function config_riscv32-baremetal() {
 
     BUILD_FUNCS=(
         "${BUILD_FUNCS[@]}"
+        "build_newlib_nano"
         "build_picolibc"
     )
 }
