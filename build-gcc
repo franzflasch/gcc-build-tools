@@ -85,7 +85,7 @@ function help_menu() {
         echo "                         - ${i//,/ }"
     done
     echo
-    echo "  -v  | --version:     Possible values: (7, 8, 9 and master. This is the GCC version to build."
+    echo "  -v  | --version:     Possible values: (7, 8, 9, 10 and master. This is the GCC version to build."
     echo
     echo "${BOLD}OPTIONAL PARAMETERS:${RST}"
     echo "  -f  | --full-src:    Download full git repos instead of shallow clones"
@@ -218,26 +218,12 @@ function fetch_source() {
     found=false
     echo "BRANCH: ${branch}"
 
-    # check if we should symlink to a subfolder:
-    for subfolder in "${url_array[@]}"; do
-      # shellcheck disable=SC2015
-      echo "${subfolder}" | grep -q "subfolder=" && local exit_code=$? || local exit_code=$?
-      if [ ${exit_code} = 0 ]; then
-        subfolder=${subfolder#*subfolder=}
-        found=true
-        break
-      fi
-    done
-    ${found} || subfolder=""
-    found=false
-    echo "SUBFOLDER: ${subfolder}"
-
     # Check if it is a git repo
     if [ "${url_type}" = "git" ]; then
         if [[ ! -d git_${folder} ]]; then
             git_clone "${url}" "git_${folder}" "${branch}"
             # Now make a symlink
-            ln -sfn "${SOURCES_DIR}/git_${folder}/${subfolder}" "${SOURCES_DIR}/${folder}"
+            ln -sfn "${SOURCES_DIR}/git_${folder}" "${SOURCES_DIR}/${folder}"
         fi
         return
     fi

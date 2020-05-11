@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-function setup_common_urls_tar() {
+function setup_common_urls() {
     MPFR_BASE_URL="https://ftp.gnu.org/gnu/mpfr/"
     GMP_BASE_URL="https://ftp.gnu.org/gnu/gmp/"
     MPC_BASE_URL="https://ftp.gnu.org/gnu/mpc/"
     ISL_BASE_URL="http://isl.gforge.inria.fr/"
     CLOOG_BASE_URL="http://www.bastoul.net/cloog/pages/download/"
+}
+
+function setup_common_urls_tar() {
+
+    setup_common_urls
+
     BINUTILS_BASE_URL="https://ftp.gnu.org/gnu/binutils/binutils-"
     GCC_BASE_URL="ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/"
     GLIBC_BASE_URL="https://ftp.gnu.org/gnu/glibc/"
@@ -19,11 +25,9 @@ function setup_common_urls_tar() {
 }
 
 function setup_common_urls_git() {
-    MPFR_BASE_URL="https://ftp.gnu.org/gnu/mpfr/"
-    GMP_BASE_URL="https://ftp.gnu.org/gnu/gmp/"
-    MPC_BASE_URL="https://ftp.gnu.org/gnu/mpc/"
-    ISL_BASE_URL="http://isl.gforge.inria.fr/"
-    CLOOG_BASE_URL="http://www.bastoul.net/cloog/pages/download/"
+
+    setup_common_urls
+
     BINUTILS_GIT_URL="git://sourceware.org/git/binutils-gdb.git"
     GCC_GIT_URL="git://gcc.gnu.org/git/gcc.git"
     GLIBC_GIT_URL="git://sourceware.org/git/glibc.git"

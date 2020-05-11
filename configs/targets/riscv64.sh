@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034
 
 function config_riscv64() {
-    TARGET="riscv64-linux-gnu" 
+    TARGET="riscv64-linux-gnu"
     # shellcheck disable=SC2034
     LINUX_ARCH="riscv"
 
@@ -25,7 +25,6 @@ function config_riscv64() {
         "--with-abi=lp64d"
         "--with-tune=rocket"
         "--disable-multilib"
-        "--enable-languages=c,c++"
     )
     GLIBC_CONFIGURATION=(
         "${GLIBC_BASE_CONFIG[@]}"
