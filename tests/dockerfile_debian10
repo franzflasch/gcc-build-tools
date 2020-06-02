@@ -14,7 +14,7 @@ ADD . /home/script_dir/build-tools-gcc
 
 WORKDIR /home/work_dir
 
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a arm -v 9 $USE_TAR && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a arm -v 9 $USE_TAR -V && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a arm64 -v 9 $USE_TAR && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a avr8 -v 9 $USE_TAR && rm -rf /home/work_dir/*"
 RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a cortex-m0 -v 9 $USE_TAR && rm -rf /home/work_dir/*"
