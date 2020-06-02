@@ -19,9 +19,10 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: ./tests/run_all_tests_tar.sh
+      # Runs a single command using the runners shell
+      - name: Execute docker build
+        timeout-minutes: 720
+        run: ./tests/run_all_tests_tar.sh
