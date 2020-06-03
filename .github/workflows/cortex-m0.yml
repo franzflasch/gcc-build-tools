@@ -19,6 +19,6 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: arm
-        run: ./tests/run_single_test.sh arm "-t"
+      - name: cortex-m0
+        run: ./tests/run_single_test.sh cortex-m0 "-t"
 
