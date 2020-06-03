@@ -23,16 +23,27 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Execute docker build
+      - name: arm
         run: ./tests/run_single_test.sh arm "-t"
+      - name: arm64
         run: ./tests/run_single_test.sh arm64 "-t"
+      - name: avr8
         run: ./tests/run_single_test.sh avr8 "-t"
+      - name: cortex-m0
         run: ./tests/run_single_test.sh cortex-m0 "-t"
+      - name: cortex-m3
         run: ./tests/run_single_test.sh cortex-m3 "-t"
+      - name: riscv32-baremetal
         run: ./tests/run_single_test.sh riscv32-baremetal "-t"
+      - name: riscv64-baremetal
         run: ./tests/run_single_test.sh riscv64-baremetal "-t"
+      - name: riscv64
         run: ./tests/run_single_test.sh riscv64 "-t"
+      - name: x86
         run: ./tests/run_single_test.sh x86 "-t"
+      - name: x86_64
         run: ./tests/run_single_test.sh x86_64 "-t"
+      - name: x86_mingw
         run: ./tests/run_single_test.sh x86_mingw "-t"
+      - name: x86_64_mingw
         run: ./tests/run_single_test.sh x86_64_mingw "-t"
