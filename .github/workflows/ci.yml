@@ -24,5 +24,15 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Execute docker build
-        timeout-minutes: 720
-        run: ./tests/run_all_tests_tar.sh
+        run: ./tests/run_single_test.sh arm "-t"
+        run: ./tests/run_single_test.sh arm64 "-t"
+        run: ./tests/run_single_test.sh avr8 "-t"
+        run: ./tests/run_single_test.sh cortex-m0 "-t"
+        run: ./tests/run_single_test.sh cortex-m3 "-t"
+        run: ./tests/run_single_test.sh riscv32-baremetal "-t"
+        run: ./tests/run_single_test.sh riscv64-baremetal "-t"
+        run: ./tests/run_single_test.sh riscv64 "-t"
+        run: ./tests/run_single_test.sh x86 "-t"
+        run: ./tests/run_single_test.sh x86_64 "-t"
+        run: ./tests/run_single_test.sh x86_mingw "-t"
+        run: ./tests/run_single_test.sh x86_64_mingw "-t"

@@ -1,5 +1,6 @@
 FROM debian:buster
 
+ARG ARCH=""
 ARG USE_TAR=""
 
 WORKDIR /home/script_dir
@@ -14,15 +15,4 @@ ADD . /home/script_dir/build-tools-gcc
 
 WORKDIR /home/work_dir
 
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a arm -v 9 $USE_TAR && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a arm64 -v 9 $USE_TAR && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a avr8 -v 9 $USE_TAR && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a cortex-m0 -v 9 $USE_TAR && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a cortex-m3 -v 9 $USE_TAR && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a riscv32-baremetal -v 9 $USE_TAR && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a riscv64-baremetal -v 9 $USE_TAR && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a riscv64 -v 9 $USE_TAR && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86 -v 9 $USE_TAR && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86_64 -v 9 $USE_TAR && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86_mingw -v 9 $USE_TAR && rm -rf /home/work_dir/*"
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a x86_64_mingw -v 9 $USE_TAR && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a $ARCH -v 9 $USE_TAR && rm -rf /home/work_dir/*"
