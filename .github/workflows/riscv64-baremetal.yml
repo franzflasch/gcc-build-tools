@@ -17,8 +17,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: riscv64-baremetal
-        run: ./tests/run_single_test.sh riscv64-baremetal "-t"
+      - name: set env
+        run: echo "::set-env name=BUILD_ARCH::$(basename $ARCH .yml)"
+        env:
+          ARCH: ${{ github.workflow }}
+      - name: run_build
+        run: ./tests/run_single_test.sh $BUILD_ARCH "-t"
 
