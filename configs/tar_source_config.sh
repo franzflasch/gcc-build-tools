@@ -36,7 +36,7 @@ function setup_variables_tar_10() {
     GLIBC="glibc-2.31"
     NEWLIB="newlib-3.3.0"
     AVRLIBC="avr-libc-2.0.0"
-    GDB="gdb-9.1"
+    GDB="gdb-9.2"
     PICOLIBC="1.4.1"
     MINGW="v7.0.0"
 
