@@ -30,7 +30,7 @@ A Linux distribution (the script has been tested on Debian Stretch/Buster)
 Core developer packages
 + For Debian 9 or 10:  
 ```bash
-sudo apt install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison libexpat1-dev
+sudo apt install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison libexpat1-dev rsync
 ```
 
 For picolibc
