@@ -47,7 +47,7 @@ function setup_variables_git_master() {
     NEWLIB="master"
     AVRLIBC="trunk/avr-libc"
     GDB="master"
-    PICOLIBC="master"
+    PICOLIBC="main"
 
     setup_urls_git
 }
@@ -74,7 +74,7 @@ function setup_variables_git_10() {
     AVRLIBC="avr-libc-2_0_0-release"
     AVRLIBC_BRANCH="tags/${AVRLIBC}"
     GDB="gdb-9-branch"
-    PICOLIBC="master"
+    PICOLIBC="main"
     MINGW="v7.x"
 
     setup_urls_git
@@ -95,7 +95,7 @@ function setup_variables_git_9() {
     AVRLIBC="avr-libc-2_0_0-release"
     AVRLIBC_BRANCH="tags/${AVRLIBC}"
     GDB="gdb-9-branch"
-    PICOLIBC="master"
+    PICOLIBC="main"
     MINGW="v7.x"
 
     setup_urls_git
@@ -114,7 +114,7 @@ function setup_variables_git_8() {
     NEWLIB="newlib-3.1.0"
     AVRLIBC="tags/avr-libc-2_0_0-release"
     GDB="gdb-8.2-branch"
-    PICOLIBC="master"
+    PICOLIBC="main"
 
     setup_urls_git
 }
@@ -132,7 +132,7 @@ function setup_variables_git_7() {
     NEWLIB="newlib-2.5.0"
     AVRLIBC="tags/avr-libc-2_0_0-release"
     GDB="gdb-7.12-branch"
-    PICOLIBC="master"
+    PICOLIBC="main"
 
     setup_urls_git
 }
