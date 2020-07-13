@@ -24,7 +24,7 @@ function setup_urls_tar() {
 }
 
 function setup_variables_tar_10() {
-    MPFR="mpfr-4.0.2"
+    MPFR="mpfr-4.1.0"
     GMP="gmp-6.2.0"
     MPC="mpc-1.1.0"
     ISL="isl-0.22.1"
@@ -37,7 +37,7 @@ function setup_variables_tar_10() {
     NEWLIB="newlib-3.3.0"
     AVRLIBC="avr-libc-2.0.0"
     GDB="gdb-9.2"
-    PICOLIBC="1.4.1"
+    PICOLIBC="1.4.4"
     MINGW="v7.0.0"
 
     setup_urls_tar
