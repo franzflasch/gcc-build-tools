@@ -21,7 +21,8 @@ jobs:
         run: echo "::set-env name=BUILD_ARCH::$(basename $ARCH .yml)"
         env:
           ARCH: ${{ github.workflow }}
-      - name: run_build
+      - name: run_build_git
         run: ./tests/run_single_test.sh $BUILD_ARCH
+      - name: run_build_tar
         run: ./tests/run_single_test.sh $BUILD_ARCH "-t"
 
