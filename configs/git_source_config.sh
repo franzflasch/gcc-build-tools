@@ -21,8 +21,6 @@ function setup_urls_git() {
     GCC_URL="${GCC_GIT_URL};type=git;branch=${GCC_BRANCH}"
     LINUX_URL="${LINUX_GIT_URL};type=git;branch=${LINUX}"
 
-    # Set back to this after release of 2.32
-    #GLIBC_URL="${GLIBC_GIT_URL};type=git;branch=${GLIBC}"
     GLIBC_URL="${GLIBC_GIT_URL};type=git;branch=${GLIBC_BRANCH}"
 
     NEWLIB_URL="${NEWLIB_GIT_URL};type=git;branch=${NEWLIB}"
@@ -41,6 +39,7 @@ function setup_variables_git_master() {
 
     BINUTILS="master"
     GLIBC="master"
+    GLIBC_BRANCH="${GLIBC}"
     LINUX="master"
     GCC_BRANCH="master"
     GCC="master"
@@ -62,13 +61,10 @@ function setup_variables_git_10() {
     LINUX="v5.6"
     GCC="gcc-10"
     GCC_BRANCH="releases/${GCC}"
-    BINUTILS="binutils-2_34-branch"
+    BINUTILS="binutils-2_35-branch"
 
-    # Use the current 2.31 release master branch instead of the release tag
-    # because of https://sourceware.org/pipermail/glibc-cvs/2020q1/069150.html
-    # PLEASE set to GLIBC="glibc-2.32" as soon as it is released
-    GLIBC="glibc-2.31"
-    GLIBC_BRANCH="release/2.31/master"
+    GLIBC="glibc-2.32"
+    GLIBC_BRANCH="${GLIBC}"
 
     NEWLIB="newlib-3.3.0"
     AVRLIBC="avr-libc-2_0_0-release"
