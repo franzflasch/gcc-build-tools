@@ -2,7 +2,7 @@
 
 BASEDIR=$(dirname "$0")
 ARCH_TO_BUILD="$1"
-#ENABLE_TAR_BUILD="$2"
+ENABLE_TAR_BUILD="$2"
 
 # Use git
 ENABLE_TAR_BUILD=""

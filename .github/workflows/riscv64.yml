@@ -22,5 +22,6 @@ jobs:
         env:
           ARCH: ${{ github.workflow }}
       - name: run_build
+        run: ./tests/run_single_test.sh $BUILD_ARCH
         run: ./tests/run_single_test.sh $BUILD_ARCH "-t"
 
