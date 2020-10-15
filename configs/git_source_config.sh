@@ -33,7 +33,7 @@ function setup_urls_git() {
 function setup_variables_git_master() {
     MPFR="mpfr-4.1.0"
     GMP="gmp-6.2.0"
-    MPC="mpc-1.1.0"
+    MPC="mpc-1.2.0"
     ISL="isl-0.22.1"
     CLOOG="cloog-0.18.4"
 
@@ -47,6 +47,7 @@ function setup_variables_git_master() {
     AVRLIBC="trunk/avr-libc"
     GDB="master"
     PICOLIBC="main"
+    MINGW="master"
 
     setup_urls_git
 }
@@ -54,7 +55,7 @@ function setup_variables_git_master() {
 function setup_variables_git_10() {
     MPFR="mpfr-4.1.0"
     GMP="gmp-6.2.0"
-    MPC="mpc-1.1.0"
+    MPC="mpc-1.2.0"
     ISL="isl-0.22.1"
     CLOOG="cloog-0.18.4"
 
@@ -71,7 +72,7 @@ function setup_variables_git_10() {
     AVRLIBC_BRANCH="tags/${AVRLIBC}"
     GDB="gdb-9-branch"
     PICOLIBC="main"
-    MINGW="v7.x"
+    MINGW="v8.x"
 
     setup_urls_git
 }

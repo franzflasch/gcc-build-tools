@@ -26,19 +26,19 @@ function setup_urls_tar() {
 function setup_variables_tar_10() {
     MPFR="mpfr-4.1.0"
     GMP="gmp-6.2.0"
-    MPC="mpc-1.1.0"
+    MPC="mpc-1.2.0"
     ISL="isl-0.22.1"
     CLOOG="cloog-0.18.4"
 
     LINUX="5.6.12"
     GCC="gcc-10.2.0"
-    BINUTILS="2.35"
+    BINUTILS="2.35.1"
     GLIBC="glibc-2.32"
     NEWLIB="newlib-3.3.0"
     AVRLIBC="avr-libc-2.0.0"
     GDB="gdb-9.2"
     PICOLIBC="1.4.6"
-    MINGW="v7.0.0"
+    MINGW="v8.0.0"
 
     setup_urls_tar
 }
