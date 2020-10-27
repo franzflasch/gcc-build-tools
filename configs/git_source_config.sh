@@ -55,7 +55,7 @@ function setup_variables_git_master() {
 function setup_variables_git_10() {
     MPFR="mpfr-4.1.0"
     GMP="gmp-6.2.0"
-    MPC="mpc-1.2.0"
+    MPC="mpc-1.2.1"
     ISL="isl-0.22.1"
     CLOOG="cloog-0.18.4"
 
@@ -70,7 +70,7 @@ function setup_variables_git_10() {
     NEWLIB="newlib-3.3.0"
     AVRLIBC="avr-libc-2_0_0-release"
     AVRLIBC_BRANCH="tags/${AVRLIBC}"
-    GDB="gdb-9-branch"
+    GDB="gdb-10-branch"
     PICOLIBC="main"
     MINGW="v8.x"
 
