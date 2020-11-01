@@ -11,7 +11,7 @@ function config_riscv64-baremetal() {
 
     BINUTILS_CONFIGURATION=(
         "${BINUTILS_BASE_CONFIG[@]}"
-        "--with-arch=rv64i"
+        "--with-arch=rv64ia"
         "--with-abi=lp64"
         "--disable-multilib"
     )
@@ -20,7 +20,7 @@ function config_riscv64-baremetal() {
         "CFLAGS_FOR_TARGET=-mcmodel=medany"
         "CXXFLAGS_FOR_TARGET=-mcmodel=medany"
         "${GCC_BASE_CONFIG[@]}"
-        "--with-arch=rv64i"
+        "--with-arch=rv64ia"
         "--with-abi=lp64"
         "--with-system-zlib"
         "--with-newlib"
@@ -33,7 +33,7 @@ function config_riscv64-baremetal() {
         "CFLAGS_FOR_TARGET=-mcmodel=medany"
         "CXXFLAGS_FOR_TARGET=-mcmodel=medany"
         "${NEWLIB_BASE_CONFIGURATION[@]}"
-        "--with-arch=rv64i"
+        "--with-arch=rv64ia"
         "--with-abi=lp64"
         "--disable-nls"
         "--disable-newlib-supplied-syscalls"
@@ -44,7 +44,7 @@ function config_riscv64-baremetal() {
         "CFLAGS_FOR_TARGET=-mcmodel=medany"
         "CXXFLAGS_FOR_TARGET=-mcmodel=medany"
         "${NEWLIB_NANO_BASE_CONFIGURATION[@]}"
-        "--with-arch=rv64i"
+        "--with-arch=rv64ia"
         "--with-abi=lp64"
         "--disable-nls"
         "--disable-newlib-supplied-syscalls"
@@ -62,8 +62,10 @@ function config_riscv64-baremetal() {
     )
 
     GCC_FINAL_CONFIGURATION=(
+        "CFLAGS_FOR_TARGET=-mcmodel=medany"
+        "CXXFLAGS_FOR_TARGET=-mcmodel=medany"
         "${GCC_BASE_CONFIG[@]}"
-        "--with-arch=rv64i"
+        "--with-arch=rv64ia"
         "--with-abi=lp64"
         "--with-system-zlib"
         "--with-newlib"
