@@ -32,9 +32,9 @@ function setup_urls_git() {
 
 function setup_variables_git_master() {
     MPFR="mpfr-4.1.0"
-    GMP="gmp-6.2.0"
-    MPC="mpc-1.2.0"
-    ISL="isl-0.22.1"
+    GMP="gmp-6.2.1"
+    MPC="mpc-1.2.1"
+    ISL="isl-0.23"
     CLOOG="cloog-0.18.4"
 
     BINUTILS="master"
