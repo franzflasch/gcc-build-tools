@@ -291,7 +291,7 @@ function parse_parameters() {
 
             # OPTIONAL FLAGS
             "-f"|"--full-src") FULL_SOURCE=true ;;
-            "-p"|"--package") shift && COMPRESSION=${1} ;;
+            "-p"|"--package") COMPRESSION=true ;;
             "-t"|"--tarballs") TARBALLS=true ;;
             "-V"|"--verbose") VERBOSE=true ;;
 
@@ -346,22 +346,10 @@ function package_tc() {
     hash -r
 
     if [[ -n ${COMPRESSION} ]]; then
-        PACKAGE=${TARGET}-${VERSION}.x-$(TZ=UTC date +%Y%m%d).tar.${COMPRESSION}
-
+        local tar_package=${TARGET}-${VERSION}-$(TZ=UTC date +%Y%m%d).tar.xz
         header "PACKAGING TOOLCHAIN"
-
-        echo "Target file: ${PACKAGE}"
-
-        case "${COMPRESSION}" in
-            "gz")
-                echo "Packaging with GZIP..."
-                tar c ${INSTALL_DIR_NAME} -C "${ROOT}" | gzip  > "${PACKAGE}" ;;
-            "xz")
-                echo "Packaging with XZ..."
-                tar c ${INSTALL_DIR_NAME} -C "${ROOT}" | xz  > "${PACKAGE}" ;;
-            *)
-                die "Invalid compression specified... skipping" ;;
-        esac
+        echo "Target file: ${tar_package}"
+        tar cf ${tar_package} ${INSTALL_DIR_NAME}
     fi
 
     set_build_state "${FUNCNAME[0]}"
@@ -386,7 +374,7 @@ function ending_info() {
             echo -e "${BOLD}File location:${RST} $(pwd)/${PACKAGE}"
             echo -e "${BOLD}File size:${RST} $(du -h "${PACKAGE}" | awk '{print $1}')"
         else
-            echo -e "${BOLD}Toolchain location:${RST} $(pwd)/${TARGET}"
+            echo -e "${BOLD}Toolchain location:${RST} ${INSTALL}"
         fi
     else
         header "BUILD FAILED"

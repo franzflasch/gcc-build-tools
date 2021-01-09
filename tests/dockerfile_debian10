@@ -15,4 +15,8 @@ ADD . /home/script_dir/build-tools-gcc
 
 WORKDIR /home/work_dir
 
-RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a $ARCH -v 10 $USE_TAR && rm -rf /home/work_dir/*"
+RUN /bin/bash -c "/home/script_dir/build-tools-gcc/build-gcc -a $ARCH -v 10 $USE_TAR -p"
+RUN /bin/bash -c "mkdir /home/toolchain_install"
+RUN /bin/bash -c "cp -rf /home/work_dir/*.xz /home/toolchain_install/"
+
+RUN /bin/bash -c "rm -rf /home/work_dir/*"
