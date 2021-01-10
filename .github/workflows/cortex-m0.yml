@@ -22,7 +22,7 @@ jobs:
         env:
           ARCH: ${{ github.workflow }}
       - name: run_build_git
-        run: ./tests/run_single_test.sh $BUILD_ARCH
+        run: ./tests/run_single_test.sh $BUILD_ARCH " " "-p"
       - name: ${BUILD_ARCH}_git_artifact
         uses: actions/upload-artifact@v2
         with:
