@@ -33,7 +33,7 @@ jobs:
       - name: run_build_tar
         run: ./tests/run_single_test.sh $BUILD_ARCH "-t"
       - name: ${BUILD_ARCH}_tar_artifact
-       uses: actions/upload-artifact@v2
-       with:
-         name: toolchain_built_from_tar
-         path: toolchain_install
+        uses: actions/upload-artifact@v2
+        with:
+          name: toolchain_built_from_tar
+          path: toolchain_install
