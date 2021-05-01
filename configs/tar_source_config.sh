@@ -31,13 +31,13 @@ function setup_variables_tar_10() {
     CLOOG="cloog-0.18.4"
 
     LINUX="5.10.5"
-    GCC="gcc-10.2.0"
-    BINUTILS="2.35.1"
-    GLIBC="glibc-2.32"
+    GCC="gcc-10.3.0"
+    BINUTILS="2.36.1"
+    GLIBC="glibc-2.33"
     NEWLIB="newlib-4.1.0"
     AVRLIBC="avr-libc-2.0.0"
-    GDB="gdb-10.1"
-    PICOLIBC="1.5"
+    GDB="gdb-10.2"
+    PICOLIBC="1.5.1"
     MINGW="v8.0.0"
 
     setup_urls_tar

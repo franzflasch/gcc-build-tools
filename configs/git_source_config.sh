@@ -54,20 +54,20 @@ function setup_variables_git_master() {
 
 function setup_variables_git_10() {
     MPFR="mpfr-4.1.0"
-    GMP="gmp-6.2.0"
+    GMP="gmp-6.2.1"
     MPC="mpc-1.2.1"
-    ISL="isl-0.22.1"
+    ISL="isl-0.23"
     CLOOG="cloog-0.18.4"
 
-    LINUX="v5.6"
+    LINUX="v5.10"
     GCC="gcc-10"
     GCC_BRANCH="releases/${GCC}"
-    BINUTILS="binutils-2_35-branch"
+    BINUTILS="binutils-2_36-branch"
 
-    GLIBC="glibc-2.32"
+    GLIBC="glibc-2.33"
     GLIBC_BRANCH="${GLIBC}"
 
-    NEWLIB="newlib-3.3.0"
+    NEWLIB="newlib-4.1.0"
     AVRLIBC="avr-libc-2_0_0-release"
     AVRLIBC_BRANCH="tags/${AVRLIBC}"
     GDB="gdb-10-branch"
