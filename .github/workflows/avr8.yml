@@ -31,7 +31,7 @@ jobs:
       #    name: toolchain_built_from_git
       #    path: toolchain_install
       - name: run_build_tar
-        run: ./tests/run_single_test.sh $BUILD_ARCH "-t"
+        run: ./tests/run_single_test.sh $BUILD_ARCH "-t" "-p"
       - name: ${BUILD_ARCH}_tar_artifact
         uses: actions/upload-artifact@v2
         with:
