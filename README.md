@@ -45,9 +45,9 @@ https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_mingw/main/toolch
 
 To build a toolchain, you will need to do the following:
 
-A Linux distribution (the script has been tested on Debian Stretch/Buster)
+A Linux distribution (the script has been tested on Debian Buster and Ubuntu 20.04)
 Core developer packages
-+ For Debian 9 or 10:  
++ For Debian 10 or Ubuntu 20.04:  
 ```bash
 sudo apt install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison libexpat1-dev rsync
 ```
