@@ -61,8 +61,8 @@ sudo pip3 install meson ninja
 Once you have set up your environment, run the following:
 
 ```bash
-git clone https://github.com/franzflasch/build-tools-gcc
-cd build-tools-gcc
+git clone https://github.com/franzflasch/gcc-build-tools
+cd gcc-build-tools
 ./build-gcc -h
 ```
 
