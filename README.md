@@ -1,26 +1,44 @@
 # GCC crosstoolchain build script
 
-This script was originally a fork of https://github.com/USBhost/build-tools-gcc but it actually has not much left in common
-with its origin. I wanted to create my own toolchain build script as I am not happy with the existing ones. Either they are too complicated to make changes on my own or they are simply not implemeted properly.  
+This script was originally a fork of https://github.com/USBhost/build-tools-gcc but it actually has not much left in common with its origin. 
+I wanted to create my own toolchain build script as I am not happy with the existing ones. Either they are too complicated to make changes on my own or they are simply not implemeted properly.  
 The main goals were to keep things as simple as possible, it should always be easy to know what the buildsystem actually does and it should be possible to do changes on my own.  
 It has a lot more features than its original. I removed superflous features and added a lot of new ones instead.
 The buildscript is able to build toolchains or crosstoolchains for Linux hosts targetting Linux, Windows (mingw) and also baremetal targets.
 
 Specifically these target architectures are currently supported:
 
-    - arm  
-    - arm64  
-    - avr8  
-    - cortex-m0  
-    - cortex-m3  
-    - riscv32-baremetal  
-    - riscv64  
-    - x86  
-    - x86_64  
-    - riscv64-baremetal  
-    - x86_mingw  
-    - x86_64_mingw  
+    - arm 
+    - arm64 
+    - avr8
+    - cortex-m0 
+    - cortex-m3 
+    - cortex-m4 
+    - riscv32 
+    - riscv32-baremetal 
+    - riscv64 
+    - riscv64-baremetal 
+    - x86 
+    - x86_64 
+    - x86_64_mingw 
+    - x86_mingw 
 
+## Prebuilt toolchains can be downloaded here (note: links are only valid 90 days after the last successful github ci runner)
+
+https://nightly.link/franzflasch/build-tools-gcc/workflows/arm/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/arm64/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/avr8/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/cortex-m0/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/cortex-m3/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/cortex-m4/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/riscv32/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/riscv32-baremetal/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/riscv64/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/riscv64-baremetal/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/x86/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/x86_64/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/x86_64_mingw/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/build-tools-gcc/workflows/x86_mingw/master/toolchain_built_from_tar
 
 ## Using the script
 

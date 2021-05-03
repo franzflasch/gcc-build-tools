@@ -57,9 +57,9 @@ function call_cmd() {
     local cmd_to_call="${*}"
 
     if [[ ! -z "${VERBOSE}" ]]; then
-        $cmd_to_call
+        eval "${cmd_to_call}"
     else
-        $cmd_to_call > /dev/null 2>&1
+        eval "${cmd_to_call} > /dev/null 2>&1"
     fi
 }
 
@@ -268,6 +268,7 @@ function setup_variables() {
 function setup_environment() {
     ROOT="${PWD}"
     SOURCES_DIR="${ROOT}/sources"
+    PATCHES_DIR="${BASH_SOURCE%/*}/patches"
     BUILD_STATE_DIR="${ROOT}/state"
     # shellcheck disable=SC2034
     BUILD_DIR="${ROOT}/build_dir"
@@ -337,6 +338,25 @@ function download_sources() {
     cd "${ROOT}"
 }
 
+function patch_sources() {
+
+    cd "${ROOT}"
+    # use clean hashtable
+    hash -r
+
+    for patch in "${PATCHES[@]}"
+    do
+        patch_full_path=$(echo "${patch}" | awk '{print $NF}')
+        patch_name=$(basename "${patch_full_path}" ".patch")
+        package_dir=$(echo "${patch}" | awk '{print $1}')
+        check_build_state "patch_${patch_name}" && continue
+        patch -d ${SOURCES_DIR}/${package_dir} -p1 < ${PATCHES_DIR}/${patch_full_path}
+        set_build_state "patch_${patch_name}"
+    done 
+
+    cd "${ROOT}"
+}
+
 # Package toolchain
 function package_tc() {
 
@@ -389,6 +409,7 @@ function ending_info() {
 parse_parameters "${@}"
 setup_variables
 download_sources
+patch_sources
 
 # Go through all build functions
 for build_func in "${BUILD_FUNCS[@]}"

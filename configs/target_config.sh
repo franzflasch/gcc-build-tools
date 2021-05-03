@@ -46,9 +46,20 @@ function setup_default_config()
         "--enable-languages=${enable_languages}"
     )
 
+    # Notes:
     # Add CC and a fake CXX to circumvent an issue in glibc in case of a c only build:
     # https://sourceware.org/bugzilla/show_bug.cgi?id=24183
+    #
+    # CFLAGS: It seems there is an issue when building glibc with GCC-11, so we add
+    # the CLFLAGS "-Wno-error=stringop-overread" to disable a warning introduced with GCC-11 during build,
+    # which is otherwise treated as an error (-Werror). 
+    # For further info, see:
+    # https://github.com/advancetoolchain/advance-toolchain/issues/1876
+    # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=98512
+    # http://sourceware-org.1504.n7.nabble.com/PATCH-string-Fix-GCC-11-Werror-stringop-overread-error-td647550.html
     GLIBC_BASE_CONFIG=(
+		"CFLAGS='-g -O2 \
+            -Wno-error=stringop-overread'"
         "CC=${TARGET}-gcc"
         "CXX=${TARGET}${fake_cpp}-g++"
         "--host=${TARGET}"
