@@ -41,6 +41,10 @@ function setup_variables_tar_11() {
     MINGW="v8.0.0"
 
     setup_urls_tar
+
+    PATCHES=(
+        "mingw-${MINGW} mingw/mingw64-runtime-8.0.0-__rdtsc.patch"
+    )
 }
 
 function setup_variables_tar_10() {
