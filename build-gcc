@@ -350,7 +350,7 @@ function patch_sources() {
         patch_name=$(basename "${patch_full_path}" ".patch")
         package_dir=$(echo "${patch}" | awk '{print $1}')
         check_build_state "patch_${patch_name}" && continue
-        patch -d ${SOURCES_DIR}/${package_dir} -p1 < ${PATCHES_DIR}/${patch_full_path}
+        [[ -d "${SOURCES_DIR}/${package_dir}" ]] && patch -d ${SOURCES_DIR}/${package_dir} -p1 < ${PATCHES_DIR}/${patch_full_path}
         set_build_state "patch_${patch_name}"
     done 
 

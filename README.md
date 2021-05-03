@@ -26,20 +26,20 @@ that as long as this project is "hidden" as a fork it does not get much attentio
 
 ## Prebuilt toolchains can be downloaded here (note: links are only valid 90 days after the last successful github ci runner)
 
-https://nightly.link/franzflasch/gcc-build-tools/workflows/arm/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/arm64/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/avr8/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m0/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m3/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m4/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32-baremetal/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64-baremetal/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/x86/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_64/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_64_mingw/master/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_mingw/master/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/arm/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/arm64/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/avr8/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m0/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m3/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m4/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32-baremetal/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64-baremetal/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/x86/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_64/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_64_mingw/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_mingw/main/toolchain_built_from_tar
 
 ## Using the script
 

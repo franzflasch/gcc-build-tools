@@ -76,9 +76,9 @@ function setup_variables_git_11() {
 
     setup_urls_git
 
-    # PATCHES=(
-    #     "glibc-${GLIBC} glibc/v2-string-Fix-GCC-11--Werror-stringop-overread-error.patch"
-    # )
+    PATCHES=(
+        "mingw-${MINGW} mingw/mingw64-runtime-8.0.0-__rdtsc.patch"
+    )
 }
 
 function setup_variables_git_10() {

@@ -58,7 +58,7 @@ function setup_default_config()
     # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=98512
     # http://sourceware-org.1504.n7.nabble.com/PATCH-string-Fix-GCC-11-Werror-stringop-overread-error-td647550.html
     GLIBC_BASE_CONFIG=(
-		"CFLAGS='-g -O2 \
+        "CFLAGS='-g -O2 \
             -Wno-error=stringop-overread'"
         "CC=${TARGET}-gcc"
         "CXX=${TARGET}${fake_cpp}-g++"
@@ -98,7 +98,11 @@ function setup_default_config()
         "--host=${TARGET}"
     )
 
+    # Note:
+    # Since GCC-11 we need to add CFLAGS='-fno-expensive-optimizations' to this build, for details see:
+    # https://bugs.gentoo.org/787662
     MINGW_WINPTHREADS_BASE_CONFIG=(
+        "CFLAGS='-fno-expensive-optimizations'"
         "--prefix=${INSTALL}/${TARGET}"
         "--host=${TARGET}"
         "--disable-multilib"
