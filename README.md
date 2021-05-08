@@ -21,11 +21,11 @@ Specifically these target architectures are currently supported:
     - x86_mingw 
 
 Supported GCC versions:
-    - GCC-latest
-    - GCC-11
-    - GCC-10
-    - GCC-9
-    - GCC-8
+- GCC-latest
+- GCC-11
+- GCC-10
+- GCC-9
+- GCC-8
 
 This script was originally a fork of https://github.com/USBhost/build-tools-gcc but it actually has not much left in common with its origin. I've the feeling
 that as long as this project is "hidden" as a fork it does not get much attention, so I made a new independent project out of it.
