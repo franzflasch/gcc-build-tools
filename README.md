@@ -132,10 +132,4 @@ For crosscompile targets it is probably necessary to install those libs into the
 
 If you have any issues with this script, feel free to open an issue!
 
-Pull requests are more than welcome as well. However, there is a particular coding style that should be followed:
-
-+ All variables are uppercased and use curly braces: ```${VARIABLE}``` instead of ```$variable```
-+ Four spaces for indents
-+ Double brackets and single equal sign for string comparisons in if blocks: ```if [[ ${VARIABLE} = "yes" ]]; then```
-
-Additionally, please be sure to run your change through shellcheck.net (either copy and paste the script there or download the binary and run `shellcheck build`).
+Pull requests are more than welcome as well!
