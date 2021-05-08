@@ -20,6 +20,13 @@ Specifically these target architectures are currently supported:
     - x86_64_mingw 
     - x86_mingw 
 
+Supported GCC versions:
+    - GCC-latest
+    - GCC-11
+    - GCC-10
+    - GCC-9
+    - GCC-8
+
 This script was originally a fork of https://github.com/USBhost/build-tools-gcc but it actually has not much left in common with its origin. I've the feeling
 that as long as this project is "hidden" as a fork it does not get much attention, so I made a new independent project out of it.
 
@@ -71,25 +78,25 @@ Example commands:
 
 ```bash
 # Build a toolchain for x86_64
-./build-gcc -a x86_64 -v 7
+./build-gcc -a x86_64 -v 11
 
 # Build a toolchain for arm64
-./build-gcc -a arm64 -v 7
+./build-gcc -a arm64 -v 11
 
 # Build a toolchain for arm
-./build-gcc -a arm -v 8
+./build-gcc -a arm -v 11
 
 # Build a toolchain for riscv linux
-./build-gcc -a riscv64 -v 8
+./build-gcc -a riscv64 -v 11
 
 # Build a toolchain for avr microcontrollers
-./build-gcc -a avr8 -v 8 -t
+./build-gcc -a avr8 -v 11 -t
 
 # Build a toolchain for arm cortex m3/m4 microcontrollers
-./build-gcc -a cortex-m3 -v 8 -t
+./build-gcc -a cortex-m3 -v 11 -t
 
 # Build a toolchain for riscv baremetal (sifive hifive1)
-./build-gcc -a riscv32-baremetal -v 8
+./build-gcc -a riscv32-baremetal -v 11
 ```
 
 ## After compilation
