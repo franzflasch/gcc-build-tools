@@ -1,8 +1,7 @@
 # GCC crosstoolchain build script
 
-I wanted to create my own toolchain build script as I am not happy with the existing ones. Either they are too complicated to make changes on my own or they are simply not implemeted properly.  
-The main goals were to keep things as simple as possible, it should always be easy to know what the buildsystem actually does and it should be possible to do changes on my own. It has a lot more features than its original. I removed superflous features and added a lot of new ones instead.
-The buildscript is able to build toolchains or crosstoolchains for Linux hosts and targets Linux, Windows (mingw) and also a lot of baremetal targets.
+This is a simple script to build gcc based (cross) toolchains for various platforms. It is much like crosstool-ng, just simpler. I wanted to do this on my own as I am not happy with the existing ones. Either they are too complicated or they are simply not implemeted properly.  
+The buildscript is able to build toolchains or (cross) toolchains for Linux hosts and targets Linux, Windows (mingw) and also a lot of baremetal targets.
 
 Specifically these target architectures are currently supported:
 
