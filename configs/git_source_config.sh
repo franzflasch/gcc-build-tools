@@ -34,7 +34,7 @@ function setup_variables_git_master() {
     MPFR="mpfr-4.1.0"
     GMP="gmp-6.2.1"
     MPC="mpc-1.2.1"
-    ISL="isl-0.23"
+    ISL="isl-0.24"
     CLOOG="cloog-0.18.4"
 
     BINUTILS="master"
@@ -56,15 +56,15 @@ function setup_variables_git_11() {
     MPFR="mpfr-4.1.0"
     GMP="gmp-6.2.1"
     MPC="mpc-1.2.1"
-    ISL="isl-0.23"
+    ISL="isl-0.24"
     CLOOG="cloog-0.18.4"
 
     LINUX="v5.10"
     GCC="gcc-11"
     GCC_BRANCH="releases/${GCC}"
-    BINUTILS="binutils-2_36-branch"
+    BINUTILS="binutils-2_37-branch"
 
-    GLIBC="glibc-2.33"
+    GLIBC="glibc-2.34"
     GLIBC_BRANCH="${GLIBC}"
 
     NEWLIB="newlib-4.1.0"
@@ -72,13 +72,13 @@ function setup_variables_git_11() {
     AVRLIBC_BRANCH="tags/${AVRLIBC}"
     GDB="gdb-10-branch"
     PICOLIBC="main"
-    MINGW="v8.x"
+    MINGW="v9.x"
 
     setup_urls_git
 
-    PATCHES=(
-        "mingw-${MINGW} mingw/mingw64-runtime-8.0.0-__rdtsc.patch"
-    )
+#    PATCHES=(
+#        "mingw-${MINGW} mingw/mingw64-runtime-8.0.0-__rdtsc.patch"
+#    )
 }
 
 function setup_variables_git_10() {

@@ -27,24 +27,24 @@ function setup_variables_tar_11() {
     MPFR="mpfr-4.1.0"
     GMP="gmp-6.2.1"
     MPC="mpc-1.2.1"
-    ISL="isl-0.23"
+    ISL="isl-0.24"
     CLOOG="cloog-0.18.4"
 
     LINUX="5.10.5"
-    GCC="gcc-11.1.0"
-    BINUTILS="2.36.1"
-    GLIBC="glibc-2.33"
+    GCC="gcc-11.2.0"
+    BINUTILS="2.37"
+    GLIBC="glibc-2.34"
     NEWLIB="newlib-4.1.0"
     AVRLIBC="avr-libc-2.0.0"
     GDB="gdb-10.2"
-    PICOLIBC="1.5.1"
-    MINGW="v8.0.0"
+    PICOLIBC="1.7.2"
+    MINGW="v9.0.0"
 
     setup_urls_tar
 
-    PATCHES=(
-        "mingw-${MINGW} mingw/mingw64-runtime-8.0.0-__rdtsc.patch"
-    )
+#    PATCHES=(
+#        "mingw-${MINGW} mingw/mingw64-runtime-8.0.0-__rdtsc.patch"
+#    )
 }
 
 function setup_variables_tar_10() {
