@@ -78,9 +78,18 @@ function setup_default_config()
         "--prefix=${NEWLIB_NANO_INSTALL_DIR}"
     )
 
+    # Although GMP is already built with GCC (in-tree) it is now also a 'host' library 
+    # dependency for GDB since version 11.
+    # So we now need to explicitely build and install it for the host.
+    local GMP_INSTALL_DIR="${BUILD_DIR}/build-gmp/__installed"
+    GMP_BASE_CONFIG=(
+        "--prefix=${GMP_INSTALL_DIR}"
+    )
+
     GDB_BASE_CONFIG=(
         "--target=${TARGET}"
         "--prefix=${INSTALL}"
+        "--with-libgmp-prefix=${GMP_INSTALL_DIR}"
         "--disable-binutils"
         "--disable-ld"
         "--disable-gas"
@@ -126,6 +135,7 @@ function setup_baremetal_default_buildfuncs() {
                  "build_gcc_stage_1"
                  "build_newlib"
                  "build_gcc_final"
+                 "build_gmp"
                  "build_gdb"
     )
 }
@@ -152,6 +162,7 @@ function setup_linux_default_buildfuncs() {
                  "build_gcc_stage2"
                  "build_glibc"
                  "build_gcc_final"
+                 "build_gmp"
                  "build_gdb"
     )
 }
