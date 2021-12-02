@@ -30,14 +30,14 @@ function setup_variables_tar_11() {
     ISL="isl-0.24"
     CLOOG="cloog-0.18.4"
 
-    LINUX="5.10.5"
+    LINUX="5.15.6"
     GCC="gcc-11.2.0"
     BINUTILS="2.37"
     GLIBC="glibc-2.34"
     NEWLIB="newlib-4.1.0"
     AVRLIBC="avr-libc-2.0.0"
-    GDB="gdb-10.2"
-    PICOLIBC="1.7.2"
+    GDB="gdb-11.1"
+    PICOLIBC="1.7.4"
     MINGW="v9.0.0"
 
     setup_urls_tar

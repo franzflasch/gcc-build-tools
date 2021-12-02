@@ -59,7 +59,7 @@ function setup_variables_git_11() {
     ISL="isl-0.24"
     CLOOG="cloog-0.18.4"
 
-    LINUX="v5.10"
+    LINUX="v5.15"
     GCC="gcc-11"
     GCC_BRANCH="releases/${GCC}"
     BINUTILS="binutils-2_37-branch"
@@ -70,7 +70,7 @@ function setup_variables_git_11() {
     NEWLIB="newlib-4.1.0"
     AVRLIBC="avr-libc-2_0_0-release"
     AVRLIBC_BRANCH="tags/${AVRLIBC}"
-    GDB="gdb-10-branch"
+    GDB="gdb-11-branch"
     PICOLIBC="main"
     MINGW="v9.x"
 

@@ -5,7 +5,7 @@ function setup_common_urls() {
     MPFR_BASE_URL="https://ftp.gnu.org/gnu/mpfr/"
     GMP_BASE_URL="https://ftp.gnu.org/gnu/gmp/"
     MPC_BASE_URL="https://ftp.gnu.org/gnu/mpc/"
-    ISL_BASE_URL="http://isl.gforge.inria.fr/"
+    ISL_BASE_URL="https://libisl.sourceforge.io/"
     CLOOG_BASE_URL="http://www.bastoul.net/cloog/pages/download/"
 }
 
@@ -21,7 +21,7 @@ function setup_common_urls_tar() {
     AVRLIBC_BASE_URL="http://download.savannah.gnu.org/releases/avr-libc/"
     GDB_BASE_URL="http://ftp.gnu.org/gnu/gdb/"
     PICOLIBC_BASE_URL="https://github.com/keith-packard/picolibc/archive/"
-    MINGW_BASE_URL="https://github.com/mirror/mingw-w64/archive/"
+    MINGW_BASE_URL="https://github.com/mirror/mingw-w64/archive/refs/tags/"
 }
 
 function setup_common_urls_git() {
