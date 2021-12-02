@@ -187,6 +187,7 @@ function setup_mingw_default_buildfuncs() {
                  "build_mingw_crt"
                  "build_mingw_winpthreads"
                  "build_gcc_final"
+                 "build_gmp"
                  "build_gdb"
     )
 }

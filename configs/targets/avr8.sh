@@ -48,6 +48,7 @@ function config_avr8() {
                  "build_gcc_stage_1"
                  "build_avrlibc"
                  "build_gcc_final"
+                 "build_gmp"
                  "build_gdb"
     )
 }

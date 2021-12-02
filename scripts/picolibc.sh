@@ -18,21 +18,9 @@ endian = 'little'
 EOF
 }
 
+# For arm-none-eabi there is already a file ready in picolibc
 function prepare_arm-none-eabi_build() {
-cat <<'EOF'  > "cross-arm-none-eabi.txt"
-[binaries]
-c = 'arm-none-eabi-gcc'
-ar = 'arm-none-eabi-ar'
-as = 'arm-none-eabi-as'
-ld = 'arm-none-eabi-ld'
-strip = 'arm-none-eabi-strip'
-
-[host_machine]
-system = 'none'
-cpu_family = 'arm'
-cpu = 'arm'
-endian = 'little'
-EOF
+    cat "${picolibc_dir}/scripts/cross-arm-none-eabi.txt" > "cross-arm-none-eabi.txt"
 }
 
 function build_picolibc() {

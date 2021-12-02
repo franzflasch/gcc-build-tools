@@ -88,7 +88,6 @@ function config_cortex-m4() {
     PICOLIBC_CONFIGURATION=(
         "--prefix=${PICOLIBC_INSTALL_DIR}"
         "-Dthread-local-storage=false"
-        "-Dhw-fp=true"
     )
 
     type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
