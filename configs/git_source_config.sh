@@ -64,11 +64,11 @@ function setup_variables_git_11() {
     GCC_BRANCH="releases/${GCC}"
     BINUTILS="binutils-2_37-branch"
 
-    GLIBC="glibc-2.34"
+    GLIBC="glibc-2.35"
     GLIBC_BRANCH="${GLIBC}"
 
-    NEWLIB="newlib-4.1.0"
-    AVRLIBC="avr-libc-2_0_0-release"
+    NEWLIB="newlib-snapshot-20211231"
+    AVRLIBC="avr-libc-2_1_0-release"
     AVRLIBC_BRANCH="tags/${AVRLIBC}"
     GDB="gdb-11-branch"
     PICOLIBC="main"
