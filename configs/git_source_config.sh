@@ -62,7 +62,7 @@ function setup_variables_git_11() {
     LINUX="v5.15"
     GCC="gcc-11"
     GCC_BRANCH="releases/${GCC}"
-    BINUTILS="binutils-2_37-branch"
+    BINUTILS="binutils-2_38-branch"
 
     GLIBC="glibc-2.35"
     GLIBC_BRANCH="${GLIBC}"
@@ -72,7 +72,7 @@ function setup_variables_git_11() {
     AVRLIBC_BRANCH="tags/${AVRLIBC}"
     GDB="gdb-11-branch"
     PICOLIBC="main"
-    MINGW="v9.x"
+    MINGW="v10.x"
 
     setup_urls_git
 
