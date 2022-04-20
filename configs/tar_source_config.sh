@@ -32,13 +32,13 @@ function setup_variables_tar_11() {
 
     LINUX="5.15.6"
     GCC="gcc-11.2.0"
-    BINUTILS="2.37"
+    BINUTILS="2.38"
     GLIBC="glibc-2.35"
     NEWLIB="newlib-4.2.0.20211231"
     AVRLIBC="avr-libc-2.1.0"
     GDB="gdb-11.2"
-    PICOLIBC="1.7.4"
-    MINGW="v9.0.0"
+    PICOLIBC="1.7.6"
+    MINGW="v10.0.0"
 
     setup_urls_tar
 
