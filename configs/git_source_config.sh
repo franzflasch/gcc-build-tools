@@ -72,7 +72,9 @@ function setup_variables_git_11() {
     AVRLIBC_BRANCH="tags/${AVRLIBC}"
     GDB="gdb-11-branch"
     PICOLIBC="main"
-    MINGW="v10.x"
+    
+    # still no branch available for v10.x, so we keep v9.x for now
+    MINGW="v9.x"
 
     setup_urls_git
 
