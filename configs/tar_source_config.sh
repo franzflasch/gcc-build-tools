@@ -23,6 +23,26 @@ function setup_urls_tar() {
     MINGW_URL="${MINGW_BASE_URL}${MINGW}.tar.gz;type=tar"
 }
 
+function setup_variables_tar_12() {
+    MPFR="mpfr-4.1.0"
+    GMP="gmp-6.2.1"
+    MPC="mpc-1.2.1"
+    ISL="isl-0.24"
+    CLOOG="cloog-0.18.4"
+
+    LINUX="5.15.6"
+    GCC="gcc-12.1.0"
+    BINUTILS="2.38"
+    GLIBC="glibc-2.35"
+    NEWLIB="newlib-4.2.0.20211231"
+    AVRLIBC="avr-libc-2_1_0"
+    GDB="gdb-12.1"
+    PICOLIBC="1.7.6"
+    MINGW="v10.0.0"
+
+    setup_urls_tar
+}
+
 function setup_variables_tar_11() {
     MPFR="mpfr-4.1.0"
     GMP="gmp-6.2.1"
@@ -82,24 +102,6 @@ function setup_variables_tar_9() {
     GDB="gdb-9.1"
     PICOLIBC="1.4.1"
     MINGW="v7.0.0"
-
-    setup_urls_tar
-}
-
-function setup_variables_tar_8() {
-    LINUX="5.1"
-    GCC="gcc-8.3.0"
-    BINUTILS="2.32"
-    GLIBC="glibc-2.29"
-    MPFR="mpfr-4.0.2"
-    GMP="gmp-6.1.2"
-    MPC="mpc-1.1.0"
-    ISL="isl-0.21"
-    CLOOG="cloog-0.18.4"
-    NEWLIB="newlib-3.1.0.20181231"
-    AVRLIBC="avr-libc-2_0_0"
-    GDB="gdb-8.2.1"
-    PICOLIBC="1.0-1"
 
     setup_urls_tar
 }
