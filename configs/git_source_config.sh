@@ -69,7 +69,9 @@ function setup_variables_git_12() {
 
     NEWLIB="newlib-snapshot-20211231"
     AVRLIBC="avr-libc-2_1_0-release"
-    GDB="gdb-12-branch"
+    # 12.1 produces a build error, which I don't know how to solve for now
+    # so we keep it at 11.2 for now.
+    GDB="gdb-11.2-release"
     PICOLIBC="main"
     MINGW="v10.0.0"
 
