@@ -4,7 +4,7 @@
 function prepare_riscv32-none-elf_build() {
 cat <<'EOF'  > "cross-riscv32-none-elf.txt"
 [binaries]
-c = 'riscv32-none-elf-gcc'
+c = ['riscv32-none-elf-gcc', '-march=rv32ima_zicsr_zifencei', '-mabi=ilp32', '-nostdlib']
 ar = 'riscv32-none-elf-ar'
 as = 'riscv32-none-elf-as'
 ld = 'riscv32-none-elf-ld'
