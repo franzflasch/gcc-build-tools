@@ -62,16 +62,14 @@ function setup_variables_git_12() {
     LINUX="v5.15"
     GCC="gcc-12"
     GCC_BRANCH="releases/${GCC}"
-    BINUTILS="binutils-2_38-branch"
+    BINUTILS="binutils-2_39-branch"
 
-    GLIBC="glibc-2.35"
+    GLIBC="glibc-2.36"
     GLIBC_BRANCH="${GLIBC}"
 
     NEWLIB="newlib-snapshot-20211231"
     AVRLIBC="avr-libc-2_1_0-release"
-    # 12.1 produces a build error, which I don't know how to solve for now
-    # so we keep it at 11.2 for now.
-    GDB="gdb-11.2-release"
+    GDB="gdb-12.1-release"
     PICOLIBC="main"
     MINGW="v10.0.0"
 
