@@ -16,7 +16,7 @@ ADD . /home/script_dir/gcc-build-tools
 
 WORKDIR /home/work_dir
 
-RUN /bin/bash -c "/home/script_dir/gcc-build-tools/build-gcc -a $ARCH -v 11 $USE_TAR $PACKAGE"
+RUN /bin/bash -c "/home/script_dir/gcc-build-tools/build-gcc -a $ARCH -v 12 $USE_TAR $PACKAGE"
 RUN /bin/bash -c "mkdir /home/toolchain_install"
 RUN /bin/bash -c "cp -rf /home/work_dir/*.xz /home/toolchain_install/ | true" # Continue, even if the file does not exist.
 
