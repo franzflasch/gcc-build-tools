@@ -1,0 +1,101 @@
+From 1653ae5b8440e2182ac86974b99b603bc15aa163 Mon Sep 17 00:00:00 2001
+From: Vladimir Mezentsev <vladimir.mezentsev@oracle.com>
+Date: Thu, 5 May 2022 00:08:19 -0700
+Subject: [PATCH] gprofng: use $host instead $target
+
+By mistake, $target was used instead of $host to configure the gprogng build.
+
+gprofng/ChangeLog
+2022-04-28  Vladimir Mezentsev  <vladimir.mezentsev@oracle.com>
+
+	PR gprofng/29113
+	PR gprofng/29116
+	* configure.ac: Use $host instead $target.
+	* libcollector/configure.ac: Likewise.
+	* configure: Rebuild.
+	* libcollector/configure: Rebuild.
+---
+ gprofng/configure                 | 9 ++-------
+ gprofng/configure.ac              | 9 ++-------
+ gprofng/libcollector/configure    | 2 +-
+ gprofng/libcollector/configure.ac | 2 +-
+ 4 files changed, 6 insertions(+), 16 deletions(-)
+
+diff --git a/gprofng/configure b/gprofng/configure
+index 6e38a140696..d0345ecdfbc 100755
+--- a/gprofng/configure
++++ b/gprofng/configure
+@@ -15780,18 +15780,13 @@ gprofng_cppflags="-U_ASM"
+ build_collector=
+ build_src=
+ 
+-# This is annoying: it means we have to pass --enable-shared explicitly to
+-# get gprofng, while the configure default is supposed to be that shared libs
+-# are on by default.  But as long as libiberty has code like this, so must
+-# we...
+-
+-  case "${target}" in
++  case "${host}" in
+     x86_64-*-linux*)
+       build_src=true
+       build_collector=true
+       ;;
+     i?86-*-linux*)
+-      build_collector=true
++      build_src=true
+       build_collector=true
+       ;;
+     aarch64-*-linux*)
+diff --git a/gprofng/configure.ac b/gprofng/configure.ac
+index 80bbc8569f5..63b505c5e14 100644
+--- a/gprofng/configure.ac
++++ b/gprofng/configure.ac
+@@ -54,18 +54,13 @@ gprofng_cppflags="-U_ASM"
+ build_collector=
+ build_src=
+ 
+-# This is annoying: it means we have to pass --enable-shared explicitly to
+-# get gprofng, while the configure default is supposed to be that shared libs
+-# are on by default.  But as long as libiberty has code like this, so must
+-# we...
+-
+-  case "${target}" in
++  case "${host}" in
+     x86_64-*-linux*)
+       build_src=true
+       build_collector=true
+       ;;
+     i?86-*-linux*)
+-      build_collector=true
++      build_src=true
+       build_collector=true
+       ;;
+     aarch64-*-linux*)
+diff --git a/gprofng/libcollector/configure b/gprofng/libcollector/configure
+index 0afa31d0819..687a6eeda5d 100755
+--- a/gprofng/libcollector/configure
++++ b/gprofng/libcollector/configure
+@@ -15475,7 +15475,7 @@ if test "$enable_shared" != "yes"; then
+ fi
+ 
+ GPROFNG_VARIANT=unknown
+-case "${target}" in
++case "${host}" in
+   x86_64-*-linux*)
+     GPROFNG_VARIANT=amd64-Linux
+     ;;
+diff --git a/gprofng/libcollector/configure.ac b/gprofng/libcollector/configure.ac
+index f49d120e0fd..6b6c5c03e27 100644
+--- a/gprofng/libcollector/configure.ac
++++ b/gprofng/libcollector/configure.ac
+@@ -42,7 +42,7 @@ if test "$enable_shared" != "yes"; then
+ fi
+ 
+ GPROFNG_VARIANT=unknown
+-case "${target}" in
++case "${host}" in
+   x86_64-*-linux*)
+     GPROFNG_VARIANT=amd64-Linux
+     ;;
+-- 
+2.31.1
