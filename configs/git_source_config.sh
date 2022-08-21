@@ -74,6 +74,11 @@ function setup_variables_git_12() {
     MINGW="v10.0.0"
 
     setup_urls_git
+
+    # Fixes: https://sourceware.org/bugzilla/show_bug.cgi?id=29116
+    PATCHES=(
+        "gdb-${GDB} gdb/fix-gdb-12-1-build.patch"
+    )
 }
 
 function setup_variables_git_11() {
