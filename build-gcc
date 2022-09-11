@@ -272,14 +272,16 @@ function setup_environment() {
     BUILD_STATE_DIR="${ROOT}/state"
     # shellcheck disable=SC2034
     BUILD_DIR="${ROOT}/build_dir"
-    INSTALL_DIR_NAME="toolchain"
-    INSTALL="${ROOT}/${INSTALL_DIR_NAME}"
+    INSTALL_DIR="/opt/local"
+    INSTALL_DIR_NAME="cross-tool-${ARCH}-gcc${VERSION}"
+    INSTALL="${INSTALL_DIR}/${INSTALL_DIR_NAME}"
 
     # Maybe not needed!?
     export PATH=${INSTALL}/bin:${PATH}
 
     mkdir -p "${SOURCES_DIR}"
     mkdir -p "${BUILD_STATE_DIR}"
+    mkdir -p "${INSTALL}"
 }
 
 # Parse parameters

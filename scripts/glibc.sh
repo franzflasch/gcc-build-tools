@@ -16,7 +16,7 @@ function build_glibc_header() {
     call_cmd make install-bootstrap-headers=yes install-headers || die "Error while building glibc headers!" -n
     call_cmd make "${JOBS}" csu/subdir_lib || die "Error while building glibc headers 2!" -n
     call_cmd install csu/crt1.o csu/crti.o csu/crtn.o "${INSTALL}/${TARGET}/lib" || die "Error while installing crt" -n
-    call_cmd "${INSTALL}/bin/${TARGET}-gcc" -nostdlib -nostartfiles -shared -x c /dev/null -o "${INSTALL}/${TARGET}/lib/libc.so" || die "Error while building libc" -n
+    call_cmd "${TARGET}-gcc" -nostdlib -nostartfiles -shared -x c /dev/null -o "${INSTALL}/${TARGET}/lib/libc.so" || die "Error while building libc" -n
     touch "${INSTALL}/${TARGET}/include/gnu/stubs.h"
 
     set_build_state "${FUNCNAME[0]}"
