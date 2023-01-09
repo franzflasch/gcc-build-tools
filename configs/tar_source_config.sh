@@ -24,10 +24,10 @@ function setup_urls_tar() {
 }
 
 function setup_variables_tar_12() {
-    MPFR="mpfr-4.1.0"
+    MPFR="mpfr-4.2.0"
     GMP="gmp-6.2.1"
-    MPC="mpc-1.2.1"
-    ISL="isl-0.24"
+    MPC="mpc-1.3.1"
+    ISL="isl-0.24" # is-0.25 is already available, but does not work with gcc-12 it seems
     CLOOG="cloog-0.18.4"
 
     LINUX="5.15.6"
@@ -37,7 +37,7 @@ function setup_variables_tar_12() {
     NEWLIB="newlib-4.2.0.20211231"
     AVRLIBC="avr-libc-2_1_0"
     GDB="gdb-12.1"
-    PICOLIBC="1.7.8"
+    PICOLIBC="1.8"
     MINGW="v10.0.0"
 
     setup_urls_tar

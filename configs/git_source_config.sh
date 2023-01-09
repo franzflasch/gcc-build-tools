@@ -31,10 +31,10 @@ function setup_urls_git() {
 }
 
 function setup_variables_git_master() {
-    MPFR="mpfr-4.1.0"
+    MPFR="mpfr-4.2.0"
     GMP="gmp-6.2.1"
-    MPC="mpc-1.2.1"
-    ISL="isl-0.24"
+    MPC="mpc-1.3.1"
+    ISL="isl-0.24" # is-0.25 is already available, but does not work with gcc-12 it seems
     CLOOG="cloog-0.18.4"
 
     BINUTILS="master"
@@ -53,10 +53,10 @@ function setup_variables_git_master() {
 }
 
 function setup_variables_git_12() {
-    MPFR="mpfr-4.1.0"
+    MPFR="mpfr-4.2.0"
     GMP="gmp-6.2.1"
-    MPC="mpc-1.2.1"
-    ISL="isl-0.24"
+    MPC="mpc-1.3.1"
+    ISL="isl-0.24" # is-0.25 is already available, but does not work with gcc-12 it seems
     CLOOG="cloog-0.18.4"
 
     LINUX="v5.15"
