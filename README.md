@@ -47,6 +47,8 @@ https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_64/main/toolchain
 https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_64_mingw/main/toolchain_built_from_tar
 https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_mingw/main/toolchain_built_from_tar
 
+**Note:** Make sure to extract the prebuilt toolchains to /opt/local/ otherwise there might be issues for certain builds.
+
 ## Using the script
 
 To build a toolchain, you will need to do the following:
