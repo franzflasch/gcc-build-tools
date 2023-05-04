@@ -23,6 +23,26 @@ function setup_urls_tar() {
     MINGW_URL="${MINGW_BASE_URL}${MINGW}.tar.gz;type=tar"
 }
 
+function setup_variables_tar_13() {
+    MPFR="mpfr-4.2.0"
+    GMP="gmp-6.2.1"
+    MPC="mpc-1.3.1"
+    ISL="isl-0.26" # is-0.26 is already available, but does not work with gcc-13 it seems
+    CLOOG="cloog-0.18.4"
+
+    LINUX="6.1.26"
+    GCC="gcc-13.1.0"
+    BINUTILS="2.40"
+    GLIBC="glibc-2.37"
+    NEWLIB="newlib-4.3.0.20230120"
+    AVRLIBC="avr-libc-2_1_0"
+    GDB="gdb-13.1"
+    PICOLIBC="1.8.1"
+    MINGW="v10.0.0"
+
+    setup_urls_tar
+}
+
 function setup_variables_tar_12() {
     MPFR="mpfr-4.2.0"
     GMP="gmp-6.2.1"
@@ -30,7 +50,7 @@ function setup_variables_tar_12() {
     ISL="isl-0.24" # is-0.25 is already available, but does not work with gcc-12 it seems
     CLOOG="cloog-0.18.4"
 
-    LINUX="5.15.6"
+    LINUX="6.1.26"
     GCC="gcc-12.2.0"
     BINUTILS="2.39"
     GLIBC="glibc-2.36"
@@ -50,7 +70,7 @@ function setup_variables_tar_11() {
     ISL="isl-0.24"
     CLOOG="cloog-0.18.4"
 
-    LINUX="5.15.6"
+    LINUX="6.1.26"
     GCC="gcc-11.2.0"
     BINUTILS="2.38"
     GLIBC="glibc-2.35"
@@ -74,7 +94,7 @@ function setup_variables_tar_10() {
     ISL="isl-0.23"
     CLOOG="cloog-0.18.4"
 
-    LINUX="5.10.5"
+    LINUX="6.1.26"
     GCC="gcc-10.3.0"
     BINUTILS="2.36.1"
     GLIBC="glibc-2.33"
@@ -83,25 +103,6 @@ function setup_variables_tar_10() {
     GDB="gdb-10.2"
     PICOLIBC="1.5.1"
     MINGW="v8.0.0"
-
-    setup_urls_tar
-}
-
-function setup_variables_tar_9() {
-    LINUX="5.1"
-    GCC="gcc-9.3.0"
-    BINUTILS="2.34"
-    GLIBC="glibc-2.31"
-    MPFR="mpfr-4.0.2"
-    GMP="gmp-6.2.0"
-    MPC="mpc-1.1.0"
-    ISL="isl-0.22.1"
-    CLOOG="cloog-0.18.4"
-    NEWLIB="newlib-3.3.0"
-    AVRLIBC="avr-libc-2_0_0"
-    GDB="gdb-9.1"
-    PICOLIBC="1.4.1"
-    MINGW="v7.0.0"
 
     setup_urls_tar
 }

@@ -14,9 +14,9 @@ function setup_common_urls_tar() {
     setup_common_urls
 
     BINUTILS_BASE_URL="https://ftp.gnu.org/gnu/binutils/binutils-"
-    GCC_BASE_URL="ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/"
+    GCC_BASE_URL="https://ftp.gnu.org/gnu/gcc/"
     GLIBC_BASE_URL="https://ftp.gnu.org/gnu/glibc/"
-    LINUX_BASE_URL="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-"
+    LINUX_BASE_URL="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-"
     NEWLIB_BASE_URL="ftp://sourceware.org/pub/newlib/"
     AVRLIBC_BASE_URL="https://github.com/avrdudes/avr-libc/archive/refs/tags/"
     GDB_BASE_URL="http://ftp.gnu.org/gnu/gdb/"
