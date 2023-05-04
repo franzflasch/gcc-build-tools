@@ -57,7 +57,7 @@ A Linux distribution (the script has been tested on Debian Buster and Ubuntu 20.
 Core developer packages
 + For Debian 10 or Ubuntu 20.04:  
 ```bash
-sudo apt install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison libexpat1-dev rsync
+sudo apt install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison libexpat1-dev rsync file
 ```
 
 For picolibc
