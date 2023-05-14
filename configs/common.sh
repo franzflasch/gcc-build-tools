@@ -22,6 +22,7 @@ function setup_common_urls_tar() {
     GDB_BASE_URL="http://ftp.gnu.org/gnu/gdb/"
     PICOLIBC_BASE_URL="https://github.com/keith-packard/picolibc/archive/"
     MINGW_BASE_URL="https://github.com/mirror/mingw-w64/archive/refs/tags/"
+    UCLIBC_NG_BASE_URL="https://downloads.uclibc-ng.org/releases/"
 }
 
 function setup_common_urls_git() {

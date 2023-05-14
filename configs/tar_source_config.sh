@@ -21,6 +21,7 @@ function setup_urls_tar() {
     GDB_URL="${GDB_BASE_URL}${GDB}.tar.xz;type=tar"
     PICOLIBC_URL="${PICOLIBC_BASE_URL}${PICOLIBC}.tar.gz;type=tar"
     MINGW_URL="${MINGW_BASE_URL}${MINGW}.tar.gz;type=tar"
+    UCLIBC_NG_URL="${UCLIBC_NG_BASE_URL}${UCLIBC_NG}/uClibc-ng-${UCLIBC_NG}.tar.xz;type=tar"
 }
 
 function setup_variables_tar_13() {
@@ -39,6 +40,7 @@ function setup_variables_tar_13() {
     GDB="gdb-13.1"
     PICOLIBC="1.8.1"
     MINGW="v10.0.0"
+    UCLIBC_NG="1.0.43"
 
     setup_urls_tar
 }
