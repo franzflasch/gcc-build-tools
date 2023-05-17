@@ -25,7 +25,7 @@ function build_gcc_stage_1() {
     set_build_state "${FUNCNAME[0]}"
 }
 
-function build_gcc_stage2() {
+function build_gcc_stage_2() {
 
     check_build_state "${FUNCNAME[0]}" && return
     cd "${ROOT}" || die "ERROR: cd to ${ROOT}"

@@ -61,6 +61,7 @@ function setup_variables_tar_12() {
     GDB="gdb-12.1"
     PICOLIBC="1.8"
     MINGW="v10.0.0"
+    UCLIBC_NG="1.0.43"
 
     setup_urls_tar
 }

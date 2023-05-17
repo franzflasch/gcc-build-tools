@@ -11,6 +11,7 @@ function setup_linux_uclibc_downloadfuncs() {
                     "fetch_source ${GMP_URL} gmp-${GMP}"
                     "fetch_source ${CLOOG_URL} cloog-${CLOOG}"
                     "fetch_source ${UCLIBC_NG_URL} uclibc-ng-${UCLIBC_NG}"
+                    "fetch_source ${GDB_URL} gdb-${GDB}"
     )
 }
 
@@ -18,9 +19,11 @@ function setup_linux_uclibc_buildfuncs() {
     BUILD_FUNCS=("build_binutils"
                  "build_headers"
                  "build_gcc_stage_1"
-                 "build_gcc_stage2"
+                 "build_gcc_stage_2"
                  "build_uclibc_ng"
                  "build_gcc_final"
+                 "build_gmp"
+                 "build_gdb"
     )
 }
 
@@ -37,28 +40,24 @@ function config_riscv64-uclibc() {
     # Append additional confis here
     BINUTILS_CONFIGURATION=(
         "${BINUTILS_BASE_CONFIG[@]}"
-        "--with-arch=rv64imafdc"
+        "--with-arch=rv64imad"
         "--with-abi=lp64d"
         "--with-tune=rocket"
         "--disable-multilib"
     )
     GCC_CONFIGURATION=(
         "${GCC_BASE_CONFIG[@]}"
-        "--with-arch=rv64imafdc"
+        "--with-arch=rv64imad"
         "--with-abi=lp64d"
         "--with-tune=rocket"
         "--disable-multilib"
         "--disable-threads"
-        "--disable-nls"
         "--disable-shared"
-        "--disable-libmudflap"
-        "--disable-libssp" 
-        "--disable-libgomp"
-        "--disable-libquadmath"
-        "--disable-target-libiberty"
-        "--disable-target-zlib"
-        "--disable-decimal-float"
     )
+#    GCC_FINAL_CONFIGURATION=(
+#        "${GCC_CONFIGURATION[@]}"
+#        "--enable-threads=posix"
+#    )
     GDB_CONFIGURATION=(
         "${GDB_BASE_CONFIG[@]}"
     )

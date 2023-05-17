@@ -15,9 +15,11 @@ function config_arm64() {
     BINUTILS_CONFIGURATION=(
         "${BINUTILS_BASE_CONFIG[@]}"
     )
+
     GCC_CONFIGURATION=(
         "${GCC_BASE_CONFIG[@]}"
     )
+    
     GLIBC_CONFIGURATION=(
         "${GLIBC_BASE_CONFIG[@]}"
     )

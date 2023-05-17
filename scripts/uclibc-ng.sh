@@ -12,6 +12,7 @@ function build_uclibc_ng() {
     #mkdir -p "${BUILD_DIR}/build-uclibc-ng"
     #cd "${BUILD_DIR}/build-uclibc-ng" || die "ERROR: cd to ${BUILD_DIR}/build-uclibc-ng"
     cd "${SOURCES_DIR}/uclibc-ng-${UCLIBC_NG}" || die "ERROR: cd to ${SOURCES_DIR}/uclibc-ng-${UCLIBC_NG}"
+    call_cmd "make distclean"
     call_cmd "make CROSS_COMPILE=${TARGET}- menuconfig"
     call_cmd "make CROSS_COMPILE=${TARGET}- oldconfig"
     call_cmd "make CROSS_COMPILE=${TARGET}-"

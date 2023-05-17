@@ -103,7 +103,7 @@ function config_cortex-m3() {
 
     BUILD_FUNCS=(
         "${BUILD_FUNCS[@]}"
-	"build_newlib_nano"
-	"build_picolibc"
+        "build_newlib_nano"
+        "build_picolibc"
     )
 }

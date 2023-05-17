@@ -22,6 +22,7 @@ function setup_default_config()
         "--disable-nls"
         "--disable-werror"
         "--disable-gdb"
+        "--with-sysroot"
     )
 
     # If you want to enable c++ please specify:
@@ -134,6 +135,7 @@ function setup_baremetal_default_buildfuncs() {
     BUILD_FUNCS=("build_binutils"
                  "build_gcc_stage_1"
                  "build_newlib"
+                 "build_gcc_stage_2"
                  "build_gcc_final"
                  "build_gmp"
                  "build_gdb"
@@ -159,7 +161,7 @@ function setup_linux_default_buildfuncs() {
                  "build_headers"
                  "build_gcc_stage_1"
                  "build_glibc_header"
-                 "build_gcc_stage2"
+                 "build_gcc_stage_2"
                  "build_glibc"
                  "build_gcc_final"
                  "build_gmp"

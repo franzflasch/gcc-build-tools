@@ -18,12 +18,14 @@ function config_riscv32() {
         "--with-abi=ilp32"
         "--disable-multilib"
     )
+
     GCC_CONFIGURATION=(
         "${GCC_BASE_CONFIG[@]}"
         "--with-arch=rv32ima"
         "--with-abi=ilp32"
         "--disable-multilib"
     )
+
     GLIBC_CONFIGURATION=(
         "${GLIBC_BASE_CONFIG[@]}"
         "--with-arch=rv32ima"

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-function setup_linux_uclibc_downloadfuncs() {
+function setup_linux_uclibc32_downloadfuncs() {
     DOWNLOAD_FUNCS=("fetch_source ${LINUX_URL} linux-${LINUX}"
                     "fetch_source ${BINUTILS_URL} binutils-${BINUTILS}"
                     "fetch_source ${GCC_URL} gcc-${GCC}"
@@ -14,11 +14,13 @@ function setup_linux_uclibc_downloadfuncs() {
     )
 }
 
-function setup_linux_uclibc_buildfuncs() {
+function setup_linux_uclibc32_buildfuncs() {
     BUILD_FUNCS=("build_binutils"
                  "build_headers"
                  "build_gcc_stage_1"
+                 "build_gcc_stage_2"
                  "build_uclibc_ng"
+                 "build_gcc_final"
     )
 }
 
@@ -44,6 +46,9 @@ function config_riscv32-uclibc() {
         "--with-arch=rv32ima"
         "--with-abi=ilp32"
         "--disable-multilib"
+        "--disable-threads"
+        "--without-headers"
+        "--disable-shared"
     )
     GDB_CONFIGURATION=(
         "${GDB_BASE_CONFIG[@]}"
@@ -52,6 +57,6 @@ function config_riscv32-uclibc() {
     type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
     "setup_variables_${TAR_OR_GIT}_${VERSION}"
 
-    setup_linux_uclibc_downloadfuncs
-    setup_linux_uclibc_buildfuncs
+    setup_linux_uclibc32_downloadfuncs
+    setup_linux_uclibc32_buildfuncs
 }

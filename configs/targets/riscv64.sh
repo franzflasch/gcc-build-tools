@@ -16,21 +16,20 @@ function config_riscv64() {
         "${BINUTILS_BASE_CONFIG[@]}"
         "--with-arch=rv64imafdc"
         "--with-abi=lp64d"
-        "--with-tune=rocket"
         "--disable-multilib"
     )
+
     GCC_CONFIGURATION=(
         "${GCC_BASE_CONFIG[@]}"
         "--with-arch=rv64imafdc"
         "--with-abi=lp64d"
-        "--with-tune=rocket"
         "--disable-multilib"
     )
+
     GLIBC_CONFIGURATION=(
         "${GLIBC_BASE_CONFIG[@]}"
         "--with-arch=rv64imafdc"
         "--with-abi=lp64d"
-        "--with-tune=rocket"
         "--disable-multilib"
     )
 
