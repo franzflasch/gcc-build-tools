@@ -23,6 +23,7 @@ function setup_common_urls_tar() {
     PICOLIBC_BASE_URL="https://github.com/keith-packard/picolibc/archive/"
     MINGW_BASE_URL="https://github.com/mirror/mingw-w64/archive/refs/tags/"
     UCLIBC_NG_BASE_URL="https://downloads.uclibc-ng.org/releases/"
+    ELF2FLT_BASE_URL="https://github.com/uclinux-dev/elf2flt/archive/refs/tags/"
 }
 
 function setup_common_urls_git() {
