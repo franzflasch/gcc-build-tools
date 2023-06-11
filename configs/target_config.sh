@@ -25,6 +25,12 @@ function setup_default_config()
         "--with-sysroot"
     )
 
+    ELF2FLT_BASE_CONFIG=(
+        "--with-binutils-build-dir=${INSTALL}/bfd"
+        "--prefix=${INSTALL}"
+        "--disable-werror"
+    )
+
     # If you want to enable c++ please specify:
     #local enable_languages="c,c++"
     local enable_languages="c"

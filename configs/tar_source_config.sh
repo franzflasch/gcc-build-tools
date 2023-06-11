@@ -22,6 +22,7 @@ function setup_urls_tar() {
     PICOLIBC_URL="${PICOLIBC_BASE_URL}${PICOLIBC}.tar.gz;type=tar"
     MINGW_URL="${MINGW_BASE_URL}${MINGW}.tar.gz;type=tar"
     UCLIBC_NG_URL="${UCLIBC_NG_BASE_URL}${UCLIBC_NG}/uClibc-ng-${UCLIBC_NG}.tar.xz;type=tar"
+    ELF2FLT_URL="${ELF2FLT_BASE_URL}${ELF2FLT}.tar.gz;type=tar"
 }
 
 function setup_variables_tar_13() {
@@ -33,7 +34,7 @@ function setup_variables_tar_13() {
 
     LINUX="6.1.26"
     GCC="gcc-13.1.0"
-    BINUTILS="2.40"
+    BINUTILS="2.39"
     GLIBC="glibc-2.37"
     NEWLIB="newlib-4.3.0.20230120"
     AVRLIBC="avr-libc-2_1_0"
@@ -41,8 +42,18 @@ function setup_variables_tar_13() {
     PICOLIBC="1.8.1"
     MINGW="v10.0.0"
     UCLIBC_NG="1.0.43"
+    ELF2FLT="v2021.08"
 
     setup_urls_tar
+
+    PATCHES=(
+        "elf2flt-${ELF2FLT} elf2flt/0001-elf2flt-handle-binutils-2.34.patch"
+        "elf2flt-${ELF2FLT} elf2flt/0002-elf2flt.ld-reinstate-32-byte-alignment-for-.data-sec.patch"
+        "elf2flt-${ELF2FLT} elf2flt/0003-elf2flt-add-riscv-64-bits-support.patch"
+        "elf2flt-${ELF2FLT} elf2flt/0004-elf2flt-create-a-common-helper-function.patch"
+        "elf2flt-${ELF2FLT} elf2flt/0005-elf2flt-fix-fatal-error-regression-on-m68k-xtensa-ri.patch"
+        "elf2flt-${ELF2FLT} elf2flt/0006-elf2flt-xtensa-fix-text-relocations.patch"
+    )
 }
 
 function setup_variables_tar_12() {
