@@ -50,4 +50,6 @@ function build_binutils_libs() {
 		cp "${SOURCES_DIR}/binutils-${BINUTILS}"/include/diagnostics.h "${INSTALL}"/bfd/include/
 	fi
     cp "${SOURCES_DIR}/binutils-${BINUTILS}"/include/elf/*.h "${INSTALL}"/bfd/include/elf/
+
+    set_build_state "${FUNCNAME[0]}"
 }

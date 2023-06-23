@@ -29,7 +29,7 @@ function setup_variables_tar_13() {
     MPFR="mpfr-4.2.0"
     GMP="gmp-6.2.1"
     MPC="mpc-1.3.1"
-    ISL="isl-0.26" # is-0.26 is already available, but does not work with gcc-13 it seems
+    ISL="isl-0.26"
     CLOOG="cloog-0.18.4"
 
     LINUX="6.1.26"
@@ -40,6 +40,26 @@ function setup_variables_tar_13() {
     AVRLIBC="avr-libc-2_1_0"
     GDB="gdb-13.1"
     PICOLIBC="1.8.1"
+    MINGW="v10.0.0"
+
+    setup_urls_tar
+}
+
+function setup_variables_tar_12() {
+    MPFR="mpfr-4.2.0"
+    GMP="gmp-6.2.1"
+    MPC="mpc-1.3.1"
+    ISL="isl-0.26"
+    CLOOG="cloog-0.18.4"
+
+    LINUX="6.1.26"
+    GCC="gcc-12.3.0"
+    BINUTILS="2.39"
+    GLIBC="glibc-2.36"
+    NEWLIB="newlib-4.2.0.20211231"
+    AVRLIBC="avr-libc-2_1_0"
+    GDB="gdb-12.1"
+    PICOLIBC="1.8"
     MINGW="v10.0.0"
     UCLIBC_NG="1.0.43"
     ELF2FLT="v2021.08"
@@ -54,27 +74,6 @@ function setup_variables_tar_13() {
         "elf2flt-${ELF2FLT} elf2flt/0005-elf2flt-fix-fatal-error-regression-on-m68k-xtensa-ri.patch"
         "elf2flt-${ELF2FLT} elf2flt/0006-elf2flt-xtensa-fix-text-relocations.patch"
     )
-}
-
-function setup_variables_tar_12() {
-    MPFR="mpfr-4.2.0"
-    GMP="gmp-6.2.1"
-    MPC="mpc-1.3.1"
-    ISL="isl-0.24" # is-0.25 is already available, but does not work with gcc-12 it seems
-    CLOOG="cloog-0.18.4"
-
-    LINUX="6.1.26"
-    GCC="gcc-12.2.0"
-    BINUTILS="2.39"
-    GLIBC="glibc-2.36"
-    NEWLIB="newlib-4.2.0.20211231"
-    AVRLIBC="avr-libc-2_1_0"
-    GDB="gdb-12.1"
-    PICOLIBC="1.8"
-    MINGW="v10.0.0"
-    UCLIBC_NG="1.0.43"
-
-    setup_urls_tar
 }
 
 function setup_variables_tar_11() {
@@ -95,10 +94,6 @@ function setup_variables_tar_11() {
     MINGW="v10.0.0"
 
     setup_urls_tar
-
-#    PATCHES=(
-#        "mingw-${MINGW} mingw/mingw64-runtime-8.0.0-__rdtsc.patch"
-#    )
 }
 
 function setup_variables_tar_10() {
