@@ -39,4 +39,8 @@ function setup_common_urls_git() {
     GDB_GIT_URL="git://sourceware.org/git/binutils-gdb.git"
     PICOLIBC_GIT_URL="https://github.com/keith-packard/picolibc.git"
     MINGW_GIT_URL="https://github.com/mirror/mingw-w64.git"
+    # Use kraj's mirror to be able to use shallow clones:
+    UCLIBC_NG_GIT_URL="https://github.com/kraj/uclibc-ng.git"
+    #UCLIBC_NG_GIT_URL="https://cgit.uclibc-ng.org/cgi/cgit/uclibc-ng.git/"
+    ELF2FLT_GIT_URL="https://github.com/uclinux-dev/elf2flt.git"
 }
