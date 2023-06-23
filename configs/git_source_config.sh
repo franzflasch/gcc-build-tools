@@ -28,6 +28,8 @@ function setup_urls_git() {
     GDB_URL="${GDB_GIT_URL};type=git;branch=${GDB}"
     PICOLIBC_URL="${PICOLIBC_GIT_URL};type=git;branch=${PICOLIBC}"
     MINGW_URL="${MINGW_GIT_URL};type=git;branch=${MINGW}"
+    UCLIBC_NG_URL="${UCLIBC_NG_GIT_URL};type=git;branch=${UCLIBC_NG}"
+    ELF2FLT_URL="${ELF2FLT_GIT_URL};type=git;branch=${ELF2FLT}"
 }
 
 function setup_variables_git_master() {
@@ -80,10 +82,10 @@ function setup_variables_git_12() {
     MPFR="mpfr-4.2.0"
     GMP="gmp-6.2.1"
     MPC="mpc-1.3.1"
-    ISL="isl-0.24" # is-0.25 is already available, but does not work with gcc-12 it seems
+    ISL="isl-0.26"
     CLOOG="cloog-0.18.4"
 
-    LINUX="v5.15"
+    LINUX="v6.1"
     GCC="gcc-12"
     GCC_BRANCH="releases/${GCC}"
     BINUTILS="binutils-2_39-branch"
@@ -96,11 +98,19 @@ function setup_variables_git_12() {
     GDB="gdb-12.1-release"
     PICOLIBC="main"
     MINGW="v10.0.0"
+    UCLIBC_NG="v1.0.43"
+    ELF2FLT="v2021.08"
 
     setup_urls_git
 
-    # Fixes: https://sourceware.org/bugzilla/show_bug.cgi?id=29116
     PATCHES=(
+        "elf2flt-${ELF2FLT} elf2flt/0001-elf2flt-handle-binutils-2.34.patch"
+        "elf2flt-${ELF2FLT} elf2flt/0002-elf2flt.ld-reinstate-32-byte-alignment-for-.data-sec.patch"
+        "elf2flt-${ELF2FLT} elf2flt/0003-elf2flt-add-riscv-64-bits-support.patch"
+        "elf2flt-${ELF2FLT} elf2flt/0004-elf2flt-create-a-common-helper-function.patch"
+        "elf2flt-${ELF2FLT} elf2flt/0005-elf2flt-fix-fatal-error-regression-on-m68k-xtensa-ri.patch"
+        "elf2flt-${ELF2FLT} elf2flt/0006-elf2flt-xtensa-fix-text-relocations.patch"
+        # Fixes: https://sourceware.org/bugzilla/show_bug.cgi?id=29116
         "gdb-${GDB} gdb/fix-gdb-12-1-build.patch"
     )
 }
@@ -127,10 +137,6 @@ function setup_variables_git_11() {
     MINGW="v10.0.0"
 
     setup_urls_git
-
-#    PATCHES=(
-#        "mingw-${MINGW} mingw/mingw64-runtime-8.0.0-__rdtsc.patch"
-#    )
 }
 
 function setup_variables_git_10() {
