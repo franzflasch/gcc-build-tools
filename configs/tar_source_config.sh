@@ -32,7 +32,7 @@ function setup_variables_tar_13() {
 
     LINUX="6.1.26"
     GCC="gcc-13.1.0"
-    BINUTILS="2.39"
+    BINUTILS="2.40"
     GLIBC="glibc-2.37"
     NEWLIB="newlib-4.3.0.20230120"
     AVRLIBC="avr-libc-2_1_0"
