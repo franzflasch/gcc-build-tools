@@ -157,7 +157,6 @@ function setup_linux_default_downloadfuncs() {
                     "fetch_source ${ISL_URL} isl-${ISL}"
                     "fetch_source ${MPFR_URL} mpfr-${MPFR}"
                     "fetch_source ${GMP_URL} gmp-${GMP}"
-                    "fetch_source ${CLOOG_URL} cloog-${CLOOG}"
                     "fetch_source ${GDB_URL} gdb-${GDB}"
     )
 }
@@ -183,7 +182,6 @@ function setup_mingw_default_downloadfuncs() {
                     "fetch_source ${ISL_URL} isl-${ISL}"
                     "fetch_source ${MPFR_URL} mpfr-${MPFR}"
                     "fetch_source ${GMP_URL} gmp-${GMP}"
-                    "fetch_source ${CLOOG_URL} cloog-${CLOOG}"
                     "fetch_source ${GDB_URL} gdb-${GDB}"
     )
 }

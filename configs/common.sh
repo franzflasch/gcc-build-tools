@@ -6,7 +6,6 @@ function setup_common_urls() {
     GMP_BASE_URL="https://ftp.gnu.org/gnu/gmp/"
     MPC_BASE_URL="https://ftp.gnu.org/gnu/mpc/"
     ISL_BASE_URL="https://libisl.sourceforge.io/"
-    CLOOG_BASE_URL="http://www.bastoul.net/cloog/pages/download/"
 }
 
 function setup_common_urls_tar() {

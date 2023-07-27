@@ -14,7 +14,6 @@ function build_gcc_stage_1() {
     ln -sfn "${SOURCES_DIR}/gmp-${GMP}" "${SOURCES_DIR}/gcc-${GCC}/gmp"
     ln -sfn "${SOURCES_DIR}/mpc-${MPC}" "${SOURCES_DIR}/gcc-${GCC}/mpc"
     ln -sfn "${SOURCES_DIR}/isl-${ISL}" "${SOURCES_DIR}/gcc-${GCC}/isl"
-    ln -sfn "${SOURCES_DIR}/cloog-${CLOOG}" "${SOURCES_DIR}/gcc-${GCC}/cloog"
 
     mkdir -p "${BUILD_DIR}/build-gcc"
     cd "${BUILD_DIR}/build-gcc" || die "GCC build folder does not exist!"

@@ -15,7 +15,6 @@ function setup_urls_git() {
     GMP_URL="${GMP_BASE_URL}${GMP}.tar.xz;type=tar"
     MPC_URL="${MPC_BASE_URL}${MPC}.tar.gz;type=tar"
     ISL_URL="${ISL_BASE_URL}${ISL}.tar.xz;type=tar"
-    CLOOG_URL="${CLOOG_BASE_URL}${CLOOG}.tar.gz;type=tar"
 
     BINUTILS_URL="${BINUTILS_GIT_URL};type=git;branch=${BINUTILS}"
     GCC_URL="${GCC_GIT_URL};type=git;branch=${GCC_BRANCH}"
@@ -37,7 +36,6 @@ function setup_variables_git_master() {
     GMP="gmp-6.2.1"
     MPC="mpc-1.3.1"
     ISL="isl-0.24" # is-0.25 is already available, but does not work with gcc-12 it seems
-    CLOOG="cloog-0.18.4"
 
     BINUTILS="master"
     GLIBC="master"
@@ -59,7 +57,6 @@ function setup_variables_git_13() {
     GMP="gmp-6.2.1"
     MPC="mpc-1.3.1"
     ISL="isl-0.26"
-    CLOOG="cloog-0.18.4"
 
     LINUX="v6.1"
     GCC="gcc-13"
@@ -83,7 +80,6 @@ function setup_variables_git_12() {
     GMP="gmp-6.2.1"
     MPC="mpc-1.3.1"
     ISL="isl-0.26"
-    CLOOG="cloog-0.18.4"
 
     LINUX="v6.1"
     GCC="gcc-12"
@@ -120,7 +116,6 @@ function setup_variables_git_11() {
     GMP="gmp-6.2.1"
     MPC="mpc-1.2.1"
     ISL="isl-0.24"
-    CLOOG="cloog-0.18.4"
 
     LINUX="v5.15"
     GCC="gcc-11"
@@ -144,7 +139,6 @@ function setup_variables_git_10() {
     GMP="gmp-6.2.1"
     MPC="mpc-1.2.1"
     ISL="isl-0.23"
-    CLOOG="cloog-0.18.4"
 
     LINUX="v5.10"
     GCC="gcc-10"

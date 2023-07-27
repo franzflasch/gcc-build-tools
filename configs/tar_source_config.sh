@@ -10,7 +10,6 @@ function setup_urls_tar() {
     GMP_URL="${GMP_BASE_URL}${GMP}.tar.xz;type=tar"
     MPC_URL="${MPC_BASE_URL}${MPC}.tar.gz;type=tar"
     ISL_URL="${ISL_BASE_URL}${ISL}.tar.xz;type=tar"
-    CLOOG_URL="${CLOOG_BASE_URL}${CLOOG}.tar.gz;type=tar"
 
     BINUTILS_URL="${BINUTILS_BASE_URL}${BINUTILS}.tar.xz;type=tar"
     GCC_URL="${GCC_BASE_URL}${GCC}/${GCC}.tar.xz;type=tar"
@@ -30,7 +29,6 @@ function setup_variables_tar_13() {
     GMP="gmp-6.2.1"
     MPC="mpc-1.3.1"
     ISL="isl-0.26"
-    CLOOG="cloog-0.18.4"
 
     LINUX="6.1.26"
     GCC="gcc-13.1.0"
@@ -50,7 +48,6 @@ function setup_variables_tar_12() {
     GMP="gmp-6.2.1"
     MPC="mpc-1.3.1"
     ISL="isl-0.26"
-    CLOOG="cloog-0.18.4"
 
     LINUX="6.1.26"
     GCC="gcc-12.3.0"
@@ -81,7 +78,6 @@ function setup_variables_tar_11() {
     GMP="gmp-6.2.1"
     MPC="mpc-1.2.1"
     ISL="isl-0.24"
-    CLOOG="cloog-0.18.4"
 
     LINUX="6.1.26"
     GCC="gcc-11.2.0"
@@ -101,7 +97,6 @@ function setup_variables_tar_10() {
     GMP="gmp-6.2.1"
     MPC="mpc-1.2.1"
     ISL="isl-0.23"
-    CLOOG="cloog-0.18.4"
 
     LINUX="6.1.26"
     GCC="gcc-10.3.0"
