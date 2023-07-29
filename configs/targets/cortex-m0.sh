@@ -32,7 +32,22 @@ function config_cortex-m0() {
     )
 
     NEWLIB_CONFIGURATION=(
-	"${NEWLIB_BASE_CONFIGURATION[@]}"
+        "${NEWLIB_BASE_CONFIGURATION[@]}"
+        "--with-cpu=cortex-m0"
+        "--with-mode=thumb"
+        "--enable-interwork"
+        "--with-float=soft"
+        "--disable-multilib"
+        "--enable-newlib-io-long-long"
+        "--enable-newlib-io-c99-formats"
+        "--enable-newlib-register-fini"
+        "--enable-newlib-retargetable-locking"
+        "--disable-newlib-supplied-syscalls"
+        "--disable-nls"
+    )
+
+    NEWLIB_NANO_CONFIGURATION=(
+        "${NEWLIB_NANO_BASE_CONFIGURATION[@]}"
         "--with-cpu=cortex-m0"
         "--with-mode=thumb"
         "--enable-interwork"
@@ -40,6 +55,7 @@ function config_cortex-m0() {
         "--disable-multilib"
         "--disable-newlib-supplied-syscalls"
         "--enable-newlib-reent-small"
+        "--enable-newlib-retargetable-locking"
         "--disable-newlib-fvwrite-in-streamio"
         "--disable-newlib-fseek-optimization"
         "--disable-newlib-wide-orient"
@@ -87,6 +103,7 @@ function config_cortex-m0() {
 
     BUILD_FUNCS=(
         "${BUILD_FUNCS[@]}"
+        "build_newlib_nano"
         "build_picolibc"
     )
 }
