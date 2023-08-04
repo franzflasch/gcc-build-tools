@@ -12,4 +12,4 @@ CONTAINER_ID=$(docker create docker_image_$ARCH_TO_BUILD)
 docker cp ${CONTAINER_ID}:/home/toolchain_install .
 docker rm ${CONTAINER_ID}
 
-docker rmi "$IMAGE_ID"
+docker rmi "docker_image_$ARCH_TO_BUILD"
