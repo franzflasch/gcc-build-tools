@@ -372,7 +372,7 @@ function package_tc() {
         local tar_package=${TARGET}-${VERSION}-$(TZ=UTC date +%Y%m%d).tar.xz
         header "PACKAGING TOOLCHAIN"
         echo "Target file: ${tar_package}"
-        tar cf ${tar_package} -C ${INSTALL_DIR} ${INSTALL_DIR_NAME}
+        XZ_OPT=-9 tar cf ${tar_package} -C ${INSTALL_DIR} ${INSTALL_DIR_NAME}
     fi
 
     set_build_state "${FUNCNAME[0]}"
