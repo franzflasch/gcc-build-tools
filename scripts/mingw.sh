@@ -29,7 +29,10 @@ function build_mingw_crt() {
     mkdir -p "${BUILD_DIR}/build-mingw-crt"
     cd "${BUILD_DIR}/build-mingw-crt" || die "build-mingw-crt folder does not exist!"
     call_cmd "${SOURCES_DIR}/mingw-${MINGW}/configure" "${MINGW_CRT_CONFIGURATION[@]}"
-    call_cmd make "${JOBS}" || die "Error while building mingw-crt"
+
+    # Do not use parallel make here:
+    # https://sourceforge.net/p/mingw-w64/mailman/message/37635156/
+    call_cmd make || die "Error while building mingw-crt"
     call_cmd make install || die "Error while installing mingw-crt"
 
     set_build_state "${FUNCNAME[0]}"
