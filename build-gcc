@@ -89,6 +89,7 @@ function help_menu() {
     echo
     echo "${BOLD}OPTIONAL PARAMETERS:${RST}"
     echo "  -f  | --full-src:    Download full git repos instead of shallow clones"
+    echo "  -s  | --strip-bin:   Strip built binaries, removing debug information from gcc, gdb etc."
     echo "  -p  | --package:     Possible values: gz or xz. Compresses toolchain after build."
     echo "  -t  | --tarballs:    Use tarballs for binutils, ISL, and, GCC"
     echo "  -V  | --verbose:     Make script print all output, not just errors and the ending information"
@@ -295,6 +296,7 @@ function parse_parameters() {
 
             # OPTIONAL FLAGS
             "-f"|"--full-src") FULL_SOURCE=true ;;
+            "-s"|"--strip") STRIP_BINARIES=true ;;
             "-p"|"--package") COMPRESSION=true ;;
             "-t"|"--tarballs") TARBALLS=true ;;
             "-V"|"--verbose") VERBOSE=true ;;
@@ -360,6 +362,28 @@ function patch_sources() {
     cd "${ROOT}"
 }
 
+function strip_binaries() {
+    if [[ -n ${STRIP_BINARIES} ]]; then
+
+        check_build_state "${FUNCNAME[0]}" && return
+        cd "${ROOT}"
+        # use clean hashtable
+        hash -r
+
+        header "STRIPPING BINARIES"
+        cd ${INSTALL}/bin/
+        # Find all files in the target directory that are "not stripped"
+        files_to_strip=$(find . -type f -exec sh -c 'file "{}" | grep -q "not stripped"' \; -print)
+
+        # Strip the files found
+        for file in $files_to_strip; do
+            strip "$file"
+        done
+
+        set_build_state "${FUNCNAME[0]}"
+    fi
+}
+
 # Package toolchain
 function package_tc() {
 
@@ -419,6 +443,8 @@ for build_func in "${BUILD_FUNCS[@]}"
 do
     ${build_func}
 done
+
+strip_binaries
 
 package_tc
 ending_info
