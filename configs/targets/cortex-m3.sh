@@ -47,6 +47,17 @@ function config_cortex-m3() {
     )
 
     NEWLIB_NANO_CONFIGURATION=(
+        "CFLAGS_FOR_TARGET=\"-ffunction-sections \
+                             -fdata-sections \
+                             -Os \
+                             -fomit-frame-pointer \
+                             -fno-unroll-loops \
+                             -mabi=aapcs \
+                             -DPREFER_SIZE_OVER_SPEED \
+                             -D__OPTIMIZE_SIZE__ \
+                             -DSMALL_MEMORY \
+                             -D__BUFSIZ__=64 \
+                             -D_REENT_SMALL\""
         "${NEWLIB_NANO_BASE_CONFIGURATION[@]}"
         "--with-cpu=cortex-m3"
         "--with-mode=thumb"
