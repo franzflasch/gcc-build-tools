@@ -37,7 +37,7 @@ function setup_common_urls_git() {
     AVRLIBC_GIT_URL="https://github.com/avrdudes/avr-libc.git"
     GDB_GIT_URL="git://sourceware.org/git/binutils-gdb.git"
     PICOLIBC_GIT_URL="https://github.com/keith-packard/picolibc.git"
-    MINGW_GIT_URL="https://github.com/mirror/mingw-w64.git"
+    MINGW_GIT_URL="https://github.com/mingw-w64/mingw-w64.git"
     # Use kraj's mirror to be able to use shallow clones:
     UCLIBC_NG_GIT_URL="https://github.com/kraj/uclibc-ng.git"
     #UCLIBC_NG_GIT_URL="https://cgit.uclibc-ng.org/cgi/cgit/uclibc-ng.git/"
