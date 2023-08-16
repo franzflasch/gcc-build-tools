@@ -33,9 +33,9 @@ function setup_urls_git() {
 
 function setup_variables_git_master() {
     MPFR="mpfr-4.2.0"
-    GMP="gmp-6.2.1"
+    GMP="gmp-6.3.0"
     MPC="mpc-1.3.1"
-    ISL="isl-0.24" # is-0.25 is already available, but does not work with gcc-12 it seems
+    ISL="isl-0.26"
 
     BINUTILS="master"
     GLIBC="master"
@@ -54,23 +54,23 @@ function setup_variables_git_master() {
 
 function setup_variables_git_13() {
     MPFR="mpfr-4.2.0"
-    GMP="gmp-6.2.1"
+    GMP="gmp-6.3.0"
     MPC="mpc-1.3.1"
     ISL="isl-0.26"
 
     LINUX="v6.1"
     GCC="gcc-13"
     GCC_BRANCH="releases/${GCC}"
-    BINUTILS="binutils-2_40-branch"
+    BINUTILS="binutils-2_41-branch"
 
-    GLIBC="glibc-2.37"
+    GLIBC="glibc-2.38"
     GLIBC_BRANCH="${GLIBC}"
 
     NEWLIB="newlib-4.3.0"
     AVRLIBC="avr-libc-2_1_0-release"
-    GDB="gdb-13.1-release"
+    GDB="gdb-13.2-release"
     PICOLIBC="main"
-    MINGW="v10.0.0"
+    MINGW="v11.0.1"
 
     setup_urls_git
 }
