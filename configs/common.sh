@@ -20,7 +20,7 @@ function setup_common_urls_tar() {
     AVRLIBC_BASE_URL="https://github.com/avrdudes/avr-libc/archive/refs/tags/"
     GDB_BASE_URL="http://ftp.gnu.org/gnu/gdb/"
     PICOLIBC_BASE_URL="https://github.com/keith-packard/picolibc/archive/"
-    MINGW_BASE_URL="https://github.com/mirror/mingw-w64/archive/refs/tags/"
+    MINGW_BASE_URL="https://github.com/mingw-w64/mingw-w64/archive/refs/tags/"
     UCLIBC_NG_BASE_URL="https://downloads.uclibc-ng.org/releases/"
     ELF2FLT_BASE_URL="https://github.com/uclinux-dev/elf2flt/archive/refs/tags/"
 }
