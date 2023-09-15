@@ -30,10 +30,12 @@ function build_binutils_libs() {
     header "BUILDING BFD"
     cd "${BUILD_DIR}/build-binutils" || die "ERROR: cd to ${BUILD_DIR}/build-binutils"
     call_cmd make "${JOBS}" all-bfd || die "Error while building target-bfd!" -n
+    call_cmd make "${JOBS}" install-bfd || die "Error while installing target-bfd!" -n
     call_cmd make "${JOBS}" all-libiberty || die "Error while building target-libiberty!" -n
+    call_cmd make "${JOBS}" install-libiberty || die "Error while installing target-libiberty!" -n
 
     mkdir -p "${INSTALL}"/bfd/{bfd,include/elf,libiberty}
-    cp bfd/bfd.h bfd/libbfd.a "${INSTALL}"/bfd/bfd/
+    cp bfd/bfd.h bfd/.libs/libbfd.a "${INSTALL}"/bfd/bfd/
 
 	if [[ -e bfd/bfd_stdint.h ]]; then
 		# Binutils 2.32+ includes this header.

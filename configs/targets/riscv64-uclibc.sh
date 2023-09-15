@@ -58,9 +58,6 @@ function config_riscv64-uclibc() {
     local VERSION="$1"
     local TAR_OR_GIT="$2"
 
-    if [[ "$VERSION" = "13" ]]; then
-        die "ERROR: gcc 13 is not supported, yet!"
-    fi
 
     setup_default_config
 

@@ -32,6 +32,7 @@ function setup_variables_tar_13() {
 
     LINUX="6.1.45"
     GCC="gcc-13.2.0"
+    #GCC="gcc-12.3.0"
     BINUTILS="2.41"
     GLIBC="glibc-2.38"
     NEWLIB="newlib-4.3.0.20230120"
@@ -39,8 +40,14 @@ function setup_variables_tar_13() {
     GDB="gdb-13.2"
     PICOLIBC="1.8.3"
     MINGW="v11.0.1"
+    UCLIBC_NG="1.0.44"
+    ELF2FLT="v2023.09"
 
     setup_urls_tar
+
+    # PATCHES=(
+    #     "elf2flt-${ELF2FLT} gcc13/elf2flt/0001-add-riscv-64-bits-support-v3.patch"
+    # )
 }
 
 function setup_variables_tar_12() {
@@ -64,12 +71,12 @@ function setup_variables_tar_12() {
     setup_urls_tar
 
     PATCHES=(
-        "elf2flt-${ELF2FLT} elf2flt/0001-elf2flt-handle-binutils-2.34.patch"
-        "elf2flt-${ELF2FLT} elf2flt/0002-elf2flt.ld-reinstate-32-byte-alignment-for-.data-sec.patch"
-        "elf2flt-${ELF2FLT} elf2flt/0003-elf2flt-add-riscv-64-bits-support.patch"
-        "elf2flt-${ELF2FLT} elf2flt/0004-elf2flt-create-a-common-helper-function.patch"
-        "elf2flt-${ELF2FLT} elf2flt/0005-elf2flt-fix-fatal-error-regression-on-m68k-xtensa-ri.patch"
-        "elf2flt-${ELF2FLT} elf2flt/0006-elf2flt-xtensa-fix-text-relocations.patch"
+        "elf2flt-${ELF2FLT} gcc12/elf2flt/0001-elf2flt-handle-binutils-2.34.patch"
+        "elf2flt-${ELF2FLT} gcc12/elf2flt/0002-elf2flt.ld-reinstate-32-byte-alignment-for-.data-sec.patch"
+        "elf2flt-${ELF2FLT} gcc12/elf2flt/0003-elf2flt-add-riscv-64-bits-support.patch"
+        "elf2flt-${ELF2FLT} gcc12/elf2flt/0004-elf2flt-create-a-common-helper-function.patch"
+        "elf2flt-${ELF2FLT} gcc12/elf2flt/0005-elf2flt-fix-fatal-error-regression-on-m68k-xtensa-ri.patch"
+        "elf2flt-${ELF2FLT} gcc12/elf2flt/0006-elf2flt-xtensa-fix-text-relocations.patch"
     )
 }
 
