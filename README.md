@@ -14,7 +14,8 @@ Specifically these target architectures are currently supported:
     - riscv32 
     - riscv32-baremetal 
     - riscv64 
-    - riscv64-baremetal 
+    - riscv64-baremetal
+    - riscv64-uclibc 
     - x86 
     - x86_64 
     - x86_64_mingw 
@@ -27,8 +28,7 @@ Supported GCC versions:
 - GCC-9
 - GCC-8
 
-This script was originally a fork of https://github.com/USBhost/build-tools-gcc but it actually has not much left in common with its origin. I've the feeling
-that as long as this project is "hidden" as a fork it does not get much attention, so I made a new independent project out of it.
+This script was originally a fork of https://github.com/USBhost/build-tools-gcc but it actually has not much left in common with its origin.
 
 ## Prebuilt toolchains can be downloaded here (note: links are only valid 90 days after the last successful github ci runner)
 
@@ -42,6 +42,7 @@ https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32/main/toolchai
 https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32-baremetal/main/toolchain_built_from_tar
 https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64/main/toolchain_built_from_tar
 https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64-baremetal/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64-uclibc/main/toolchain_built_from_tar
 https://nightly.link/franzflasch/gcc-build-tools/workflows/x86/main/toolchain_built_from_tar
 https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_64/main/toolchain_built_from_tar
 https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_64_mingw/main/toolchain_built_from_tar
@@ -53,9 +54,9 @@ https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_mingw/main/toolch
 
 To build a toolchain, you will need to do the following:
 
-A Linux distribution (the script has been tested on Debian Buster and Ubuntu 20.04)
+A Linux distribution (the script has been tested on Ubuntu 22.04)
 Core developer packages
-+ For Debian 10 or Ubuntu 20.04:  
++ For Ubuntu 22.04:  
 ```bash
 sudo apt install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison libexpat1-dev rsync file
 ```

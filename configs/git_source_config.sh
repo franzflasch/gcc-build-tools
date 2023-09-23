@@ -71,6 +71,8 @@ function setup_variables_git_13() {
     GDB="gdb-13.2-release"
     PICOLIBC="main"
     MINGW="v11.0.1"
+    UCLIBC_NG="v1.0.44"
+    ELF2FLT="v2023.09"
 
     setup_urls_git
 }

@@ -44,10 +44,6 @@ function setup_variables_tar_13() {
     ELF2FLT="v2023.09"
 
     setup_urls_tar
-
-    # PATCHES=(
-    #     "elf2flt-${ELF2FLT} gcc13/elf2flt/0001-add-riscv-64-bits-support-v3.patch"
-    # )
 }
 
 function setup_variables_tar_12() {

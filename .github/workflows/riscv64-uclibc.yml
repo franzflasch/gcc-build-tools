@@ -22,10 +22,10 @@ jobs:
         env:
           ARCH: ${{ github.workflow }}
       - name: run_build_git
-        run: ./tests/run_single_test.sh $BUILD_ARCH 12
+        run: ./tests/run_single_test.sh $BUILD_ARCH 13
 
       - name: run_build_tar
-        run: ./tests/run_single_test.sh $BUILD_ARCH 12 "-t" "-p"
+        run: ./tests/run_single_test.sh $BUILD_ARCH 13 "-t" "-p"
       - name: ${BUILD_ARCH}_tar_artifact
         uses: actions/upload-artifact@v2
         with:
