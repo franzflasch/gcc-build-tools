@@ -102,12 +102,12 @@ function setup_variables_git_12() {
     setup_urls_git
 
     PATCHES=(
-        "elf2flt-${ELF2FLT} elf2flt/0001-elf2flt-handle-binutils-2.34.patch"
-        "elf2flt-${ELF2FLT} elf2flt/0002-elf2flt.ld-reinstate-32-byte-alignment-for-.data-sec.patch"
-        "elf2flt-${ELF2FLT} elf2flt/0003-elf2flt-add-riscv-64-bits-support.patch"
-        "elf2flt-${ELF2FLT} elf2flt/0004-elf2flt-create-a-common-helper-function.patch"
-        "elf2flt-${ELF2FLT} elf2flt/0005-elf2flt-fix-fatal-error-regression-on-m68k-xtensa-ri.patch"
-        "elf2flt-${ELF2FLT} elf2flt/0006-elf2flt-xtensa-fix-text-relocations.patch"
+        "elf2flt-${ELF2FLT} gcc12/elf2flt/0001-elf2flt-handle-binutils-2.34.patch"
+        "elf2flt-${ELF2FLT} gcc12/elf2flt/0002-elf2flt.ld-reinstate-32-byte-alignment-for-.data-sec.patch"
+        "elf2flt-${ELF2FLT} gcc12/elf2flt/0003-elf2flt-add-riscv-64-bits-support.patch"
+        "elf2flt-${ELF2FLT} gcc12/elf2flt/0004-elf2flt-create-a-common-helper-function.patch"
+        "elf2flt-${ELF2FLT} gcc12/elf2flt/0005-elf2flt-fix-fatal-error-regression-on-m68k-xtensa-ri.patch"
+        "elf2flt-${ELF2FLT} gcc12/elf2flt/0006-elf2flt-xtensa-fix-text-relocations.patch"
         # Fixes: https://sourceware.org/bugzilla/show_bug.cgi?id=29116
         "gdb-${GDB} gdb/fix-gdb-12-1-build.patch"
     )
