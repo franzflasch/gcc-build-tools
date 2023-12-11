@@ -32,7 +32,7 @@ function setup_urls_git() {
 }
 
 function setup_variables_git_master() {
-    MPFR="mpfr-4.2.0"
+    MPFR="mpfr-4.2.1"
     GMP="gmp-6.3.0"
     MPC="mpc-1.3.1"
     ISL="isl-0.26"
@@ -53,7 +53,7 @@ function setup_variables_git_master() {
 }
 
 function setup_variables_git_13() {
-    MPFR="mpfr-4.2.0"
+    MPFR="mpfr-4.2.1"
     GMP="gmp-6.3.0"
     MPC="mpc-1.3.1"
     ISL="isl-0.26"
@@ -68,7 +68,7 @@ function setup_variables_git_13() {
 
     NEWLIB="newlib-4.3.0"
     AVRLIBC="avr-libc-2_1_0-release"
-    GDB="gdb-13.2-release"
+    GDB="gdb-14.1-release"
     PICOLIBC="main"
     MINGW="v11.0.1"
     UCLIBC_NG="v1.0.44"
