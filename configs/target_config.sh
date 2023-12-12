@@ -85,7 +85,7 @@ function setup_default_config()
         "--prefix=${NEWLIB_NANO_INSTALL_DIR}"
     )
 
-    # Although GMP is already built with GCC (in-tree) it is now also a 'host' library 
+    # Although GMP and MPFR is already built with GCC (in-tree) it is now also a 'host' library 
     # dependency for GDB since version 11.
     # So we now need to explicitely build and install it for the host.
     local GMP_INSTALL_DIR="${BUILD_DIR}/build-gmp/__installed"
@@ -93,10 +93,20 @@ function setup_default_config()
         "--prefix=${GMP_INSTALL_DIR}"
     )
 
+    local MPFR_INSTALL_DIR="${BUILD_DIR}/build-mpfr/__installed"
+    MPFR_BASE_CONFIG=(
+        "--prefix=${MPFR_INSTALL_DIR}"
+        "--with-gmp=${GMP_INSTALL_DIR}"
+    )
+
+    # seems --with-libgmp-prefix and --with-gmp is needed starting with gdb 14.1+ for some reason
+    # https://sourceware.org/pipermail/gdb/2022-March/049960.html
     GDB_BASE_CONFIG=(
         "--target=${TARGET}"
         "--prefix=${INSTALL}"
         "--with-libgmp-prefix=${GMP_INSTALL_DIR}"
+        "--with-gmp=${GMP_INSTALL_DIR}"
+        "--with-mpfr=${MPFR_INSTALL_DIR}"
         "--disable-binutils"
         "--disable-ld"
         "--disable-gas"
@@ -144,6 +154,7 @@ function setup_baremetal_default_buildfuncs() {
                  "build_gcc_stage_2"
                  "build_gcc_final"
                  "build_gmp"
+                 "build_mpfr"
                  "build_gdb"
     )
 }
@@ -170,6 +181,7 @@ function setup_linux_default_buildfuncs() {
                  "build_glibc"
                  "build_gcc_final"
                  "build_gmp"
+                 "build_mpfr"
                  "build_gdb"
     )
 }
@@ -194,6 +206,7 @@ function setup_mingw_default_buildfuncs() {
                  "build_mingw_winpthreads"
                  "build_gcc_final"
                  "build_gmp"
+                 "build_mpfr"
                  "build_gdb"
     )
 }
