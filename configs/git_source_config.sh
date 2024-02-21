@@ -63,7 +63,7 @@ function setup_variables_git_13() {
     GCC_BRANCH="releases/${GCC}"
     BINUTILS="binutils-2_42-branch"
 
-    GLIBC="glibc-2.40"
+    GLIBC="glibc-2.39"
     GLIBC_BRANCH="${GLIBC}"
 
     NEWLIB="newlib-4.4.0"
