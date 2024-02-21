@@ -61,18 +61,18 @@ function setup_variables_git_13() {
     LINUX="v6.1"
     GCC="gcc-13"
     GCC_BRANCH="releases/${GCC}"
-    BINUTILS="binutils-2_41-branch"
+    BINUTILS="binutils-2_42-branch"
 
-    GLIBC="glibc-2.38"
+    GLIBC="glibc-2.40"
     GLIBC_BRANCH="${GLIBC}"
 
-    NEWLIB="newlib-4.3.0"
+    NEWLIB="newlib-4.4.0"
     AVRLIBC="avr-libc-2_1_0-release"
     GDB="gdb-14.1-release"
     PICOLIBC="main"
     MINGW="v11.0.1"
-    UCLIBC_NG="v1.0.44"
-    ELF2FLT="v2023.09"
+    UCLIBC_NG="v1.0.45"
+    ELF2FLT="v2024.02"
 
     setup_urls_git
 }
