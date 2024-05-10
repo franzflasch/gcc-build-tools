@@ -24,6 +24,31 @@ function setup_urls_tar() {
     ELF2FLT_URL="${ELF2FLT_BASE_URL}${ELF2FLT}.tar.gz;type=tar"
 }
 
+function setup_variables_tar_14() {
+    MPFR="mpfr-4.2.1"
+    GMP="gmp-6.3.0"
+    MPC="mpc-1.3.1"
+    ISL="isl-0.26"
+
+    LINUX="6.8.9"
+    GCC="gcc-14.1.0"
+    BINUTILS="2.42"
+    GLIBC="glibc-2.39"
+    NEWLIB="newlib-4.4.0.20231231"
+    AVRLIBC="avr-libc-2_1_0"
+    GDB="gdb-14.2"
+    PICOLIBC="1.8.6"
+    MINGW="v11.0.1"
+    UCLIBC_NG="1.0.48"
+    ELF2FLT="v2024.02"
+
+    setup_urls_tar
+
+    PATCHES=(
+        "uclibc-ng-${UCLIBC_NG} uclibc-ng-1.0.48/fix_futimesat.patch"
+    )
+}
+
 function setup_variables_tar_13() {
     MPFR="mpfr-4.2.1"
     GMP="gmp-6.3.0"
@@ -90,25 +115,6 @@ function setup_variables_tar_11() {
     GDB="gdb-11.2"
     PICOLIBC="1.7.6"
     MINGW="v10.0.0"
-
-    setup_urls_tar
-}
-
-function setup_variables_tar_10() {
-    MPFR="mpfr-4.1.0"
-    GMP="gmp-6.2.1"
-    MPC="mpc-1.2.1"
-    ISL="isl-0.23"
-
-    LINUX="6.1.26"
-    GCC="gcc-10.3.0"
-    BINUTILS="2.36.1"
-    GLIBC="glibc-2.33"
-    NEWLIB="newlib-4.1.0"
-    AVRLIBC="avr-libc-2_0_0"
-    GDB="gdb-10.2"
-    PICOLIBC="1.5.1"
-    MINGW="v8.0.0"
 
     setup_urls_tar
 }
