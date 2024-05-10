@@ -24,10 +24,10 @@ Specifically these target architectures are currently supported:
 
 Supported GCC versions:
 - GCC-latest
+- GCC-14
 - GCC-13
 - GCC-12
 - GCC-11
-- GCC-10
 
 Please be aware that some target/version combinations might not work.
 
@@ -105,35 +105,35 @@ Example commands:
 
 ```bash
 # build a riscv64-uclibc toolchain, stripping binaries, verbose mode
-build-gcc -a riscv64-uclibc -v 13 -s -V
+build-gcc -a riscv64-uclibc -v 14 -s -V
 
 # Build a toolchain for x86_64
-./build-gcc -a x86_64 -v 13
+./build-gcc -a x86_64 -v 14
 
 # Build a toolchain for arm64
-./build-gcc -a arm64 -v 13
+./build-gcc -a arm64 -v 14
 
 # Build a toolchain for arm
-./build-gcc -a arm -v 13
+./build-gcc -a arm -v 14
 
 # Build a toolchain for riscv linux
-./build-gcc -a riscv64 -v 13
+./build-gcc -a riscv64 -v 14
 
 # Build a toolchain for avr microcontrollers
-./build-gcc -a avr8 -v 13 -t
+./build-gcc -a avr8 -v 14 -t
 
 # Build a toolchain for arm cortex m3/m4 microcontrollers
-./build-gcc -a cortex-m3 -v 13 -t
+./build-gcc -a cortex-m3 -v 14 -t
 
 # Build a toolchain for riscv baremetal (sifive hifive1)
-./build-gcc -a riscv32-baremetal -v 13
+./build-gcc -a riscv32-baremetal -v 14
 ```
 
 ### After compilation
 
-The end result will be placed into ```/opt/local/``` e.g. ```/opt/local/cross-tool-riscv64-uclibc-gcc13/```.  
+The end result will be placed into ```/opt/local/``` e.g. ```/opt/local/cross-tool-riscv64-uclibc-gcc14/```.  
 
-To use the toolchain just add ```/opt/local/cross-tool-riscv64-uclibc-gcc13/bin``` to your $PATH and thats it.
+To use the toolchain just add ```/opt/local/cross-tool-riscv64-uclibc-gcc14/bin``` to your $PATH and thats it.
 
 
 ## Notes on using the toolchain
