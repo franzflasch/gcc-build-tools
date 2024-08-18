@@ -8,7 +8,7 @@ ARG GCC_VERSION=""
 WORKDIR /home/script_dir
 
 RUN apt update -y
-RUN apt install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison python3 meson rsync file
+RUN apt install -y wget build-essential make gawk git subversion texinfo autoconf autopoint pkg-config gettext txt2man liblzma-dev libssl-dev libz-dev flex bison python3 python3-dev meson rsync file
 
 ENV PATH="/home/script_dir/gcc-build-tools:${PATH}"
 
