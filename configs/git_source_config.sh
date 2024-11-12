@@ -35,7 +35,7 @@ function setup_variables_git_master() {
     MPFR="mpfr-4.2.1"
     GMP="gmp-6.3.0"
     MPC="mpc-1.3.1"
-    ISL="isl-0.26"
+    ISL="isl-0.27"
 
     BINUTILS="master"
     GLIBC="master"
@@ -56,7 +56,7 @@ function setup_variables_git_14() {
     MPFR="mpfr-4.2.1"
     GMP="gmp-6.3.0"
     MPC="mpc-1.3.1"
-    ISL="isl-0.26"
+    ISL="isl-0.27"
 
     LINUX="v6.8"
     GCC="gcc-14"
@@ -68,17 +68,13 @@ function setup_variables_git_14() {
 
     NEWLIB="newlib-4.4.0"
     AVRLIBC="avr-libc-2_2_1-release"
-    GDB="gdb-15.1-release"
+    GDB="gdb-15.2-release"
     PICOLIBC="main"
     MINGW="v12.0.0"
-    UCLIBC_NG="v1.0.48"
+    UCLIBC_NG="v1.0.50"
     ELF2FLT="v2024.05"
 
     setup_urls_git
-
-    PATCHES=(
-        "uclibc-ng-${UCLIBC_NG} uclibc-ng-1.0.48/fix_futimesat.patch"
-    )
 }
 
 function setup_variables_git_13() {

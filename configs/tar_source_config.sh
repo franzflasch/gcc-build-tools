@@ -28,7 +28,7 @@ function setup_variables_tar_14() {
     MPFR="mpfr-4.2.1"
     GMP="gmp-6.3.0"
     MPC="mpc-1.3.1"
-    ISL="isl-0.26"
+    ISL="isl-0.27"
 
     LINUX="6.8.9"
     GCC="gcc-14.2.0"
@@ -36,17 +36,13 @@ function setup_variables_tar_14() {
     GLIBC="glibc-2.40"
     NEWLIB="newlib-4.4.0.20231231"
     AVRLIBC="avr-libc-2_2_1"
-    GDB="gdb-15.1"
-    PICOLIBC="1.8.6"
+    GDB="gdb-15.2"
+    PICOLIBC="1.8.8"
     MINGW="v12.0.0"
-    UCLIBC_NG="1.0.48"
+    UCLIBC_NG="1.0.50"
     ELF2FLT="v2024.05"
 
     setup_urls_tar
-
-    PATCHES=(
-        "uclibc-ng-${UCLIBC_NG} uclibc-ng-1.0.48/fix_futimesat.patch"
-    )
 }
 
 function setup_variables_tar_13() {
