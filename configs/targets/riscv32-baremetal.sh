@@ -63,7 +63,6 @@ function config_riscv32-baremetal() {
         "--with-newlib"
         "--disable-shared"
         "--disable-multilib"
-        "--enable-languages=c,c++"
     )
 
     GDB_CONFIGURATION=(

@@ -33,11 +33,11 @@ function setup_default_config()
 
     # If you want to enable c++ please specify:
     #local enable_languages="c,c++"
-    local enable_languages="c"
-    local fake_cpp=""
+    local enable_languages="c,c++"
+    local CPP_COMPILER_NAME="${TARGET}-g++"
 
     if [[ ${enable_languages} = "c" ]]; then
-        fake_cpp="fake"
+        CPP_COMPILER_NAME="false"
     fi
 
     # According to the gcc docs bootstrap is only enabled for native builds by default.
@@ -54,7 +54,7 @@ function setup_default_config()
     )
 
     # Notes:
-    # Add CC and a fake CXX to circumvent an issue in glibc in case of a c only build:
+    # In case of a c only build, we need to specify "CXX=false" otherwise the build won't work.
     # https://sourceware.org/bugzilla/show_bug.cgi?id=24183
     #
     # CFLAGS: It seems there is an issue when building glibc with GCC-11, so we add
@@ -68,7 +68,7 @@ function setup_default_config()
         "CFLAGS='-g -O2 \
             -Wno-error=stringop-overread'"
         "CC=${TARGET}-gcc"
-        "CXX=${TARGET}${fake_cpp}-g++"
+        "CXX=${CPP_COMPILER_NAME}"
         "--host=${TARGET}"
         "--prefix=${INSTALL}/${TARGET}"
         "--with-headers=${INSTALL}/${TARGET}/include"

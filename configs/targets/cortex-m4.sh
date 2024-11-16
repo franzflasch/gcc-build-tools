@@ -88,7 +88,6 @@ function config_cortex-m4() {
         "--disable-shared"
         "--with-float=hard"
         "--disable-multilib"
-        "--enable-languages=c,c++"
     )
 
     GDB_CONFIGURATION=(

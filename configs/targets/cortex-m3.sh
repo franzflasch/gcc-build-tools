@@ -88,7 +88,6 @@ function config_cortex-m3() {
         "--disable-shared"
         "--with-float=soft"
         "--disable-multilib"
-        "--enable-languages=c,c++"
     )
 
     GDB_CONFIGURATION=(
