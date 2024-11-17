@@ -31,8 +31,6 @@ function setup_default_config()
         "--disable-werror"
     )
 
-    # If you want to enable c++ please specify:
-    #local enable_languages="c,c++"
     local enable_languages="c,c++"
     local CPP_COMPILER_NAME="${TARGET}-g++"
 
@@ -51,6 +49,7 @@ function setup_default_config()
         "--disable-nls"
         "--disable-bootstrap"
         "--enable-languages=${enable_languages}"
+        "--includedir=${INSTALL}/${TARGET}/include"
     )
 
     # Notes:

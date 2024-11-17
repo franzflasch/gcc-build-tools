@@ -25,6 +25,11 @@ function config_x86_64() {
         "${GLIBC_BASE_CONFIG[@]}"
     )
 
+    GCC_FINAL_CONFIGURATION=(
+        "${GCC_BASE_CONFIG[@]}"
+        "--includedir=${INSTALL}/${TARGET}/include"
+    )
+
     GDB_CONFIGURATION=(
         "${GDB_BASE_CONFIG[@]}"
     )

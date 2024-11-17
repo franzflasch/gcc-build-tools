@@ -74,11 +74,16 @@ function config_riscv64-uclibc() {
         "--target=riscv64-linux-uclibc"
     )
 
+    # The uclibc target is the only target that should not use c++ (does not build yet). So we change the --enable-languages config here
+    # Copy Base Configuration
+    local GCC_UCLIBC_BASE_CONFIG=("${GCC_BASE_CONFIG[@]/--enable-languages=*}")
+    GCC_UCLIBC_BASE_CONFIG+=("--enable-languages=c")
+
     # Config is loosely based on buildroot
-    GCC_CONFIGURATION=(
+    GCC_CONFIGURATION+=(
         "CFLAGS_FOR_TARGET='-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -fPIC  -Wl,-elf2flt=-r -static'"
         "CXXFLAGS_FOR_TARGET='-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -fPIC  -Wl,-elf2flt=-r -static  -Wl,-elf2flt=-r -static'"
-        "${GCC_BASE_CONFIG[@]}"
+        "${GCC_UCLIBC_BASE_CONFIG[@]}"
         "--with-arch=rv64imafd"
         "--with-abi=lp64"
         "--disable-multilib"
@@ -100,7 +105,7 @@ function config_riscv64-uclibc() {
     GCC_FINAL_CONFIGURATION=(
         "CFLAGS_FOR_TARGET='-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -fPIC  -Wl,-elf2flt=-r -static'"
         "CXXFLAGS_FOR_TARGET='-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -fPIC  -Wl,-elf2flt=-r -static  -Wl,-elf2flt=-r -static'"
-        "${GCC_BASE_CONFIG[@]}"
+        "${GCC_UCLIBC_BASE_CONFIG[@]}"
         "--with-arch=rv64imafd"
         "--with-abi=lp64"
         "--enable-static"

@@ -33,6 +33,11 @@ function config_riscv64() {
         "--disable-multilib"
     )
 
+    GCC_FINAL_CONFIGURATION=(
+        "${GCC_BASE_CONFIG[@]}"
+        "--includedir=${INSTALL}/${TARGET}/include"
+    )
+
     GDB_CONFIGURATION=(
         "${GDB_BASE_CONFIG[@]}"
     )
