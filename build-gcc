@@ -56,10 +56,21 @@ function call_cmd() {
     echo "CMD being executed: ${*}"
     local cmd_to_call="${*}"
 
-    if [[ ! -z "${VERBOSE}" ]]; then
+    if [[ -n "${VERBOSE}" ]]; then
         eval "${cmd_to_call}"
     else
-        eval "${cmd_to_call} > /dev/null 2>&1"
+        local tmp_file
+        tmp_file=$(mktemp)
+
+        if eval "${cmd_to_call}" > "${tmp_file}" 2>&1; then
+            # Command succeeded, remove the temp file
+            rm -f "${tmp_file}"
+        else
+            # Command failed, display the output
+            echo "Command failed. Output:"
+            cat "${tmp_file}"
+            rm -f "${tmp_file}"
+        fi
     fi
 }
 
