@@ -66,12 +66,12 @@ function setup_variables_git_14() {
     GLIBC="glibc-2.40"
     GLIBC_BRANCH="${GLIBC}"
 
-    NEWLIB="newlib-4.4.0"
+    NEWLIB="newlib-4.5.0"
     AVRLIBC="avr-libc-2_2_1-release"
-    GDB="gdb-15.2-release"
+    GDB="gdb-16.1-release"
     PICOLIBC="main"
     MINGW="v12.0.0"
-    UCLIBC_NG="v1.0.50"
+    UCLIBC_NG="v1.0.51"
     ELF2FLT="v2024.05"
 
     setup_urls_git

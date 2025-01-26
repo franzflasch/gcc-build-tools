@@ -34,12 +34,12 @@ function setup_variables_tar_14() {
     GCC="gcc-14.2.0"
     BINUTILS="2.43"
     GLIBC="glibc-2.40"
-    NEWLIB="newlib-4.4.0.20231231"
+    NEWLIB="newlib-4.5.0.20241231"
     AVRLIBC="avr-libc-2_2_1"
-    GDB="gdb-15.2"
+    GDB="gdb-16.1"
     PICOLIBC="1.8.8"
     MINGW="v12.0.0"
-    UCLIBC_NG="1.0.50"
+    UCLIBC_NG="1.0.51"
     ELF2FLT="v2024.05"
 
     setup_urls_tar
