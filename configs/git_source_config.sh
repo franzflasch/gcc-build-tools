@@ -61,9 +61,9 @@ function setup_variables_git_14() {
     LINUX="v6.8"
     GCC="gcc-14"
     GCC_BRANCH="releases/${GCC}"
-    BINUTILS="binutils-2_43-branch"
+    BINUTILS="binutils-2_44-branch"
 
-    GLIBC="glibc-2.40"
+    GLIBC="glibc-2.41"
     GLIBC_BRANCH="${GLIBC}"
 
     NEWLIB="newlib-4.5.0"
