@@ -25,7 +25,6 @@ function setup_urls_tar() {
 }
 
 function setup_variables_tar_15() {
-{
     MPFR="mpfr-4.2.2"
     GMP="gmp-6.3.0"
     MPC="mpc-1.3.1"
@@ -117,3 +116,4 @@ function setup_variables_tar_12() {
         "elf2flt-${ELF2FLT} gcc12/elf2flt/0006-elf2flt-xtensa-fix-text-relocations.patch"
     )
 }
+
