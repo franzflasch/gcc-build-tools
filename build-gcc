@@ -85,7 +85,7 @@ function help_menu() {
     echo
     echo "${BOLD}USAGE:${RST} ${0} <options>"
     echo
-    echo "${BOLD}EXAMPLE:${RST} ${0} -a arm64 -v 12"
+    echo "${BOLD}EXAMPLE:${RST} ${0} -a arm64 -v 15"
     echo
     echo "${BOLD}REQUIRED PARAMETERS:${RST}"
     echo "  -a  | --arch:        This is the toolchain's target architecture."
@@ -96,7 +96,7 @@ function help_menu() {
         echo "                         - ${i//,/ }"
     done
     echo
-    echo "  -v  | --version:     Possible values: (11, 12, 13, 14 and master. This is the GCC version to build."
+    echo "  -v  | --version:     Possible values: (12, 13, 14, 15 and master. This is the GCC version to build."
     echo
     echo "${BOLD}OPTIONAL PARAMETERS:${RST}"
     echo "  -f  | --full-src:    Download full git repos instead of shallow clones"

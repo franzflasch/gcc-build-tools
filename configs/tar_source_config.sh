@@ -24,6 +24,28 @@ function setup_urls_tar() {
     ELF2FLT_URL="${ELF2FLT_BASE_URL}${ELF2FLT}.tar.gz;type=tar"
 }
 
+function setup_variables_tar_15() {
+{
+    MPFR="mpfr-4.2.2"
+    GMP="gmp-6.3.0"
+    MPC="mpc-1.3.1"
+    ISL="isl-0.27"
+
+    LINUX="6.12.28"
+    GCC="gcc-15.1.0"
+    BINUTILS="2.44"
+    GLIBC="glibc-2.41"
+    NEWLIB="newlib-4.5.0.20241231"
+    AVRLIBC="avr-libc-2_2_1"
+    GDB="gdb-16.3"
+    PICOLIBC="1.8.10"
+    MINGW="v12.0.0"
+    UCLIBC_NG="1.0.52"
+    ELF2FLT="v2024.05"
+
+    setup_urls_tar
+}
+
 function setup_variables_tar_14() {
     MPFR="mpfr-4.2.1"
     GMP="gmp-6.3.0"
@@ -94,23 +116,4 @@ function setup_variables_tar_12() {
         "elf2flt-${ELF2FLT} gcc12/elf2flt/0005-elf2flt-fix-fatal-error-regression-on-m68k-xtensa-ri.patch"
         "elf2flt-${ELF2FLT} gcc12/elf2flt/0006-elf2flt-xtensa-fix-text-relocations.patch"
     )
-}
-
-function setup_variables_tar_11() {
-    MPFR="mpfr-4.1.0"
-    GMP="gmp-6.2.1"
-    MPC="mpc-1.2.1"
-    ISL="isl-0.24"
-
-    LINUX="6.1.26"
-    GCC="gcc-11.2.0"
-    BINUTILS="2.38"
-    GLIBC="glibc-2.35"
-    NEWLIB="newlib-4.2.0.20211231"
-    AVRLIBC="avr-libc-2_1_0"
-    GDB="gdb-11.2"
-    PICOLIBC="1.7.6"
-    MINGW="v10.0.0"
-
-    setup_urls_tar
 }

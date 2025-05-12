@@ -52,6 +52,31 @@ function setup_variables_git_master() {
     setup_urls_git
 }
 
+function setup_variables_git_15() {
+    MPFR="mpfr-4.2.2"
+    GMP="gmp-6.3.0"
+    MPC="mpc-1.3.1"
+    ISL="isl-0.27"
+
+    LINUX="v6.12.28"
+    GCC="gcc-15"
+    GCC_BRANCH="releases/${GCC}"
+    BINUTILS="binutils-2_44-branch"
+
+    GLIBC="glibc-2.41"
+    GLIBC_BRANCH="${GLIBC}"
+
+    NEWLIB="newlib-4.5.0"
+    AVRLIBC="avr-libc-2_2_1-release"
+    GDB="gdb-16.3-release"
+    PICOLIBC="main"
+    MINGW="v12.0.0"
+    UCLIBC_NG="v1.0.52"
+    ELF2FLT="v2024.05"
+
+    setup_urls_git
+}
+
 function setup_variables_git_14() {
     MPFR="mpfr-4.2.1"
     GMP="gmp-6.3.0"
@@ -138,25 +163,3 @@ function setup_variables_git_12() {
     )
 }
 
-function setup_variables_git_11() {
-    MPFR="mpfr-4.1.0"
-    GMP="gmp-6.2.1"
-    MPC="mpc-1.2.1"
-    ISL="isl-0.24"
-
-    LINUX="v5.15"
-    GCC="gcc-11"
-    GCC_BRANCH="releases/${GCC}"
-    BINUTILS="binutils-2_38-branch"
-
-    GLIBC="glibc-2.35"
-    GLIBC_BRANCH="${GLIBC}"
-
-    NEWLIB="newlib-snapshot-20211231"
-    AVRLIBC="avr-libc-2_1_0-release"
-    GDB="gdb-11-branch"
-    PICOLIBC="main"
-    MINGW="v10.0.0"
-
-    setup_urls_git
-}
