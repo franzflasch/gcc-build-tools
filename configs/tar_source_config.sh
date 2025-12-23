@@ -36,10 +36,10 @@ function setup_variables_tar_15() {
     GLIBC="glibc-2.42"
     NEWLIB="newlib-4.5.0.20241231"
     AVRLIBC="avr-libc-2_2_1"
-    GDB="gdb-16.3"
+    GDB="gdb-17.1"
     PICOLIBC="1.8.10"
     MINGW="v13.0.0"
-    UCLIBC_NG="1.0.54"
+    UCLIBC_NG="1.0.55"
     ELF2FLT="v2024.05"
 
     setup_urls_tar

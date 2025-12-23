@@ -68,10 +68,10 @@ function setup_variables_git_15() {
 
     NEWLIB="newlib-4.5.0"
     AVRLIBC="avr-libc-2_2_1-release"
-    GDB="gdb-16.3-release"
+    GDB="gdb-17.1-release"
     PICOLIBC="main"
     MINGW="v13.0.0"
-    UCLIBC_NG="v1.0.54"
+    UCLIBC_NG="v1.0.55"
     ELF2FLT="v2024.05"
 
     setup_urls_git
