@@ -55,23 +55,23 @@ function setup_variables_git_master() {
 function setup_variables_git_15() {
     MPFR="mpfr-4.2.2"
     GMP="gmp-6.3.0"
-    MPC="mpc-1.3.1"
+    MPC="mpc-1.4.1"
     ISL="isl-0.27"
 
-    LINUX="v6.12.72"
+    LINUX="v6.18.26"
     GCC="gcc-15"
     GCC_BRANCH="releases/${GCC}"
     BINUTILS="binutils-2_46-branch"
 
-    GLIBC="glibc-2.42"
+    GLIBC="glibc-2.43"
     GLIBC_BRANCH="${GLIBC}"
 
-    NEWLIB="newlib-4.5.0"
-    AVRLIBC="avr-libc-2_2_1-release"
+    NEWLIB="newlib-4.6.0"
+    AVRLIBC="avr-libc-2_3_1-release"
     GDB="gdb-17.1-release"
     PICOLIBC="main"
-    MINGW="v13.0.0"
-    UCLIBC_NG="v1.0.56"
+    MINGW="v14.0.0"
+    UCLIBC_NG="v1.0.57"
     ELF2FLT="v2024.05"
 
     setup_urls_git
