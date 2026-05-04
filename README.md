@@ -32,21 +32,21 @@ Please be aware that some target/version combinations might not work.
 
 ## Prebuilt toolchains can be downloaded here (note: links are only valid 90 days after the last successful github ci runner)
 
-https://nightly.link/franzflasch/gcc-build-tools/workflows/arm/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/arm64/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/avr8/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m0/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m3/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m4/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32-baremetal/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64-baremetal/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64-uclibc/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/x86/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_64/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_64_mingw/main/toolchain_built_from_tar
-https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_mingw/main/toolchain_built_from_tar
+https://nightly.link/franzflasch/gcc-build-tools/workflows/arm/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/arm64/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/avr8/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m0/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m3/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m4/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32-baremetal/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64-baremetal/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64-uclibc/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/x86/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_64/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_64_mingw/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/x86_mingw/main/toolchain_built_from_tar  
 
 > **_NOTE:_** Make sure to extract the prebuilt toolchains to `/opt/local/` otherwise there might be issues for certain builds.
 
