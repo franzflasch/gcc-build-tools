@@ -13,7 +13,7 @@ function setup_urls_git() {
 
     MPFR_URL="${MPFR_BASE_URL}${MPFR}.tar.xz;type=tar"
     GMP_URL="${GMP_BASE_URL}${GMP}.tar.xz;type=tar"
-    MPC_URL="${MPC_BASE_URL}${MPC}.tar.gz;type=tar"
+    MPC_URL="${MPC_BASE_URL}${MPC}.tar.xz;type=tar"
     ISL_URL="${ISL_BASE_URL}${ISL}.tar.xz;type=tar"
 
     BINUTILS_URL="${BINUTILS_GIT_URL};type=git;branch=${BINUTILS}"
