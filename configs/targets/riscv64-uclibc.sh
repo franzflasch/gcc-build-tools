@@ -33,7 +33,12 @@ function riscv64-uclibc_kconfig()
     CONFIG_="" "${TOOLS_ROOT_DIR}"/ext/scripts/config -k -e TARGET_riscv64
     CONFIG_="" "${TOOLS_ROOT_DIR}"/ext/scripts/config -k -d ARCH_USE_MMU
 
-    # This is needed to be able to build libm
+    # Float functions (strtod, atof, libm, printf %f, etc.) are kept enabled.
+    # UCLIBC_HAS_FPU is kept enabled to prevent uclibc from injecting
+    # -msoft-float, which RISC-V GCC does not support. The toolchain is built
+    # with --with-arch=rv64ima (no F/D extensions), which is sufficient to
+    # ensure no F/D ISA attributes are baked into libc.a objects, fixing the
+    # GCC 15 ISA attribute merging issue that implied Zca (compressed instructions).
     CONFIG_="" "${TOOLS_ROOT_DIR}"/ext/scripts/config -k -e UCLIBC_HAS_FLOATS
     CONFIG_="" "${TOOLS_ROOT_DIR}"/ext/scripts/config -k -e UCLIBC_HAS_FPU
     CONFIG_="" "${TOOLS_ROOT_DIR}"/ext/scripts/config -k -e DO_C99_MATH
@@ -64,7 +69,7 @@ function config_riscv64-uclibc() {
     # Append additional confis here
     BINUTILS_CONFIGURATION=(
         "${BINUTILS_BASE_CONFIG[@]}"
-        "--with-arch=rv64imafd"
+        "--with-arch=rv64ima"
         "--with-abi=lp64"
         "--disable-multilib"
     )
@@ -84,7 +89,7 @@ function config_riscv64-uclibc() {
         "CFLAGS_FOR_TARGET='-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -fPIC  -Wl,-elf2flt=-r -static'"
         "CXXFLAGS_FOR_TARGET='-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -fPIC  -Wl,-elf2flt=-r -static  -Wl,-elf2flt=-r -static'"
         "${GCC_UCLIBC_BASE_CONFIG[@]}"
-        "--with-arch=rv64imafd"
+        "--with-arch=rv64ima"
         "--with-abi=lp64"
         "--disable-multilib"
         "--disable-threads"
@@ -106,7 +111,7 @@ function config_riscv64-uclibc() {
         "CFLAGS_FOR_TARGET='-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -fPIC  -Wl,-elf2flt=-r -static'"
         "CXXFLAGS_FOR_TARGET='-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -fPIC  -Wl,-elf2flt=-r -static  -Wl,-elf2flt=-r -static'"
         "${GCC_UCLIBC_BASE_CONFIG[@]}"
-        "--with-arch=rv64imafd"
+        "--with-arch=rv64ima"
         "--with-abi=lp64"
         "--enable-static"
         "--disable-multilib"
