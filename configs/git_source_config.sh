@@ -56,31 +56,29 @@ function setup_variables_git_16() {
     MPFR="mpfr-4.2.2"
     GMP="gmp-6.3.0"
     MPC="mpc-1.4.1"
-    ISL="isl-0.27"
+    ISL="isl-0.28"
 
-    LINUX="v6.18.26"
+    LINUX="v6.18.40"
     GCC="gcc-16"
     GCC_BRANCH="releases/${GCC}"
-    BINUTILS="binutils-2_46-branch"
+    BINUTILS="binutils-2_47-branch"
 
-    GLIBC="glibc-2.43"
+    GLIBC="glibc-2.44"
     GLIBC_BRANCH="${GLIBC}"
 
     NEWLIB="newlib-4.6.0"
-    AVRLIBC="avr-libc-2_3_1-release"
-    GDB="gdb-17.1-release"
+    AVRLIBC="avr-libc-2_3_2-release"
+    GDB="gdb-17.2-release"
     PICOLIBC="main"
     MINGW="v14.0.0"
-    UCLIBC_NG="v1.0.57"
+    UCLIBC_NG="v1.0.58"
     ELF2FLT="v2024.05"
 
     setup_urls_git
 
-    # Patches can be added here if needed, e.g.:
-    # PATCHES=(
-    #     "elf2flt-${ELF2FLT} gcc16/elf2flt/0001-some-fix.patch"
-    #     "gdb-${GDB} gdb/fix-gdb-16-build.patch"
-    # )
+    PATCHES=(
+        "uclibc-ng-${UCLIBC_NG} uclibc-ng/0001-pagesize-restore-PAGE_SHIFT-fallback-for-binfmt_flat.patch"
+    )
 }
 
 function setup_variables_git_15() {
