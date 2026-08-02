@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-function setup_linux_uclibc_downloadfuncs() {
+function setup_linux_uclibc32_downloadfuncs() {
     DOWNLOAD_FUNCS=("fetch_source ${LINUX_URL} linux-${LINUX}"
                     "fetch_source ${BINUTILS_URL} binutils-${BINUTILS}"
                     "fetch_source ${ELF2FLT_URL} elf2flt-${ELF2FLT}"
@@ -14,7 +14,7 @@ function setup_linux_uclibc_downloadfuncs() {
     )
 }
 
-function setup_linux_uclibc_buildfuncs() {
+function setup_linux_uclibc32_buildfuncs() {
     BUILD_FUNCS=("build_binutils"
                  "build_binutils_libs"
                  "build_elf2flt"
@@ -26,17 +26,17 @@ function setup_linux_uclibc_buildfuncs() {
     )
 }
 
-function riscv64-uclibc_kconfig() 
+function riscv32-uclibc_kconfig() 
 {
     #call_cmd "make CROSS_COMPILE=${TARGET}- defconfig"
 
-    CONFIG_="" "${TOOLS_ROOT_DIR}"/ext/scripts/config -k -e TARGET_riscv64
+    CONFIG_="" "${TOOLS_ROOT_DIR}"/ext/scripts/config -k -e TARGET_riscv32
     CONFIG_="" "${TOOLS_ROOT_DIR}"/ext/scripts/config -k -d ARCH_USE_MMU
 
     # Float functions (strtod, atof, libm, printf %f, etc.) are kept enabled.
     # UCLIBC_HAS_FPU is kept enabled to prevent uclibc from injecting
     # -msoft-float, which RISC-V GCC does not support. The toolchain is built
-    # with --with-arch=rv64ima (no F/D extensions), which is sufficient to
+    # with --with-arch=rv32ima (no F/D extensions), which is sufficient to
     # ensure no F/D ISA attributes are baked into libc.a objects, fixing the
     # GCC 15 ISA attribute merging issue that implied Zca (compressed instructions).
     CONFIG_="" "${TOOLS_ROOT_DIR}"/ext/scripts/config -k -e UCLIBC_HAS_FLOATS
@@ -55,8 +55,8 @@ function riscv64-uclibc_kconfig()
     CONFIG_="" "${TOOLS_ROOT_DIR}"/ext/scripts/config -k -e UCLIBC_HAS_UTMP
 }
 
-function config_riscv64-uclibc() {
-    TARGET="riscv64-linux-uclibc"
+function config_riscv32-uclibc() {
+    TARGET="riscv32-linux-uclibc"
     # shellcheck disable=SC2034
     LINUX_ARCH="riscv"
 
@@ -68,14 +68,14 @@ function config_riscv64-uclibc() {
     # Append additional confis here
     BINUTILS_CONFIGURATION=(
         "${BINUTILS_BASE_CONFIG[@]}"
-        "--with-arch=rv64ima"
-        "--with-abi=lp64"
+        "--with-arch=rv32ima"
+        "--with-abi=ilp32"
         "--disable-multilib"
     )
 
     ELF2FLT_CONFIGURATION=(
         "${ELF2FLT_BASE_CONFIG[@]}"
-        "--target=riscv64-linux-uclibc"
+        "--target=riscv32-linux-uclibc"
     )
 
     # The uclibc target is the only target that should not use c++ (does not build yet). So we change the --enable-languages config here
@@ -88,8 +88,8 @@ function config_riscv64-uclibc() {
         "CFLAGS_FOR_TARGET='-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -fPIC  -Wl,-elf2flt=-r -static'"
         "CXXFLAGS_FOR_TARGET='-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -fPIC  -Wl,-elf2flt=-r -static  -Wl,-elf2flt=-r -static'"
         "${GCC_UCLIBC_BASE_CONFIG[@]}"
-        "--with-arch=rv64ima"
-        "--with-abi=lp64"
+        "--with-arch=rv32ima"
+        "--with-abi=ilp32"
         "--disable-multilib"
         "--disable-threads"
         "--disable-shared"
@@ -110,8 +110,8 @@ function config_riscv64-uclibc() {
         "CFLAGS_FOR_TARGET='-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -fPIC  -Wl,-elf2flt=-r -static'"
         "CXXFLAGS_FOR_TARGET='-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -Os -g0  -fPIC  -Wl,-elf2flt=-r -static  -Wl,-elf2flt=-r -static'"
         "${GCC_UCLIBC_BASE_CONFIG[@]}"
-        "--with-arch=rv64ima"
-        "--with-abi=lp64"
+        "--with-arch=rv32ima"
+        "--with-abi=ilp32"
         "--enable-static"
         "--disable-multilib"
         "--disable-threads"
@@ -126,11 +126,11 @@ function config_riscv64-uclibc() {
         "--enable-__cxa_atexit"
     )
 
-    UCLIB_KCONFIG_CONFIGURATION=riscv64-uclibc_kconfig
+    UCLIB_KCONFIG_CONFIGURATION=riscv32-uclibc_kconfig
 
     type -t "setup_variables_${TAR_OR_GIT}_${VERSION}" > /dev/null || die "No setup_variables_${TAR_OR_GIT}_${VERSION} found!"
     "setup_variables_${TAR_OR_GIT}_${VERSION}"
 
-    setup_linux_uclibc_downloadfuncs
-    setup_linux_uclibc_buildfuncs
+    setup_linux_uclibc32_downloadfuncs
+    setup_linux_uclibc32_buildfuncs
 }

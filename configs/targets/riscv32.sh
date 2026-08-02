@@ -24,10 +24,18 @@ function config_riscv32() {
         "--with-arch=rv32ima"
         "--with-abi=ilp32"
         "--disable-multilib"
+        "--disable-libatomic"
     )
 
     GLIBC_CONFIGURATION=(
         "${GLIBC_BASE_CONFIG[@]}"
+        "--with-arch=rv32ima"
+        "--with-abi=ilp32"
+        "--disable-multilib"
+    )
+
+    GCC_FINAL_CONFIGURATION=(
+        "${GCC_BASE_CONFIG[@]}"
         "--with-arch=rv32ima"
         "--with-abi=ilp32"
         "--disable-multilib"

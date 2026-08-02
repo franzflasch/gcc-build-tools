@@ -24,6 +24,7 @@ function config_riscv64() {
         "--with-arch=rv64imafdc"
         "--with-abi=lp64d"
         "--disable-multilib"
+        "--disable-libatomic"
     )
 
     GLIBC_CONFIGURATION=(
@@ -35,7 +36,8 @@ function config_riscv64() {
 
     GCC_FINAL_CONFIGURATION=(
         "${GCC_BASE_CONFIG[@]}"
-        "--includedir=${INSTALL}/${TARGET}/include"
+        "--with-arch=rv64imafdc"
+        "--with-abi=lp64d"
         "--disable-multilib"
     )
 
