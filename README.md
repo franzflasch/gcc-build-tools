@@ -14,6 +14,7 @@ Specifically these target architectures are currently supported:
 - cortex-m4
 - riscv32
 - riscv32-baremetal
+- riscv32-uclibc
 - riscv64
 - riscv64-baremetal
 - riscv64-uclibc
@@ -40,6 +41,7 @@ https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m3/main/toolch
 https://nightly.link/franzflasch/gcc-build-tools/workflows/cortex-m4/main/toolchain_built_from_tar  
 https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32/main/toolchain_built_from_tar  
 https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32-baremetal/main/toolchain_built_from_tar  
+https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv32-uclibc/main/toolchain_built_from_tar  
 https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64/main/toolchain_built_from_tar  
 https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64-baremetal/main/toolchain_built_from_tar  
 https://nightly.link/franzflasch/gcc-build-tools/workflows/riscv64-uclibc/main/toolchain_built_from_tar  
