@@ -20,8 +20,8 @@ function build_avrlibc() {
     mkdir -p "${BUILD_DIR}/build-avrlibc"
     cd "${BUILD_DIR}/build-avrlibc" || die "avrlibc build folder does not exist!"
     call_cmd "${SOURCES_DIR}/avrlibc-${AVRLIBC}/configure" "${AVRLIBC_CONFIGURATION[@]}"
-    call_cmd make || die "Error while building avrlibc!" -n
-    call_cmd make install || die "Error while installing avrlibc!" -n
+    call_cmd make
+    call_cmd make install
 
     set_build_state "${FUNCNAME[0]}"
 }

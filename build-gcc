@@ -57,7 +57,7 @@ function call_cmd() {
     local cmd_to_call="${*}"
 
     if [[ -n "${VERBOSE}" ]]; then
-        eval "${cmd_to_call}"
+        eval "${cmd_to_call}" || die "Command failed: ${cmd_to_call}" -n
     else
         local tmp_file
         tmp_file=$(mktemp)
@@ -70,6 +70,7 @@ function call_cmd() {
             echo "Command failed. Output:"
             cat "${tmp_file}"
             rm -f "${tmp_file}"
+            die "Command failed: ${cmd_to_call}" -n
         fi
     fi
 }
@@ -211,7 +212,7 @@ function fetch_source() {
     if [ "${url_type}" = "tar" ]; then
         local file_name=""
         file_name=$(basename "${url}")
-        call_cmd wget -c "${url}" || die "Failed to download ${url}" -n
+        call_cmd wget -c "${url}"
         extract "${file_name}" "${folder}" || die "Failed to extract ${file_name}" -n
         return
     fi

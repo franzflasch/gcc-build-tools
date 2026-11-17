@@ -12,8 +12,8 @@ function build_gmp() {
     mkdir -p "${BUILD_DIR}/build-gmp"
     cd "${BUILD_DIR}/build-gmp" || die "gmp build folder does not exist!"
     call_cmd "${SOURCES_DIR}/gmp-${GMP}/configure" "${GMP_BASE_CONFIG[@]}"
-    call_cmd make || die "Error while building gmp!" -n
-    call_cmd make install || die "Error while installing gmp!" -n
+    call_cmd make
+    call_cmd make install
 
     set_build_state "${FUNCNAME[0]}"
 }

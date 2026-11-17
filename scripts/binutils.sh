@@ -12,8 +12,8 @@ function build_binutils() {
     mkdir -p "${BUILD_DIR}/build-binutils"
     cd "${BUILD_DIR}/build-binutils" || die "ERROR: cd to ${BUILD_DIR}/build-binutils"
     call_cmd "${SOURCES_DIR}/binutils-${BINUTILS}/configure" "${BINUTILS_CONFIGURATION[@]}"
-    call_cmd make "${JOBS}" all || die "Error while building binutils!" -n
-    call_cmd make install || die "Error while installing binutils!" -n
+    call_cmd make "${JOBS}" all
+    call_cmd make install
 
     set_build_state "${FUNCNAME[0]}"
 }
@@ -29,10 +29,10 @@ function build_binutils_libs() {
 
     header "BUILDING BFD"
     cd "${BUILD_DIR}/build-binutils" || die "ERROR: cd to ${BUILD_DIR}/build-binutils"
-    call_cmd make "${JOBS}" all-bfd || die "Error while building target-bfd!" -n
-    call_cmd make "${JOBS}" install-bfd || die "Error while installing target-bfd!" -n
-    call_cmd make "${JOBS}" all-libiberty || die "Error while building target-libiberty!" -n
-    call_cmd make "${JOBS}" install-libiberty || die "Error while installing target-libiberty!" -n
+    call_cmd make "${JOBS}" all-bfd
+    call_cmd make "${JOBS}" install-bfd
+    call_cmd make "${JOBS}" all-libiberty
+    call_cmd make "${JOBS}" install-libiberty
 
     mkdir -p "${INSTALL}"/bfd/{bfd,include/elf,libiberty}
     cp bfd/bfd.h bfd/.libs/libbfd.a "${INSTALL}"/bfd/bfd/

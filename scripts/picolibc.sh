@@ -43,8 +43,8 @@ function build_picolibc() {
     cd "${BUILD_DIR}/build-picolibc" || die "picolibc build folder does not exist!"
     call_cmd meson "${picolibc_dir}" -Dincludedir=picolibc/"${TARGET}"/include -Dlibdir=picolibc/"${TARGET}"/lib --cross-file "${picolibc_dir}"/cross-"${TARGET}".txt "${PICOLIBC_CONFIGURATION[@]}"
 
-    call_cmd ninja || die "Error while building picolibc!" -n
-    call_cmd ninja install || die "Error while installing picolibc!" -n
+    call_cmd ninja
+    call_cmd ninja install
 
     # Install specs file
     sed -e "s|${PICOLIBC_INSTALL_DIR}||g" -i "${BUILD_DIR}"/build-picolibc/picolibc.specs

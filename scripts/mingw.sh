@@ -13,7 +13,7 @@ function build_mingw_header() {
     cd "${BUILD_DIR}/build-mingw-headers" || die "build-mingw-headers folder does not exist!"
     call_cmd "${SOURCES_DIR}/mingw-${MINGW}/mingw-w64-headers/configure" "${MINGW_HEADER_CONFIGURATION[@]}"
 
-    call_cmd make install || die "Error while building mingw headers!" -n
+    call_cmd make install
 
     set_build_state "${FUNCNAME[0]}"
 }
@@ -32,8 +32,8 @@ function build_mingw_crt() {
 
     # Do not use parallel make here:
     # https://sourceforge.net/p/mingw-w64/mailman/message/37635156/
-    call_cmd make || die "Error while building mingw-crt"
-    call_cmd make install || die "Error while installing mingw-crt"
+    call_cmd make
+    call_cmd make install
 
     set_build_state "${FUNCNAME[0]}"
 }
@@ -49,8 +49,8 @@ function build_mingw_winpthreads() {
     mkdir -p "${BUILD_DIR}/build-mingw-winpthreads"
     cd "${BUILD_DIR}/build-mingw-winpthreads" || die "build-mingw-winpthreads folder does not exist!"
     call_cmd "${SOURCES_DIR}/mingw-${MINGW}/mingw-w64-libraries/winpthreads/configure" "${MINGW_WINPTHREADS_CONFIGURATION[@]}"
-    call_cmd make "${JOBS}" || die "Error while building mingw-winpthreads"
-    call_cmd make install || die "Error while installing mingw-winpthreads"
+    call_cmd make "${JOBS}"
+    call_cmd make install
 
     set_build_state "${FUNCNAME[0]}"
 }

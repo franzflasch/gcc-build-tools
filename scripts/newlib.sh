@@ -13,8 +13,8 @@ function build_newlib() {
     mkdir -p "${BUILD_DIR}/build-newlib"
     cd "${BUILD_DIR}/build-newlib" || die "newlib build folder does not exist!"
     call_cmd "${SOURCES_DIR}/newlib-${NEWLIB}/configure" "${NEWLIB_CONFIGURATION[@]}"
-    call_cmd make all || die "Error while building newlib!" -n
-    call_cmd make install || die "Error while installing newlib!" -n
+    call_cmd make all
+    call_cmd make install
 
     set_build_state "${FUNCNAME[0]}"
 }

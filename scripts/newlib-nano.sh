@@ -13,8 +13,8 @@ function build_newlib_nano() {
     mkdir -p "${BUILD_DIR}/build-newlib-nano"
     cd "${BUILD_DIR}/build-newlib-nano" || die "newlib-nano build folder does not exist!"
     call_cmd "${SOURCES_DIR}/newlib-${NEWLIB}/configure" "${NEWLIB_NANO_CONFIGURATION[@]}"
-    call_cmd make all || die "Error while building newlib-nano!" -n
-    call_cmd make install || die "Error while installing newlib-nano!" -n
+    call_cmd make all
+    call_cmd make install
 
     # Newlib nano specific preparations
     cd "${INSTALL}/${TARGET}/lib" || die "ERROR: cd to ${INSTALL}/${TARGET}/lib"
