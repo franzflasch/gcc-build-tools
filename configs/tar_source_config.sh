@@ -44,9 +44,11 @@ function setup_variables_tar_16() {
 
     setup_urls_tar
 
-    PATCHES=(
-        "uclibc-ng-${UCLIBC_NG} uclibc-ng/0001-pagesize-restore-PAGE_SHIFT-fallback-for-binfmt_flat.patch"
-    )
+    # uclibc-ng 1.0.60 includes the PAGE_SHIFT fallback fix upstream,
+    # so the patch is no longer needed. Kept for reference.
+    #PATCHES=(
+    #    "uclibc-ng-${UCLIBC_NG} uclibc-ng/0001-pagesize-restore-PAGE_SHIFT-fallback-for-binfmt_flat.patch"
+    #)
 }
 
 function setup_variables_tar_15() {
