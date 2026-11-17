@@ -19,6 +19,10 @@ function config_x86_64() {
     GCC_CONFIGURATION=(
         "${GCC_BASE_CONFIG[@]}"
         "--disable-multilib"
+        # GCC 16 links -latomic_asneeded by default, but libatomic cannot
+        # be built before glibc exists. Disable it for the early GCC stages;
+        # the final GCC (GCC_FINAL_CONFIGURATION) still builds libatomic.
+        "--disable-libatomic"
     )
 
     GLIBC_CONFIGURATION=(
