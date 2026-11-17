@@ -76,6 +76,12 @@ function setup_variables_git_16() {
 
     setup_urls_git
 
+    # gmp-6.3.0 configure fails with GCC >= 15 (C23 default).
+    # Fixed upstream, drop once a newer gmp release is used.
+    PATCHES=(
+        "gmp-${GMP} gmp/0001-Complete-function-prototype-in-acinclude.m4-for-C23.patch"
+    )
+
     # uclibc-ng 1.0.60 includes the PAGE_SHIFT fallback fix upstream,
     # so the patch is no longer needed. Kept for reference.
     #PATCHES=(
