@@ -211,8 +211,8 @@ function fetch_source() {
     if [ "${url_type}" = "tar" ]; then
         local file_name=""
         file_name=$(basename "${url}")
-        call_cmd wget -c "${url}"
-        extract "${file_name}" "${folder}"
+        call_cmd wget -c "${url}" || die "Failed to download ${url}" -n
+        extract "${file_name}" "${folder}" || die "Failed to extract ${file_name}" -n
         return
     fi
 

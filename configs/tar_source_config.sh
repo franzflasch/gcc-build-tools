@@ -18,7 +18,7 @@ function setup_urls_tar() {
     NEWLIB_URL="${NEWLIB_BASE_URL}${NEWLIB}.tar.gz;type=tar"
     AVRLIBC_URL="${AVRLIBC_BASE_URL}${AVRLIBC}-release.tar.gz;type=tar"
     GDB_URL="${GDB_BASE_URL}${GDB}.tar.xz;type=tar"
-    PICOLIBC_URL="${PICOLIBC_BASE_URL}${PICOLIBC}.tar.gz;type=tar"
+    PICOLIBC_URL="${PICOLIBC_BASE_URL}${PICOLIBC};type=tar"
     MINGW_URL="${MINGW_BASE_URL}${MINGW}.tar.gz;type=tar"
     UCLIBC_NG_URL="${UCLIBC_NG_BASE_URL}${UCLIBC_NG}/uClibc-ng-${UCLIBC_NG}.tar.xz;type=tar"
     ELF2FLT_URL="${ELF2FLT_BASE_URL}${ELF2FLT}.tar.gz;type=tar"

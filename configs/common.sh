@@ -19,7 +19,7 @@ function setup_common_urls_tar() {
     NEWLIB_BASE_URL="ftp://sourceware.org/pub/newlib/"
     AVRLIBC_BASE_URL="https://github.com/avrdudes/avr-libc/archive/refs/tags/"
     GDB_BASE_URL="http://ftp.gnu.org/gnu/gdb/"
-    PICOLIBC_BASE_URL="https://github.com/keith-packard/picolibc/archive/"
+    PICOLIBC_BASE_URL="https://codeload.github.com/picolibc/picolibc/tar.gz/refs/tags/"
     MINGW_BASE_URL="https://github.com/mingw-w64/mingw-w64/archive/refs/tags/"
     UCLIBC_NG_BASE_URL="https://downloads.uclibc-ng.org/releases/"
     ELF2FLT_BASE_URL="https://github.com/uclinux-dev/elf2flt/archive/refs/tags/"
@@ -36,7 +36,7 @@ function setup_common_urls_git() {
     NEWLIB_GIT_URL="git://sourceware.org/git/newlib-cygwin.git"
     AVRLIBC_GIT_URL="https://github.com/avrdudes/avr-libc.git"
     GDB_GIT_URL="git://sourceware.org/git/binutils-gdb.git"
-    PICOLIBC_GIT_URL="https://github.com/keith-packard/picolibc.git"
+    PICOLIBC_GIT_URL="https://github.com/picolibc/picolibc.git"
     MINGW_GIT_URL="https://github.com/mingw-w64/mingw-w64.git"
     # Use kraj's mirror to be able to use shallow clones:
     UCLIBC_NG_GIT_URL="https://github.com/kraj/uclibc-ng.git"
