@@ -58,7 +58,7 @@ function setup_variables_git_16() {
     MPC="mpc-1.4.1"
     ISL="isl-0.28"
 
-    LINUX="v6.18.40"
+    LINUX="v6.18.63"
     GCC="gcc-16"
     GCC_BRANCH="releases/${GCC}"
     BINUTILS="binutils-2_47-branch"
@@ -68,10 +68,10 @@ function setup_variables_git_16() {
 
     NEWLIB="newlib-4.6.0"
     AVRLIBC="avr-libc-2_3_2-release"
-    GDB="gdb-17.2-release"
+    GDB="gdb-18.1-release"
     PICOLIBC="main"
     MINGW="v14.0.0"
-    UCLIBC_NG="v1.0.58"
+    UCLIBC_NG="v1.0.60"
     ELF2FLT="v2024.05"
 
     setup_urls_git

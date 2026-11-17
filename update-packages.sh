@@ -182,7 +182,7 @@ fetch_latest_newlib() {
 
 # Returns e.g. "1.8.11"
 fetch_latest_picolibc() {
-    git ls-remote --tags "https://github.com/keith-packard/picolibc.git" 2>/dev/null \
+    GIT_TERMINAL_PROMPT=0 git ls-remote --tags "https://github.com/picolibc/picolibc.git" 2>/dev/null \
         | grep -oP '(?<=refs/tags/)[0-9][0-9.]+$' \
         | sort_versions | tail -1
 }
@@ -196,14 +196,14 @@ fetch_latest_uclibc_ng() {
 
 # Returns e.g. "avr-libc-2_3_1"
 fetch_latest_avrlibc() {
-    git ls-remote --tags "https://github.com/avrdudes/avr-libc.git" 2>/dev/null \
+    GIT_TERMINAL_PROMPT=0 git ls-remote --tags "https://github.com/avrdudes/avr-libc.git" 2>/dev/null \
         | grep -oP '(?<=refs/tags/)avr-libc-\d+_\d+_\d+(?=-release)' \
         | sort | tail -1
 }
 
 # Returns e.g. "v14.0.0"
 fetch_latest_mingw() {
-    git ls-remote --tags "https://github.com/mingw-w64/mingw-w64.git" 2>/dev/null \
+    GIT_TERMINAL_PROMPT=0 git ls-remote --tags "https://github.com/mingw-w64/mingw-w64.git" 2>/dev/null \
         | grep -oP '(?<=refs/tags/)v\d+\.\d+\.\d+$' \
         | sed 's/^v//' | sort_versions | tail -1 \
         | sed 's/^/v/'
@@ -211,7 +211,7 @@ fetch_latest_mingw() {
 
 # Returns e.g. "v2024.05"
 fetch_latest_elf2flt() {
-    git ls-remote --tags "https://github.com/uclinux-dev/elf2flt.git" 2>/dev/null \
+    GIT_TERMINAL_PROMPT=0 git ls-remote --tags "https://github.com/uclinux-dev/elf2flt.git" 2>/dev/null \
         | grep -oP '(?<=refs/tags/)v[0-9]{4}\.[0-9]+' \
         | sort -V | tail -1
 }

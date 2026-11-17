@@ -30,16 +30,16 @@ function setup_variables_tar_16() {
     MPC="mpc-1.4.1"
     ISL="isl-0.28"
 
-    LINUX="6.18.40"
-    GCC="gcc-16.1.0"
+    LINUX="6.18.63"
+    GCC="gcc-16.2.0"
     BINUTILS="2.47"
     GLIBC="glibc-2.44"
     NEWLIB="newlib-4.6.0.20260123"
     AVRLIBC="avr-libc-2_3_2"
-    GDB="gdb-17.2"
-    PICOLIBC="1.8.11"
+    GDB="gdb-18.1"
+    PICOLIBC="1.8.12"
     MINGW="v14.0.0"
-    UCLIBC_NG="1.0.58"
+    UCLIBC_NG="1.0.60"
     ELF2FLT="v2024.05"
 
     setup_urls_tar
