@@ -16,7 +16,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - name: Clean Docker
+        run: docker system prune -af --volumes || true
       - name: set env
         run: echo "BUILD_ARCH=$(basename $ARCH .yml)" >> $GITHUB_ENV
         env:
