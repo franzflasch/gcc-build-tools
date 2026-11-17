@@ -404,10 +404,10 @@ function package_tc() {
     hash -r
 
     if [[ -n ${COMPRESSION} ]]; then
-        local tar_package=${TARGET}-${VERSION}-$(TZ=UTC date +%Y%m%d).tar.xz
+        TAR_PACKAGE=${TARGET}-${VERSION}-$(TZ=UTC date +%Y%m%d).tar.xz
         header "PACKAGING TOOLCHAIN"
-        echo "Target file: ${tar_package}"
-        XZ_OPT=-9 tar cf ${tar_package} -C ${INSTALL_DIR} ${INSTALL_DIR_NAME}
+        echo "Target file: ${TAR_PACKAGE}"
+        XZ_OPT=-9 tar cf ${TAR_PACKAGE} -C ${INSTALL_DIR} ${INSTALL_DIR_NAME}
     fi
 
     set_build_state "${FUNCNAME[0]}"
@@ -428,9 +428,9 @@ function ending_info() {
         echo -e "${BOLD}Script duration:${RST} $(format_time "${START}" "${END}")"
         # shellcheck disable=SC2086
         echo -e "${BOLD}GCC version:${RST} $(${INSTALL}/bin/${TARGET}-gcc --version | head -n 1)"
-        if [[ -n ${COMPRESSION} ]] && [[ -e ${PACKAGE} ]]; then
-            echo -e "${BOLD}File location:${RST} $(pwd)/${PACKAGE}"
-            echo -e "${BOLD}File size:${RST} $(du -h "${PACKAGE}" | awk '{print $1}')"
+        if [[ -n ${COMPRESSION} ]] && [[ -e ${TAR_PACKAGE} ]]; then
+            echo -e "${BOLD}File location:${RST} $(pwd)/${TAR_PACKAGE}"
+            echo -e "${BOLD}File size:${RST} $(du -h "${TAR_PACKAGE}" | awk '{print $1}')"
         else
             echo -e "${BOLD}Toolchain location:${RST} ${INSTALL}"
         fi
