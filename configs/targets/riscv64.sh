@@ -23,7 +23,6 @@ function config_riscv64() {
         "${GCC_BASE_CONFIG[@]}"
         "--with-arch=rv64imafdc"
         "--with-abi=lp64d"
-        "--disable-multilib"
         "--disable-libatomic"
     )
 
@@ -38,7 +37,6 @@ function config_riscv64() {
         "${GCC_BASE_CONFIG[@]}"
         "--with-arch=rv64imafdc"
         "--with-abi=lp64d"
-        "--disable-multilib"
     )
 
     GDB_CONFIGURATION=(

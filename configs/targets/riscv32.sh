@@ -23,7 +23,6 @@ function config_riscv32() {
         "${GCC_BASE_CONFIG[@]}"
         "--with-arch=rv32ima"
         "--with-abi=ilp32"
-        "--disable-multilib"
         "--disable-libatomic"
     )
 
@@ -38,7 +37,6 @@ function config_riscv32() {
         "${GCC_BASE_CONFIG[@]}"
         "--with-arch=rv32ima"
         "--with-abi=ilp32"
-        "--disable-multilib"
     )
 
     GDB_CONFIGURATION=(

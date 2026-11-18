@@ -26,7 +26,6 @@ function config_riscv64-baremetal() {
         "--with-newlib"
         "--disable-shared"
         "--without-headers"
-        "--disable-multilib"
     )
 
     NEWLIB_CONFIGURATION=(
@@ -70,7 +69,6 @@ function config_riscv64-baremetal() {
         "--with-system-zlib"
         "--with-newlib"
         "--disable-shared"
-        "--disable-multilib"
     )
 
     GDB_CONFIGURATION=(

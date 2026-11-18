@@ -32,7 +32,6 @@ function config_x86_64_mingw() {
         "--enable-checking=release"
         "--enable-version-specific-runtime-libs"
         "--disable-shared"
-        "--disable-multilib"
         "--disable-nls"
         "--disable-werror"
         "--disable-win32-registry"

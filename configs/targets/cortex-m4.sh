@@ -28,7 +28,6 @@ function config_cortex-m4() {
         "--disable-shared"
         "--without-headers"
         "--with-float=hard"
-        "--disable-multilib"
     )
 
     NEWLIB_CONFIGURATION=(
@@ -87,7 +86,6 @@ function config_cortex-m4() {
         "--with-newlib"
         "--disable-shared"
         "--with-float=hard"
-        "--disable-multilib"
     )
 
     GDB_CONFIGURATION=(

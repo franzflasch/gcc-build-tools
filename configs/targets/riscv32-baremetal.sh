@@ -24,7 +24,6 @@ function config_riscv32-baremetal() {
         "--with-newlib"
         "--disable-shared"
         "--without-headers"
-        "--disable-multilib"
     )
 
     NEWLIB_CONFIGURATION=(
@@ -62,7 +61,6 @@ function config_riscv32-baremetal() {
         "--with-system-zlib"
         "--with-newlib"
         "--disable-shared"
-        "--disable-multilib"
     )
 
     GDB_CONFIGURATION=(

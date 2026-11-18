@@ -28,7 +28,6 @@ function config_cortex-m3() {
         "--disable-shared"
         "--without-headers"
         "--with-float=soft"
-        "--disable-multilib"
     )
 
     NEWLIB_CONFIGURATION=(
@@ -87,7 +86,6 @@ function config_cortex-m3() {
         "--with-newlib"
         "--disable-shared"
         "--with-float=soft"
-        "--disable-multilib"
     )
 
     GDB_CONFIGURATION=(
