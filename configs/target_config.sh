@@ -48,6 +48,9 @@ function setup_default_config()
         "--prefix=${INSTALL}"
         "--disable-nls"
         "--disable-bootstrap"
+        # Build all toolchains as non-multilib for simplicity. Enable
+        # per-target later if a specific target needs multilib.
+        "--disable-multilib"
         "--enable-languages=${enable_languages}"
         "--includedir=${INSTALL}/${TARGET}/include"
     )
